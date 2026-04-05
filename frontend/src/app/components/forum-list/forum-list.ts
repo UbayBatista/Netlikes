@@ -9,21 +9,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './forum-list.css'
 })
 export class ForumList {
-  @Output() foroClickeado = new EventEmitter<void>();
-  busqueda = signal('');
+  @Output() clickedForum = new EventEmitter<void>();
+  search = signal('');
 
-  peliculasForo = [
-    { titulo: 'Los juegos del hambre', activa: true },
-    { titulo: 'Vaiana', activa: false },
-    { titulo: 'Los juegos del hambre: sinsajo - Parte 2', activa: false },
-    { titulo: 'Harry Potter y la piedra filosofal', activa: false },
-    { titulo: 'Avatar', activa: false }
+  filmsForum = [
+    { title: 'Los juegos del hambre', active: true },
+    { title: 'Vaiana', active: false },
+    { title: 'Los juegos del hambre: sinsajo - Parte 2', active: false },
+    { title: 'Harry Potter y la piedra filosofal', active: false },
+    { title: 'Avatar', active: false }
   ];
   seleccionarForo(index: number) {
-    this.peliculasForo.forEach(p => p.activa = false);
-    this.peliculasForo[index].activa = true;
+    this.filmsForum.forEach(p => p.active = false);
+    this.filmsForum[index].active = true;
     
-    this.foroClickeado.emit();
-    console.log('Cambiando al foro de:', this.peliculasForo[index].titulo);
+    this.clickedForum.emit();
+    console.log('Cambiando al foro de:', this.filmsForum[index].title);
   }
 }

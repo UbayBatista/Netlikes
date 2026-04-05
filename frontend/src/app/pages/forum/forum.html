@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div class="foro-container" [class.show-chat]="selectedForum">
+  <aside class="sidebar-foros">
+    <app-forum-list (foroClickeado)="seeChat()"></app-forum-list>
+  </aside>
+
+  <main class="chat-main">
+    <app-chat-window (volver)="returnToList()"></app-chat-window>
+  </main>
+</div>

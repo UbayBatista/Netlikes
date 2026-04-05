@@ -10,42 +10,42 @@ import { MessageBubble } from '../message-bubble/message-bubble';
   styleUrl: './chat-window.css'
 })
 export class ChatWindow {
-  @Output() volver = new EventEmitter<void>();
+  @Output() return = new EventEmitter<void>();
 
-  tituloForo: string = 'Los juegos del hambre';
-  nuevoMensaje = signal('');
+  ForumTitle: string = 'Los juegos del hambre';
+  newMessage = signal('');
 
-  mensajes = signal([
-    { texto: '¡Hola a todos! ¿Cuál es vuestra escena favorita?', esMio: false, usuario: 'User123' },
-    { texto: 'A mi me encanta cuando Katniss se ofrece como tributo en lugar de su hermana', esMio: true, usuario: 'Yo' },
-    { texto: 'Totalmente de acuerdo', esMio: false, usuario: 'Cinefilo99' },
-    { texto: 'Pues a mi me gusta la escena de las bayas', esMio: false, usuario: 'User123' },
-    { texto: 'Siii, gracias a esa se inicia la revelión', esMio: false, usuario: 'Cinefilo99' },
-    { texto: 'A mi me gustó las entrevistas a los tributos', esMio: false, usuario: 'User987' },
-    { texto: 'Ojalá hubieran añadido todas, así conoceríamos mejor a los participantes', esMio: true, usuario: 'Yo' }
+  messages = signal([
+    { text: '¡Hola a todos! ¿Cuál es vuestra escena favorita?', isMine: false, user: 'User123' },
+    { text: 'A mi me encanta cuando Katniss se ofrece como tributo en lugar de su hermana', isMine: true, user: 'Yo' },
+    { text: 'Totalmente de acuerdo', isMine: false, user: 'Cinefilo99' },
+    { text: 'Pues a mi me gusta la escena de las bayas', isMine: false, user: 'User123' },
+    { text: 'Siii, gracias a esa se inicia la revelión', isMine: false, user: 'Cinefilo99' },
+    { text: 'A mi me gustó las entrevistas a los tributos', isMine: false, user: 'User987' },
+    { text: 'Ojalá hubieran añadido todas, así conoceríamos mejor a los participantes', isMine: true, user: 'Yo' }
   ]);
 
-  ajustarAltura(textarea: HTMLTextAreaElement) {
+  AdjustHeight(textarea: HTMLTextAreaElement) {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
   }
 
-  enviarMensaje(textarea: HTMLTextAreaElement) {
-    const texto = this.nuevoMensaje().trim();
-    if (texto) {
-      this.mensajes.update(prev => [...prev, {
-        texto: texto,
-        esMio: true,
-        usuario: 'Yo',
-        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  sendMessage(textarea: HTMLTextAreaElement) {
+    const text = this.newMessage().trim();
+    if (text) {
+      this.messages.update(prev => [...prev, {
+        text: text,
+        isMine: true,
+        user: 'Yo',
+        hour: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }]);
     }
-    this.nuevoMensaje.set('');
+    this.newMessage.set('');
     textarea.style.height = 'auto';
     console.log('Mensaje enviado correctamente');
   }
 
-  irAtras() {
-    this.volver.emit();
+  goBack() {
+    this.return.emit();
   }
 }

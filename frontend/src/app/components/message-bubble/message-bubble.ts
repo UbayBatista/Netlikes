@@ -7,9 +7,10 @@ import { Component, Input } from '@angular/core';
   templateUrl: './message-bubble.html',
   styleUrl: './message-bubble.css'
 })
+
 export class MessageBubble {
-  @Input() texto: string = '';
-  @Input() usuario: string = '';
-  @Input() esMio: boolean = false;
-  @Input() hora: string = '12:00';
+  @Input() text: string = '';
+  @Input() user: string = '';
+  @Input() isMine: boolean = false;
+  @Input() hour: string = '12:00';
 }
