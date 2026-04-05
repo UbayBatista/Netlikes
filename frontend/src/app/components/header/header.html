@@ -3,10 +3,15 @@
 
   <div class="d-flex align-items-center gap-3">
 
-    <div class="position-relative" (click)="toggleNotifications()">
-       <button class="btn btn-link p-0 text-black"><i class="bi bi-bell-fill fs-5"></i></button>
+    <div class="position-relative">
+      <button (click)="openBox()" class="btn btn-link p-0 text-black"><i class="bi bi-bell-fill fs-5"></i></button>
+
+      <app-notification-panel
+        [isOpen]="boxOpen"
+        (closed)="boxOpen = false">
+      </app-notification-panel>
       @if (hasNotifications) {
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 0 </span>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 8 </span>
       }
     </div>
 
@@ -19,11 +24,3 @@
     </div>
   </div>
 </nav>
-
-@if (showNotifications) {
-  <div class="notificaciones-popup">
-    <h6 class="text-white px-3 pt-3">Notificaciones</h6>
-    <hr class="border-secondary mx-3">
-    <p class="text-white-50 px-3">No tienes notificaciones nuevas.</p>
-  </div>
-}
