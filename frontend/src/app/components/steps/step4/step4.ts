@@ -9,28 +9,28 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['../steps.css', './step4.css']
 })
 export class Step4 {
-  @Output() alFinalizar = new EventEmitter<any>();
-  @Output() alAtras = new EventEmitter<void>();
+  @Output() toEnd = new EventEmitter<any>();
+  @Output() toPrev = new EventEmitter<void>();
 
   generos = [
-    { nombre: 'Acción', seleccionado: false },
-    { nombre: 'Comedia', seleccionado: false },
-    { nombre: 'Drama', seleccionado: false },
-    { nombre: 'Terror', seleccionado: false },
-    { nombre: 'Ciencia Ficción', seleccionado: false },
-    { nombre: 'Romance', seleccionado: false },
-    { nombre: 'Documental', seleccionado: false },
-    { nombre: 'Animación', seleccionado: false }
+    { name: 'Acción', selected: false },
+    { name: 'Comedia', selected: false },
+    { name: 'Drama', selected: false },
+    { name: 'Terror', selected: false },
+    { name: 'Ciencia Ficción', selected: false },
+    { name: 'Romance', selected: false },
+    { name: 'Documental', selected: false },
+    { name: 'Animación', selected: false }
   ];
 
   toggleGenero(index: number) {
-    this.generos[index].seleccionado = !this.generos[index].seleccionado;
+    this.generos[index].selected = !this.generos[index].selected;
   }
 
-  finalizar() {
-    const seleccion = this.generos.filter(g => g.seleccionado).map(g => g.nombre);
-    
-    this.alFinalizar.emit(seleccion);
+  handleEnd() {
+    const seleccion = this.generos.filter(g => g.selected).map(g => g.name);
+
+    this.toEnd.emit(seleccion);
     
     console.log('Registro completado con los géneros:', seleccion);
   }

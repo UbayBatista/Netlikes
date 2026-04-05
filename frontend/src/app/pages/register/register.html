@@ -4,23 +4,23 @@
     </div>
     <div class="right-side">
         <div class="form-box">   
-            <h1 class="title">Registrarse</h1>
+            <h2 class="text-black fw-bold mb-3">Registrarse</h2>
            
-            <div [ngSwitch]="pasoActual">
+            <div [ngSwitch]="currentStep">
                 <div *ngSwitchCase="1"> 
-                    <app-step1 (alSiguiente)="siguientePaso()"></app-step1>
+                    <app-step1 (toNext)="nextStep()"></app-step1>
                 </div>
                 
                 <div *ngSwitchCase="2"> 
-                    <app-step2 (alSiguiente)="siguientePaso()" (alAtras)="anteriorPaso()"></app-step2>
+                    <app-step2 (toNext)="nextStep()" (toPrev)="prevStep()"></app-step2>
                 </div>
 
                 <div *ngSwitchCase="3"> 
-                    <app-step3 (alSiguiente)="siguientePaso()" (alAtras)="anteriorPaso()"></app-step3>
+                    <app-step3 (toNext)="nextStep()" (toPrev)="prevStep()"></app-step3>
                 </div>
 
                 <div *ngSwitchCase="4"> 
-                    <app-step4 (alAtras)="anteriorPaso()" (alFinalizar)="manejarFinalizacion($event)"></app-step4>
+                    <app-step4 (toPrev)="prevStep()" (toEnd)="handleEnd($event)"></app-step4>
                 </div>
             </div>
         </div>

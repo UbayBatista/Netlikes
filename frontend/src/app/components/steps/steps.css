@@ -16,6 +16,12 @@
   box-sizing: border-box;
 }
 
+.form-control {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #eee !important;
+  border-radius: 15px !important;
+}
+
 .subtitle {
   font-size: 1.5rem;
   font-weight: bold;

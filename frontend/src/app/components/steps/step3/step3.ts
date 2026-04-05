@@ -10,20 +10,20 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['../steps.css', './step3.css']
 })
 export class Step3 {
-  @Output() alSiguiente = new EventEmitter<void>();
-  @Output() alAtras = new EventEmitter<void>();
+  @Output() toNext = new EventEmitter<void>();
+  @Output() toPrev = new EventEmitter<void>();
 
-  terminosAceptados: boolean = false;
+  termsAccepted: boolean = false;
 
-  notificarSiguiente() {
-    if (this.terminosAceptados) {
-      this.alSiguiente.emit();
+  notifyNext() {
+    if (this.termsAccepted) {
+      this.toNext.emit();
     } else {
       alert('Debes aceptar los términos y condiciones para continuar.');
     }
   }
 
-  notificarAtras() {
-    this.alAtras.emit();
+  notifyPrev() {
+    this.toPrev.emit();
   }
 }

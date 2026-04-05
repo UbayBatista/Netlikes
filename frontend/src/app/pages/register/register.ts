@@ -14,20 +14,20 @@ import { Step4 } from '../../components/steps/step4/step4';
   styleUrl: './register.css',
 })
 export class Register {
-    pasoActual: number = 1;
+    currentStep: number = 1;
 
-    siguientePaso() {
-        if (this.pasoActual < 4) {
-            this.pasoActual++;
+    nextStep() {
+        if (this.currentStep < 4) {
+            this.currentStep++;
         }
     }
 
-    anteriorPaso() {
-        if (this.pasoActual > 1) {
-            this.pasoActual--;
+    prevStep() {
+        if (this.currentStep > 1) {
+            this.currentStep--;
         }
     }
 
-    manejarFinalizacion(generos: string[]) {
-    console.log('Registro finalizado con géneros seleccionados:', generos);}
+    handleEnd(genders: string[]) {
+    console.log('Registro finalizado con géneros seleccionados:', genders);}
 }

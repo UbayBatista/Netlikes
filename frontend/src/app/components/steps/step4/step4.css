@@ -42,3 +42,7 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.btn-finish:hover {
+  background-color: #333;
+}

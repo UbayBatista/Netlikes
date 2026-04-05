@@ -5,14 +5,16 @@
   <div class="genres-grid">
     <div *ngFor="let genero of generos; let i = index" 
          class="genre-chip" 
-         [class.selected]="genero.seleccionado"
+         [class.selected]="genero.selected"
          (click)="toggleGenero(i)">
-      {{ genero.nombre }}
+      {{ genero.name }}
     </div>
   </div>
 
   <div class="button-group">
-    <button class="arrow-btn" (click)="alAtras.emit()">&#10229;</button>
-    <button class="btn-finish" (click)="finalizar()">Finalizar Registro</button>
+    <button class="arrow-btn" (click)="toPrev.emit()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <button class="btn-finish" (click)="handleEnd()">Finalizar Registro</button>
   </div>
 </div>

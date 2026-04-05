@@ -1,33 +1,96 @@
-<div class="step-form">
-  
-  <div class="input-group">
-    <input type="text" placeholder="Nombre de usuario" class="form-input">
+<div class="step-form" [formGroup]="form">
+
+  <div class="position-relative mb-3">
+    <div class="form-floating">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        id="password"
+        placeholder=""
+        formControlName="password"
+        class="form-control border-0 pe-5"
+        [ngClass]="{'is-invalid': form.get('password')?.invalid && form.get('password')?.touched}"
+      />
+      <label for="password">Contraseña</label>
+      @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+        <div class="invalid-feedback">La contraseña es obligatoria.</div>
+      }
+      @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+        <div class="invalid-feedback">Mínimo 6 caracteres.</div>
+      }
+    </div>
+    <button
+      type="button"
+      class="btn btn-link text-black-50 position-absolute top-50 end-0 translate-middle-y pe-3"
+      (click)="togglePassword()">
+      <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+    </button>
   </div>
 
-  <div class="input-group">
-    <input type="password" placeholder="Contraseña" class="form-input">
+  <div class="position-relative mb-3">
+    <div class="form-floating">
+      <input
+        [type]="showConfirmation ? 'text' : 'password'"
+        id="confirmPassword"
+        placeholder=""
+        formControlName="confirmPassword"
+        class="form-control border-0 pe-5"
+        [ngClass]="{'is-invalid': (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) || (form.hasError('notSamePasswords') && form.get('confirmPassword')?.touched)}"
+      />
+      <label for="confirmPassword">Confirmar contraseña</label>
+      @if (form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.touched) {
+        <div class="invalid-feedback">Confirma tu contraseña.</div>
+      }
+      @if (form.hasError('notSamePasswords') && form.get('confirmPassword')?.touched) {
+        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+      }
+    </div>
+    <button
+      type="button"
+      class="btn btn-link text-black-50 position-absolute top-50 end-0 translate-middle-y pe-3"
+      (click)="toggleConfirm()">
+      <i [class]="showConfirmation ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+    </button>
   </div>
 
-  <div class="input-group">
-    <input type="password" placeholder="Confirmar contraseña" class="form-input">
-  </div>
-
-  <div class="input-group">
-    <select class="form-select">
-      <option value="" disabled selected>Pregunta de recuperación de contraseña</option>
-      <option *ngFor="let pregunta of preguntas" [value]="pregunta">
-        {{ pregunta }}
-      </option>
+  <label class="form-label text-black-50 mb-1">Pregunta de recuperación</label>
+  <div class="form-floating mb-3">
+    <select
+      id="question"
+      formControlName="question"
+      class="form-select border-0"
+      [ngClass]="{'is-invalid': form.get('question')?.invalid && form.get('question')?.touched}"
+    >
+      <option value="">Selecciona una pregunta</option>
+      @for (q of questions; track q) {
+        <option [value]="q">{{ q }}</option>
+      }
     </select>
+    @if (form.get('question')?.hasError('required') && form.get('question')?.touched) {
+      <div class="invalid-feedback">Selecciona una pregunta de recuperación.</div>
+    }
   </div>
+
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      id="answer"
+      placeholder=""
+      formControlName="answer"
+      class="form-control border-0"
+      [ngClass]="{'is-invalid': form.get('answer')?.invalid && form.get('answer')?.touched}"
+    />
+    <label for="answer">Respuesta</label>
+    @if (form.get('answer')?.hasError('required') && form.get('answer')?.touched) {
+      <div class="invalid-feedback">La respuesta es obligatoria.</div>
+    }
 
   <div class="button-group">
-    <button class="arrow-btn" (click)="notificarAtras()">
-        &#10229; 
+    <button class="arrow-btn" (click)="notifyNext()">
+        <i class="bi bi-arrow-left"></i>
     </button>
     
-    <button class="arrow-btn" (click)="notificarSiguiente()">
-        &#10230;
+    <button class="arrow-btn" (click)="notifyNext()">
+        <i class="bi bi-arrow-right"></i>
     </button>
    </div>
 </div>
