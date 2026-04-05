@@ -1,0 +1,18 @@
+@if (isOpen) {
+  <div class="overlay" (click)="close()"></div>
+  
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Notificaciones</h2>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+    @for (notificacion of notifications; track $index) {   
+        <div class="content">
+          <app-notification
+          [image]="notificacion.imagen"
+          [message]="notificacion.mensaje">
+        </app-notification>
+      </div>
+    }
+  </div>
+}
