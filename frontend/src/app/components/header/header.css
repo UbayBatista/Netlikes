@@ -1,0 +1,33 @@
+nav {
+  background-color: white;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #e50914;
+}
+
+svg {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+svg:hover {
+  opacity: 0.7;
+}
+
+.notificaciones-popup {
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  width: 300px;
+  background-color: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
