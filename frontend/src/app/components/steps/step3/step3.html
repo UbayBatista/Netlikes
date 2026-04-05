@@ -1,0 +1,22 @@
+<div class="step-form">
+  <h2 class="subtitle">Términos y Condiciones de uso</h2>
+  
+  <div class="terms-box">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </div>
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="terms" [(ngModel)]="terminosAceptados">
+    <label for="terms">He leído y acepto los términos y condiciones.</label>
+  </div>
+
+  <div class="button-group">
+    <button class="arrow-btn" (click)="notificarAtras()">&#10229;</button>
+    <button class="arrow-btn" 
+            (click)="notificarSiguiente()" 
+            [style.opacity]="terminosAceptados ? '1' : '0.3'">
+      &#10230;
+    </button>
+  </div>
+</div>

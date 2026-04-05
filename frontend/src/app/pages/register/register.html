@@ -1,0 +1,28 @@
+<div class="main-container">
+    <div class="left-side">
+        <app-brand-panel></app-brand-panel>
+    </div>
+    <div class="right-side">
+        <div class="form-box">   
+            <h1 class="title">Registrarse</h1>
+           
+            <div [ngSwitch]="pasoActual">
+                <div *ngSwitchCase="1"> 
+                    <app-step1 (alSiguiente)="siguientePaso()"></app-step1>
+                </div>
+                
+                <div *ngSwitchCase="2"> 
+                    <app-step2 (alSiguiente)="siguientePaso()" (alAtras)="anteriorPaso()"></app-step2>
+                </div>
+
+                <div *ngSwitchCase="3"> 
+                    <app-step3 (alSiguiente)="siguientePaso()" (alAtras)="anteriorPaso()"></app-step3>
+                </div>
+
+                <div *ngSwitchCase="4"> 
+                    <app-step4 (alAtras)="anteriorPaso()" (alFinalizar)="manejarFinalizacion($event)"></app-step4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

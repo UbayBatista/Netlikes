@@ -1,0 +1,44 @@
+.instruction {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.genre-chip {
+  padding: 12px;
+  border: 2px solid #eee;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background-color: #f9f9f9;
+}
+
+.genre-chip.selected {
+  background-color: #34A8DA;
+  color: white;
+  border-color: #34A8DA;
+}
+
+.genre-chip:hover:not(.selected) {
+  background-color: #eef8fd;
+  border-color: #34A8DA;
+}
+
+.btn-finish {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
