@@ -1,0 +1,17 @@
+<app-header title="Film catalog"></app-header>
+
+<div class="search-wrapper">
+  <input 
+    type="text"
+    class="form-control search-input"
+    placeholder="Buscar películas o géneros..."
+  >
+</div>
+
+@for (genre of genres; track $index) {
+  <app-genre 
+    [genre]="genre"
+    [index]="$index">
+  </app-genre>
+}
+

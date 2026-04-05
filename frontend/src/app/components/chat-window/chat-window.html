@@ -1,0 +1,31 @@
+<div class="chat-container">
+  <header class="chat-header">
+    <button class="mobile-back-btn" (click)="goBack()">&#10229;</button>
+    <h2> {{ ForumTitle }}</h2>
+  </header>
+
+  <div class="messages-viewport">
+    @for (msg of messages(); track $index) {
+      <div class="message-row" [class.mine]="msg.isMine">
+        <app-message-bubble [text]="msg.text" [user]="msg.user" [isMine]="msg.isMine" hour="12:45"></app-message-bubble>
+      </div>
+    } @empty {
+      <p class="text-center text-muted p-4">No hay messages aún. ¡Sé el primero!</p>
+    }
+  </div>
+
+  <footer class="chat-footer">
+    <div class="input-wrapper">
+      <textarea 
+      #txtArea
+      [(ngModel)]="newMessage" 
+      placeholder="Escribe un mensaje..."
+      (input)="AdjustHeight(txtArea)"
+      (keydown.enter)="$event.preventDefault(); sendMessage(txtArea)"
+      rows="1"></textarea>
+      <button (click)="sendMessage(txtArea)" [disabled]="!newMessage()">
+        ➤
+      </button>
+    </div>
+  </footer>
+</div>

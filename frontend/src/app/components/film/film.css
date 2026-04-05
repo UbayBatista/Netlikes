@@ -1,0 +1,29 @@
+.netflix-card {
+  border: none;
+  background: transparent;
+}
+
+.netflix-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+  .netflix-card img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .netflix-card img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .netflix-card img {
+    height: 130px;
+  }
+}
