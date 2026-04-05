@@ -1,0 +1,24 @@
+<h2 class="genre-title">{{ genre.name }}</h2>
+
+<div class="netflix-wrapper">
+
+  @if (genre.canScrollLeft) {
+    <button class="nav-btn left" (click)="scrollLeft()">‹</button>
+  }
+
+  <div class="netflix-row" #scrollContainer>
+    <div class="netflix-slider">
+      @for(film of genre.films; track $index) {
+        <div class="film-item">
+          <app-film [image]="film.image" [title]="film.title"></app-film>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (genre.canScrollRight) {
+    <button class="nav-btn right" (click)="scrollRight()">›</button>
+  }
+
+</div>
+
