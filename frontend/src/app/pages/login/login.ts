@@ -12,32 +12,32 @@ import { BrandPanel } from "../../components/brand-panel/brand-panel";
 })
 export class Login {
 
-  formulario: FormGroup;
-  mostrarPassword: boolean = false;
+  form: FormGroup;
+  showPassword: boolean = false;
 
 
   constructor(private router: Router, private fb: FormBuilder) {
-    this.formulario = this.fb.group({
+    this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
   
   togglePassword() {
-    this.mostrarPassword = !this.mostrarPassword;
+    this.showPassword = !this.showPassword;
   }
 
   login() {
-    if (this.formulario.valid) {
-      console.log('Datos:', this.formulario.value);
+    if (this.form.valid) {
+      console.log('Datos:', this.form.value);
     } else {
-      this.formulario.markAllAsTouched();
+      this.form.markAllAsTouched();
     }
   }
 
   createAccount() {
     console.log('Redirigiendo a creación de cuenta');
-    this.router.navigate(['/registro']);
+    this.router.navigate(['/register']);
   }
 
   forgotPassword() {
