@@ -1,0 +1,26 @@
+<div class="sidebar-container">
+  <div class="search-box">
+    <input 
+      type="text" 
+      placeholder="Buscar foro" 
+      [(ngModel)]="busqueda"
+      class="search-input"
+    >
+  </div>
+
+  <div class="list-container">
+    @for (pelicula of peliculasForo; track pelicula.titulo; let i = $index) {
+      <div 
+      class="foro-item" 
+      [class.active]="pelicula.activa"
+      (click)="seleccionarForo(i)"
+      >
+      <div class="foro-info" (click)="seleccionarForo(1)">
+        <span class="foro-name"> {{ pelicula.titulo }}</span>
+      </div>
+    </div>
+    } @empty {
+      <div class="p-3 text-muted">No estás suscrito a ningún foro.</div>
+    }
+  </div>
+</div>
