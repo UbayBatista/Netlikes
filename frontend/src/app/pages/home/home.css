@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  background-color: #141414;
+  min-height: 100vh;
+}
+
+.nav-bar {
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #2a2a2a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-tab {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tab:hover {
+  color: white;
+}
+
+.nav-tab.active {
+  color: white;
+  border-bottom: 3px solid #e50914;
+}
+
+.fila-peliculas {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.fila-peliculas2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.fila-peliculas::-webkit-scrollbar {
+  height: 4px;
+}
+
+.fila-peliculas::-webkit-scrollbar-thumb {
+  background: #e50914;
+  border-radius: 4px;
+}
+
+.tarjeta-pelicula {
+  min-width: 140px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.tarjeta-pelicula:hover {
+  transform: scale(1.05);
+}
+
+.tarjeta-pelicula img {
+  width: 140px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tarjeta-pelicula .placeholder-img {
+  width: 140px;
+  height: 200px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 2rem;
+}

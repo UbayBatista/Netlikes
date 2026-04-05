@@ -1,0 +1,52 @@
+<app-header />
+
+<div class="nav-bar d-flex">
+  <button 
+    class="nav-tab flex-fill py-3"
+    [class.active]="tabActive === 'paraTi'"
+    (click)="switchTab('paraTi')">
+    Para ti
+  </button>
+  <button 
+    class="nav-tab flex-fill py-3"
+    [class.active]="tabActive === 'usuarios'"
+    (click)="switchTab('usuarios')">
+    Usuarios
+  </button>
+</div>
+
+@if (tabActive === 'paraTi') {
+  <div class="contenido px-4 py-3">
+    <h5 class="text-white mb-3">Recomendaciones para ti</h5>
+
+    @for (fila of peliculasParaTi; track fila.categoria) {
+      <div class="mb-4">
+        <h6 class="text-white-50 mb-2">{{ fila.categoria }}</h6>
+        <div class="fila-peliculas">
+          @for (pelicula of fila.items; track pelicula.id) {
+            <div class="tarjeta-pelicula">
+              <div class="placeholder-img">🎬</div>
+              <p class="text-white mt-2 mb-0">{{ pelicula.titulo }}</p>
+              <small class="text-white-50">{{ pelicula.ano }}</small>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}
+
+@if (tabActive === 'usuarios') {
+    <div class="contenido px-4 py-3">
+        <h5 class="text-white mb-3">Recomendaciones de otros usuarios</h5>
+        <div class="fila-peliculas2">
+            @for (pelicula of peliculasUsuarios; track pelicula.id) {
+                <div class="tarjeta-pelicula">
+                    <div class="placeholder-img">🎬</div>
+                    <p class="text-white mt-2 mb-0">{{ pelicula.titulo }}</p>
+                    <small class="text-white-50">{{ pelicula.ano }}</small>
+                </div>
+            }
+        </div>
+    </div>
+}
