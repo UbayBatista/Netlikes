@@ -1,0 +1,122 @@
+.perfil-header {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start;
+    padding: 20px;
+    font-family: sans-serif;
+    position: relative; 
+
+}
+
+.contenedor-configuracion {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.configuracion {
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+}
+
+.menu {
+    position: absolute;
+    top: 30px; 
+    right: 0;
+    background-color: white;
+    border: 1px solid black;
+    width: 160px;
+    z-index: 10;
+}
+
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    border-bottom: 1px solid black; 
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu li:hover {
+    background-color: #d3d3d3;
+}
+
+.logo-nombre {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nombre-usuario {
+    margin: 0 0 5px 0; 
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.perfil-usuario {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.boton-seguir-editar{
+    margin-left: 20px;
+    margin-top: 25px; 
+    flex: 1; 
+}
+
+.boton {
+    background-color: #d3d3d3;
+    border: none;
+    padding: 8px 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.boton:hover{
+    background-color: grey;
+}
+
+.estadisticas {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end; 
+    margin-right: 50px;
+}
+
+.estadistica{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texto-seguidoresyseguidos{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d3d3d3;
+    width: 65px;
+    height: 50px;
+    margin: 0;
+    font-size: 18px;
+}

@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<div class="d-flex border-bottom border-dark border-2">
+    
+    <div 
+        class="pestana" 
+        [class.activa]="modo_seleccionado === 'Buscar Usuario'"
+        (click)="cambiar_modo('Buscar Usuario')">
+        Buscar Usuarios
+    </div>
+
+    <div 
+        class="pestana" 
+        [class.activa]="modo_seleccionado === 'Chats'"
+        (click)="cambiar_modo('Chats')">
+        Chats
+    </div>
+
+</div>
+
+@if (modo_seleccionado == "Buscar Usuario"){
+    <app-social-search-user></app-social-search-user>
+}
+@else{
+    <app-social-chats></app-social-chats>
+}
+

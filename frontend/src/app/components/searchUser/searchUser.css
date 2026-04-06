@@ -1,0 +1,15 @@
+.tarjeta-gris {
+    background-color: #dcdcdc; 
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.tarjeta-gris:hover {
+    transform: translateY(-5px);
+    background-color: #d0d0d0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    outline: 1px solid #aaa;
+}

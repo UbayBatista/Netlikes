@@ -1,0 +1,34 @@
+.Informacion {
+    padding: 0 20px; /* Alineado con los márgenes del header */
+    font-family: sans-serif;
+}
+
+.seccion {
+    margin-bottom: 20px;
+}
+
+.seccion-titulo {
+    font-size: 15px;
+    font-weight: normal;
+    margin: 0 0 5px 0; 
+}
+
+.seccion-contenido {
+    background-color: #d3d3d3;
+    width: 100%;
+    min-height: 100px; 
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+@media (max-width: 1024px){
+    .seccion-contenido { font-size: 1em; }   
+}
+
+@media (max-width: 768px){
+    .seccion-contenido { font-size: 0.85em; }   
+}
+
+@media (max-width: 480px){
+    .seccion-contenido { font-size: 0.7em; }   
+}

@@ -1,0 +1,32 @@
+<div class="container py-5">
+    
+    <div class="row justify-content-center mb-5">
+        <div class="col-12 col-md-6">
+            <input 
+                type="text" 
+                class="form-control rounded-pill bg-light border-0 px-4 py-2" 
+                placeholder="🔍 Buscar Usuario"
+            >
+        </div>
+    </div>
+
+    <div class="row g-4">
+        
+        @for (user of listaUsuarios; track user) {
+            
+            <div class="col-6 col-md-3">
+                <div class="tarjeta-gris d-flex flex-column align-items-center justify-content-center p-4">
+                    <img 
+                        class="rounded-circle object-fit-cover mb-3" 
+                        width="80" 
+                        height="80" 
+                        src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U="
+                    >
+                    <h5 class="m-0 fw-bold">{{usuario}}</h5>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

@@ -4,7 +4,8 @@ import { Register } from './pages/register/register';
 import { Home } from './pages/home/home';
 import { Catalog } from './pages/catalog/catalog';
 import { Forum } from './pages/forum/forum';
-
+import { ProfileComplete } from './pages/profile/profileBody';
+import { Social } from './pages/social/social';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'catalog', component: Catalog },
   { path: 'forum', component: Forum },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
+  { path: 'profile', component: ProfileComplete },
+  { path: 'social', component: Social },
 ];
