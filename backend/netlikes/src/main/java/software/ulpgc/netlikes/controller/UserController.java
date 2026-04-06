@@ -1,13 +1,16 @@
 package software.ulpgc.netlikes.controller;
 
-import software.ulpgc.netlikes.model.User;
+import software.ulpgc.netlikes.dto.UserRequestDTO;
+import software.ulpgc.netlikes.dto.UserResponseDTO;
 import software.ulpgc.netlikes.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -15,27 +18,30 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserResponseDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
+    @GetMapping("/{email}")
+    public UserResponseDTO getUserById(@PathVariable String email) {
+        return userService.getUserById(email);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserResponseDTO createUser(@Valid @RequestBody UserRequestDTO dto) {
+        return userService.createUser(dto);
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id, @RequestBody User updatedUser) {
-        return userService.updateUser(id, updatedUser);
+    @PutMapping("/{email}")
+    public UserResponseDTO updateUser(
+            @PathVariable String email,
+            @Valid @RequestBody UserRequestDTO dto) {
+
+        return userService.updateUser(email, dto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/{email}")
+    public void deleteUser(@PathVariable String email) {
+        userService.deleteUser(email);
     }
 }

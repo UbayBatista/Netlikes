@@ -20,9 +20,9 @@ public class User {
     @Column(nullable=false) private String name;
     @Column(nullable=false) private Date birthdate;
     @Column(nullable=false) private boolean accountPrivacity;
-    @Column(nullable=false) private boolean watchedFilms;
-    @Column(nullable=false) private boolean filmsToWatchLater;
-    @Column(nullable=false) private boolean recommendedFilms;
+    @Column(nullable=false) private boolean showWatchedFilms;
+    @Column(nullable=false) private boolean showFilmsToWatchLater;
+    @Column(nullable=false) private boolean showRecommendedFilms;
     @Column(nullable=true) private String profilePicture;
     @Column(nullable=true) private String bio;
 
