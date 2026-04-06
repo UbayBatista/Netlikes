@@ -1,19 +1,19 @@
 .Informacion {
-    padding: 0 20px; /* Alineado con los márgenes del header */
+    padding: 0 20px; 
     font-family: sans-serif;
 }
 
-.seccion {
+.section {
     margin-bottom: 20px;
 }
 
-.seccion-titulo {
+.sectionTitle{
     font-size: 15px;
     font-weight: normal;
     margin: 0 0 5px 0; 
 }
 
-.seccion-contenido {
+.sectionContent {
     background-color: #d3d3d3;
     width: 100%;
     min-height: 100px; 
@@ -22,13 +22,13 @@
 }
 
 @media (max-width: 1024px){
-    .seccion-contenido { font-size: 1em; }   
+    .sectionContent { font-size: 1em; }   
 }
 
 @media (max-width: 768px){
-    .seccion-contenido { font-size: 0.85em; }   
+    .sectionContent { font-size: 0.85em; }   
 }
 
 @media (max-width: 480px){
-    .seccion-contenido { font-size: 0.7em; }   
+    .sectionContent { font-size: 0.7em; }   
 }

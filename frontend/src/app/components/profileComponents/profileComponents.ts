@@ -7,6 +7,6 @@ import { Component, Input } from "@angular/core";
     styleUrl: './profileComponents.css',
 })
 
-export class Profilebody{
-    @Input() titulo: string = 'bio';
+export class ProfileBody{
+    @Input() title: string = 'bio';
 }

@@ -6,11 +6,11 @@ import { Component, Input } from "@angular/core";
     templateUrl: "./profileHeader.html",
     styleUrl: "./profileHeader.css"
 })
-export class Profileheader{
-    @Input() nombreUsuario: string = "Cristiano";
-    menuAbierto: boolean = false;
+export class ProfileHeader{
+    @Input() userName: string = "Cristiano";
+    openMenu: boolean = false;
 
     Menu(){
-        this.menuAbierto = !this.menuAbierto;
+        this.openMenu = !this.openMenu;
     }
 }

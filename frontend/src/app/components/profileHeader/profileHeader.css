@@ -1,4 +1,4 @@
-.perfil-header {
+.profileHeader {
     display: flex;
     align-items: center; 
     justify-content: flex-start;
@@ -8,13 +8,13 @@
 
 }
 
-.contenedor-configuracion {
+.containerConfiguration {
     position: absolute;
     top: 15px;
     right: 20px;
 }
 
-.configuracion {
+.configuration {
     font-size: 20px;
     cursor: pointer;
     background: none;
@@ -55,32 +55,32 @@
     background-color: #d3d3d3;
 }
 
-.logo-nombre {
+.logoName {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.nombre-usuario {
+.userName {
     margin: 0 0 5px 0; 
     font-size: 16px;
     font-weight: normal;
 }
 
-.perfil-usuario {
+.userProfile {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover; 
 }
 
-.boton-seguir-editar{
+.buttonFollow{
     margin-left: 20px;
     margin-top: 25px; 
     flex: 1; 
 }
 
-.boton {
+.button {
     background-color: #d3d3d3;
     border: none;
     padding: 8px 24px;
@@ -88,29 +88,29 @@
     cursor: pointer;
 }
 
-.boton:hover{
+.button:hover{
     background-color: grey;
 }
 
-.estadisticas {
+.stats {
     display: flex;
     gap: 20px;
     align-items: flex-end; 
     margin-right: 50px;
 }
 
-.estadistica{
+.stat {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.texto-seguidoresyseguidos{
+.follow{
     font-size: 12px;
     margin-bottom: 5px;
 }
 
-.numero {
+.number {
     display: flex;
     align-items: center;
     justify-content: center;

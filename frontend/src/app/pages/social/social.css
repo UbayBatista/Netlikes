@@ -1,4 +1,4 @@
-.pestana {
+.window {
     flex: 1; 
     text-align: center;
     padding: 15px;
@@ -9,7 +9,7 @@
     border-bottom: none; 
 }
 
-.activa {
+.active {
     background-color: #dcdcdc;
     font-weight: bold; 
 }

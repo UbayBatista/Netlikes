@@ -1,8 +1,8 @@
 import { Component, Input } from "@angular/core";
 
 interface Menssage{
-    texto: string;
-    soyYo: boolean;
+    text: string;
+    itsMe: boolean;
 }
 
 @Component({
@@ -12,24 +12,24 @@ interface Menssage{
     styleUrl: "./menssages.css"
 })
 export class Menssages{
-    @Input() usuario: string="Cristiano"
-    @Input() persona: string="Messi"
+    @Input() user: string="Cristiano"
+    @Input() person: string="Messi"
 
-    historialMensajes: Menssage[] = [
-        { texto: 'Hola, ¿qué tal?', soyYo: false },
-        { texto: '¡Todo bien! Entrenando.', soyYo: true }
+    messageHistory: Menssage[] = [
+        { text: 'Hola, ¿qué tal?', itsMe: false },
+        { text: '¡Todo bien! Entrenando.', itsMe: true }
     ];
 
-    enviarMensaje(nuevoTexto: string) {
-        if (nuevoTexto.trim() !== '') {
-            this.historialMensajes.push({
-                texto: nuevoTexto,
-                soyYo: true 
+    sendMessage(newText: string) {
+        if (newText.trim() !== '') {
+            this.messageHistory.push({
+                text: newText,
+                itsMe: true 
             });
         }
     }
 
-    ajustarAltura(textarea: HTMLTextAreaElement) {
+    height(textarea: HTMLTextAreaElement) {
         textarea.style.height = 'auto'; 
         textarea.style.height = textarea.scrollHeight + 'px';
     }

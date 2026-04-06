@@ -8,5 +8,5 @@ import { Component, Input } from "@angular/core";
     styleUrl: "./users.css"
 })
 export class Users{
-    @Input() persona: string="Messi"
+    @Input() person: string="Messi"
 }

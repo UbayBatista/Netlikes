@@ -1,29 +1,29 @@
 <div class="p-3 border-bottom border-dark border-2 w-100">
-    <h4 class="m-0">{{persona}}</h4>
+    <h4 class="m-0">{{person}}</h4>
 </div>
 
 <div class="flex-grow-1 p-4 overflow-auto d-flex flex-column gap-3 w-100">
     
-        @for (msg of historialMensajes; track msg) {
+        @for (msg of messageHistory; track msg) {
             
-            @if (!msg.soyYo){
+            @if (!msg.itsMe){
                 <div class="d-flex flex-column align-items-start">
                     <div class="d-flex align-items-center mb-2">
-                        <img class="foto-usuario" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
-                        <h5 class="m-0 ms-2">{{persona}}</h5>
+                        <img class="userPhoto" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
+                        <h5 class="m-0 ms-2">{{person}}</h5>
                     </div>
 
-                    <div class="burbuja bg-white">{{msg.texto}}</div>
+                    <div class="bubble bg-white">{{msg.text}}</div>
 
                 </div>
             }
             @else{
                 <div class="d-flex flex-column align-items-end">
                     <div class="d-flex align-items-center mb-2">
-                        <img class="foto-usuario" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
-                        <h5 class="nombre-usuario">{{usuario}}</h5>
+                        <img class="userPhoto" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
+                        <h5 class="userName">{{user}}</h5>
                     </div>
-                    <div class="burbuja bg-white">{{msg.texto}}</div>
+                    <div class="bubble bg-white">{{msg.text}}</div>
                 </div>
             }  
         }
@@ -37,13 +37,13 @@
             #txtArea
             placeholder="Escribe un mensaje..."
             rows="1"
-            (input)="ajustarAltura(txtArea)"
-            (keydown.enter)="$event.preventDefault(); enviarMensaje(txtArea.value); txtArea.value=''; ajustarAltura(txtArea)"
+            (input)="height(txtArea)"
+            (keydown.enter)="$event.preventDefault(); sendMessage(txtArea.value); txtArea.value=''; height(txtArea)"
         ></textarea>
 
         <button 
             type="button" 
-            (click)="enviarMensaje(txtArea.value); txtArea.value=''; ajustarAltura(txtArea)"
+            (click)="sendMessage(txtArea.value); txtArea.value=''; height(txtArea)"
         >▻</button>
 
     </div>
