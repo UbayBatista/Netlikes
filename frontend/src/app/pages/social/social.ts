@@ -12,10 +12,10 @@ import { Header } from "../../components/header/header";
 })
 export class Social{
 
-    modo_seleccionado: string="Buscar Usuario";
+    selectedMode: string="Buscar Usuario";
 
-    cambiar_modo(nuevo_modo: string){
-        this.modo_seleccionado = nuevo_modo;
+    changeMode(newMode: string){
+        this.selectedMode = newMode;
     }
 
 }

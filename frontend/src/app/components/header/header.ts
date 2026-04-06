@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { NotificationPanel } from '../notification-panel/notification-panel';
 
 @Component({
@@ -13,8 +13,11 @@ export class Header {
   showNotifications: boolean = false;
   avatarUrl: string = 'https://i.pravatar.cc/150?img=54';
 
+  constructor(private router: Router) {}
+
   goToProfile() {
     console.log('Ir al perfil');
+    this.router.navigate(['/profile']);
   }
 
   boxOpen = false;

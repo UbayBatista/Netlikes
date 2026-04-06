@@ -1,9 +1,9 @@
-<div class="perfil-header">
+<div class="profileHeader">
 
-    <div class="contenedor-configuracion">
-        <button class="configuracion" (click)="Menu()">⚙️</button>
+    <div class="containerConfiguration">
+        <button class="configuration" (click)="Menu()">⚙️</button>
 
-        @if (menuAbierto){
+        @if (openMenu){
             <div class="menu">
                 <ul>
                     <li>Ajustes</li>
@@ -12,24 +12,24 @@
         }
     </div>
 
-    <div class="logo-nombre">
-        <h4 class="nombre-usuario">{{nombreUsuario}}</h4>
-        <img class="perfil-usuario" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
+    <div class="logoName">
+        <h4 class="userName">{{userName}}</h4>
+        <img class="userProfile" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
     </div>
 
-    <div class="boton-seguir-editar">
-        <button  class="boton">Editar Perfil</button>
+    <div class="buttonFollow">
+        <button  class="button">Editar Perfil</button>
     </div>
 
-    <div class="estadisticas">
-        <div class="estadistica">
-            <h5 class="texto-seguidoresyseguidos">Seguidores</h5>
-            <p class="numero">123</p>
+    <div class="stats">
+        <div class="stat">
+            <h5 class="follow">Seguidores</h5>
+            <p class="number">123</p>
         </div>
 
-        <div class="estadistica">
-            <h5 class="texto-seguidoresyseguidos">Seguidos</h5>
-            <p class="numero">123</p>
+        <div class="stat">
+            <h5 class="follow">Seguidos</h5>
+            <p class="number">123</p>
         </div>
 
     </div>
