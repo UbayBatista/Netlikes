@@ -9,7 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './forum-list.css'
 })
 export class ForumList {
-  @Output() clickedForum = new EventEmitter<void>();
+  @Output() clickedForum = new EventEmitter<{title: string}>(); 
+
   search = signal('');
 
   filmsForum = [
@@ -19,11 +20,12 @@ export class ForumList {
     { title: 'Harry Potter y la piedra filosofal', active: false },
     { title: 'Avatar', active: false }
   ];
-  seleccionarForo(index: number) {
+
+  selectForum(index: number) {
     this.filmsForum.forEach(p => p.active = false);
     this.filmsForum[index].active = true;
     
-    this.clickedForum.emit();
+    this.clickedForum.emit({ title: this.filmsForum[index].title });
     console.log('Cambiando al foro de:', this.filmsForum[index].title);
   }
 }

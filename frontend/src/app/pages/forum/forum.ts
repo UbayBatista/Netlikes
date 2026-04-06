@@ -12,9 +12,11 @@ import { Header } from '../../components/header/header';
 })
 
 export class Forum { 
+  currentTitle: string = 'Los juegos del hambre';
   selectedForum: boolean = false;
 
-  seeChat() {
+  seeChat(event: { title: string }) {
+    this.currentTitle = event.title;
     this.selectedForum = true;
   }
   returnToList() {

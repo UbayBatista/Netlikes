@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Output, EventEmitter, signal, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessageBubble } from '../message-bubble/message-bubble';
 
@@ -12,8 +12,12 @@ import { MessageBubble } from '../message-bubble/message-bubble';
 export class ChatWindow {
   @Output() return = new EventEmitter<void>();
 
-  ForumTitle: string = 'Los juegos del hambre';
+  ForumTitle = 'Los juegos del hambre';
   newMessage = signal('');
+
+  @Input() set selectedForumTitle(value: string) {
+    this.ForumTitle = value;
+  }
 
   messages = signal([
     { text: '¡Hola a todos! ¿Cuál es vuestra escena favorita?', isMine: false, user: 'User123' },
