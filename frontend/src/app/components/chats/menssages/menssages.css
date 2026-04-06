@@ -1,9 +1,22 @@
+.chatContainer{
+  overflow-y: auto; 
+  flex-grow: 1;
+}
+
+.chatContainer {
+    max-height: calc(100vh - 200px); 
+}
+
+
 .bubble {
     border: 3px solid #222;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 8px; 
     max-width: 75%; 
+    max-width: 50%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .userPhoto{

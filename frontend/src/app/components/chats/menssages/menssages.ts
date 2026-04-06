@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
 
 interface Menssage{
     text: string;
@@ -11,7 +11,7 @@ interface Menssage{
     templateUrl: "./menssages.html",
     styleUrl: "./menssages.css"
 })
-export class Menssages{
+export class Menssages implements OnInit, OnDestroy{
     @Input() user: string="Cristiano"
     @Input() person: string="Messi"
 
@@ -20,6 +20,44 @@ export class Menssages{
         { text: '¡Todo bien! Entrenando.', itsMe: true }
     ];
 
+        private intervalId: any; 
+        constructor(private cdr: ChangeDetectorRef) {}
+
+    ngOnInit() {
+        this.intervalId = setInterval(() => {
+            this.sendAutomaticMessage();
+        }, 5000); 
+    }
+
+    ngOnDestroy() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+        }
+    }
+
+    randomPhrase: string[] = [
+      "¡Hola! ¿Cómo va el entrenamiento?",
+      "Ayer jugamos un partidazo ⚽",
+      "¿Viste el golazo que marqué?",
+      "Siuuuuuuu",
+      "Me voy al gimnasio, luego hablamos.",
+      "Qué buen clima para jugar hoy."
+    ];
+
+    sendAutomaticMessage() {
+        
+        const number = Math.floor(Math.random() * 6);
+
+        const randomText = this.randomPhrase[number];
+        
+
+        this.messageHistory.push(
+            { text: randomText, itsMe: false },
+        );
+
+        this.cdr.detectChanges();
+    }
+   
     sendMessage(newText: string) {
         if (newText.trim() !== '') {
             this.messageHistory.push({
@@ -27,7 +65,10 @@ export class Menssages{
                 itsMe: true 
             });
         }
+        
     }
+
+    
 
     height(textarea: HTMLTextAreaElement) {
         textarea.style.height = 'auto'; 
