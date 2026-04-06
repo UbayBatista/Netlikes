@@ -34,11 +34,13 @@
 .messages-viewport {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 100%;
+  max-width: 100%;
   min-height: 0;
 }
 
