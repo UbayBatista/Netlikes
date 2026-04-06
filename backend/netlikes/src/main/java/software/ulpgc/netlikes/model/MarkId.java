@@ -1,0 +1,16 @@
+package software.ulpgc.netlikes.model;
+
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Embeddable
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MarkId implements Serializable {
+    private String email;
+    private Integer filmId;
+}

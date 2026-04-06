@@ -32,6 +32,9 @@ public class Film{
 
     private List<Platform> platforms;
 
+    @OneToMany(mappedBy = "film")
+    @JsonIgnore
+    private List<Mark> markUsers;
     
     @ManyToMany
     @JoinTable(

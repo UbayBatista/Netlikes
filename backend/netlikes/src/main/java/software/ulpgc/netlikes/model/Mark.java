@@ -1,0 +1,29 @@
+package software.ulpgc.netlikes.model;
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.List;
+
+@Entity 
+@Table(name = "mark")
+@Data
+@NoArgsConstructor
+
+public class Mark {
+
+    @EmbeddedId
+    private MarkId id = new MarkId();
+
+    @ManyToOne
+    @MapsId("email")
+    @JoinColumn(name = "email")
+    private User user;
+
+    @ManyToOne
+    @MapsId("filmId")
+    @JoinColumn(name = "filmId")
+    private Film film;
+
+    @Column(nullable = false)
+    private String type;
+    
+}

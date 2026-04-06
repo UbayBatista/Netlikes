@@ -21,4 +21,8 @@ public class User {
     @Column(nullable=false) private boolean recommendedFilms;
     @Column(nullable=true) private String profilePicture;
     @Column(nullable=true) private String bio;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Mark> markFilms;
 }
