@@ -1,6 +1,8 @@
 package software.ulpgc.netlikes.model;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.sql.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,10 +19,16 @@ public class Film{
     private boolean adult;
 
     @Column(nullable = false, columnDefinition = "TEXT")
+    private String title;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String filmUrl;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String summary;
+
+    @Column(nullable = false)
+    private Date releaseDate;
 
     @Column(columnDefinition = "TEXT")
     private String trailer;
