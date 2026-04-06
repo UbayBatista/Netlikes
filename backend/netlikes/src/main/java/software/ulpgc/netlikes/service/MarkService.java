@@ -1,9 +1,15 @@
 package software.ulpgc.netlikes.service;
 
+import software.ulpgc.netlikes.model.Film;
+import software.ulpgc.netlikes.model.User;
 import software.ulpgc.netlikes.model.Mark;
 import software.ulpgc.netlikes.model.MarkId;
+import software.ulpgc.netlikes.repository.FilmRepository;
 import software.ulpgc.netlikes.repository.MarkRepository;
+import software.ulpgc.netlikes.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import lombok.*;
+
 import java.util.List;
 
 @Service
@@ -18,10 +24,10 @@ public class MarkService {
         
         MarkId id = new MarkId(email, filmId);
 
-        return MarkRepository.findById(id)
+        return markRepository.findById(id)
             .map(relationExists -> {
-                relationExists.setEstado(type);
-                return userFilmRepository.save(relationExists);
+                relationExists.setType(type);
+                return markRepository.save(relationExists);
             })
             .orElseGet(() -> {
                 User user = userRepository.findById(email).orElseThrow();
@@ -30,15 +36,15 @@ public class MarkService {
                 Mark relation = new Mark();
                 relation.setUser(user);
                 relation.setFilm(film);
-                relation.setEstado(type);
+                relation.setType(type);
 
-                return markRepository.save(relacion);
+                return markRepository.save(relation);
             });
     }
 
     public void deletetype(String email, Integer filmId) {
         MarkId id = new MarkId(email, filmId);
-        userFilmRepository.deleteById(id);
+        markRepository.deleteById(id);
     }
 
 }
