@@ -51,5 +51,5 @@ public class Film{
         joinColumns = @JoinColumn(name = "filmId"),
         inverseJoinColumns = @JoinColumn(name = "actorId")
     )
-    private List<Genre> participateIn;
+    private List<Actor> participateIn;
 }

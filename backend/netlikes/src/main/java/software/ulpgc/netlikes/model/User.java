@@ -1,6 +1,7 @@
 package software.ulpgc.netlikes.model;
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -28,4 +29,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Mark> markFilms;
+
+    @ManyToMany
+    @Size(min=3 , message="Tiene que seleccionar al menos un género favorito")
+    @JoinTable(
+        name = "mark_favorite",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> favoriteGenres;
 }
