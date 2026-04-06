@@ -34,8 +34,8 @@ public class User {
     @Size(min=3 , message="Tiene que seleccionar al menos un género favorito")
     @JoinTable(
         name = "mark_favorite",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id")
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "genreId")
     )
     private List<Genre> favoriteGenres;
 }
