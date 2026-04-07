@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter} from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 
 @Component({
@@ -10,7 +10,9 @@ import { Router, RouterLink } from "@angular/router";
 })
 export class ProfileHeader{
     @Input() userName: string = "Cristiano";
-    @Input() type: string = "Editar Perfil"
+    @Input() type: string = "Editar Perfil";
+    @Input() option: string = "Ajustes";
+    @Input() otherUser: string = 'No';
     openMenu: boolean = false;
 
     Menu(){

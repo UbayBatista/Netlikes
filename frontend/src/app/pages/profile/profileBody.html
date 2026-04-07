@@ -4,7 +4,7 @@
     
     @if(!itsMe){
         
-        <app-profile-header userName={{profileName}} type="Siguiendo"></app-profile-header>
+        <app-profile-header userName={{profileName}} type="Siguiendo" option="Bloquear" otherUser="Yes"></app-profile-header>
 
         <app-profile-components title="Bio">
             <p>{{textBio}}</p>
@@ -20,7 +20,7 @@
     }
     @else{
         
-        <app-profile-header userName="Cristiano Ronaldo"></app-profile-header>
+        <app-profile-header userName="Cristiano Ronaldo" option="Ajustes"></app-profile-header>
 
         <app-profile-components title="Bio">
             <p>Hola soy el Bicho Oficial</p>

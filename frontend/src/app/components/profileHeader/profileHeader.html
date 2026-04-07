@@ -4,12 +4,21 @@
         <button class="configuration" (click)="Menu()">⚙️</button>
 
         @if (openMenu){
-            <div class="menu">
-                <ul>
-                    <li>Ajustes</li>
-                    <li (click)="logOut()">Cerrar sesión</li>
-                </ul>
-            </div>
+            @if (otherUser === "Yes"){
+                <div class="menu">
+                    <ul>
+                        <li>{{option}}</li>
+                    </ul>
+                </div>
+            }
+            @else{
+                <div class="menu">
+                    <ul>
+                        <li>{{option}}</li>
+                        <li (click)="logOut()">Cerrar sesión</li>
+                    </ul>
+                </div>
+            }
         }
     </div>
 
