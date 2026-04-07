@@ -41,21 +41,21 @@
   <div class="d-flex gap-2 mb-3">
     <select formControlName="day" class="form-select border-0"
       [ngClass]="{'is-invalid': form.get('day')?.invalid && form.get('day')?.touched}">
-      <option value="">Día</option>
+      <option value="" disabled hidden>Día</option>
       @for (d of days; track d) {
         <option [value]="d">{{ d }}</option>
       }
     </select>
     <select formControlName="month" class="form-select border-0"
       [ngClass]="{'is-invalid': form.get('month')?.invalid && form.get('month')?.touched}">
-      <option value="">Mes</option>
+      <option value="" disabled hidden>Mes</option>
       @for (m of months; track m.value) {
         <option [value]="m.value">{{ m.name }}</option>
       }
     </select>
     <select formControlName="year" class="form-select border-0"
       [ngClass]="{'is-invalid': form.get('year')?.invalid && form.get('year')?.touched}">
-      <option value="">Año</option>
+      <option value="" disabled hidden>Año</option>
       @for (y of years; track y) {
         <option [value]="y">{{ y }}</option>
       }
