@@ -46,6 +46,27 @@
   background-color: #333;
 }
 
+.position-relative input.is-invalid {
+  background-position: right 2.5rem center !important;
+}
+
+select.is-invalid {
+  background-position: right 0.75rem center, center right 2.25rem !important;
+}
+
+.btn-eye {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: #6c757d;
+  z-index: 4;
+}
+
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
