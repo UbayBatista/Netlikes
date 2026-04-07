@@ -20,8 +20,8 @@ describe('Step4', () => {
   });
 
   it('should toggle a genre selection', () => {
-    const initialStatus = component.generos[0].seleccionado;
+    const initialStatus = component.generos[0].selected;
     component.toggleGenero(0);
-    expect(component.generos[0].seleccionado).toBe(!initialStatus);
+    expect(component.generos[0].selected).toBe(!initialStatus);
   });
 });

@@ -1,10 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-step4',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './step4.html',
   styleUrls: ['../steps.css', './step4.css']
 })
@@ -20,8 +19,17 @@ export class Step4 {
     { name: 'Ciencia Ficción', selected: false },
     { name: 'Romance', selected: false },
     { name: 'Documental', selected: false },
-    { name: 'Animación', selected: false }
+    { name: 'Animación', selected: false },
+    { name: 'Musical', selected: false },
+    { name: 'Aventura', selected: false },
+    { name: 'Suspense', selected: false },
+    { name: 'Historia', selected: false },
+    { name: 'Bélica', selected: false }
   ];
+
+  get totalSelected(): number {
+    return this.generos.filter(g => g.selected).length;
+  }
 
   toggleGenero(index: number) {
     this.generos[index].selected = !this.generos[index].selected;
