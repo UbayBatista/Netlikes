@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Genre } from "../../components/genre/genre";
-import { Header } from '../../components/header/header';
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [Genre, Header, CommonModule],
+  imports: [Genre, CommonModule],
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',
 })
