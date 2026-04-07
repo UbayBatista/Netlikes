@@ -9,5 +9,7 @@ import { Component, Input } from '@angular/core';
 export class Film {
   @Input() image!: string;
   @Input() title!: string;
+  @Input() year!: number;
+  @Input() id!: number;
 }
 

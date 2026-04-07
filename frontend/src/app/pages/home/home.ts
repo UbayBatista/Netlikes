@@ -1,38 +1,41 @@
 import { Component } from '@angular/core';
+import { Genre } from '../../components/genre/genre';
+import { Film } from '../../components/film/film';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
+  imports: [Genre, Film]
 })
 export class Home {
   tabActive: string = 'paraTi';
 
-  peliculasParaTi = [
+  forYouFilms = [
     {
-      categoria: 'Acción',
-      items: [
-        { id: 1, titulo: 'Mad Max', ano: 2015, imagen: 'https://via.placeholder.com/140x200' },
-        { id: 2, titulo: 'John Wick', ano: 2014, imagen: 'https://via.placeholder.com/140x200' },
-        { id: 3, titulo: 'Top Gun', ano: 2022, imagen: 'https://via.placeholder.com/140x200' },
-        { id: 4, titulo: 'Mission Impossible', ano: 2023, imagen: 'https://via.placeholder.com/140x200' },
+      name: 'Acción',
+      films: [
+        { id: 1, title: 'Mad Max', ano: 2015, image: 'https://via.placeholder.com/140x200' },
+        { id: 2, title: 'John Wick', ano: 2014, image: 'https://via.placeholder.com/140x200' },
+        { id: 3, title: 'Top Gun', ano: 2022, image: 'https://via.placeholder.com/140x200' },
+        { id: 4, title: 'Mission Impossible', ano: 2023, image: 'https://via.placeholder.com/140x200' },
       ]
     },
     {
-      categoria: 'Drama',
-      items: [
-        { id: 5, titulo: 'Oppenheimer', ano: 2023, imagen: 'https://via.placeholder.com/140x200' },
-        { id: 6, titulo: 'The Godfather', ano: 1972, imagen: 'https://via.placeholder.com/140x200' },
-        { id: 7, titulo: 'Forrest Gump', ano: 1994, imagen: 'https://via.placeholder.com/140x200' },
+      name: 'Drama',
+      films: [
+        { id: 5, title: 'Oppenheimer', ano: 2023, image: 'https://via.placeholder.com/140x200' },
+        { id: 6, title: 'The Godfather', ano: 1972, image: 'https://via.placeholder.com/140x200' },
+        { id: 7, title: 'Forrest Gump', ano: 1994, image: 'https://via.placeholder.com/140x200' },
       ]
     }
   ];
 
   peliculasUsuarios = [
-  { id: 7, titulo: 'Inception', ano: 2010 },
-  { id: 8, titulo: 'Interstellar', ano: 2014 },
-  { id: 9, titulo: 'The Dark Knight', ano: 2008 },
-  { id: 10, titulo: 'Dune 2', ano: 2024 },
+  { id: 7, title: 'Inception', ano: 2010,  image: 'https://c8.alamy.com/comp/2C4X05R/inception-2010-directed-by-christopher-nolan-and-starring-leonardo-dicaprio-joseph-gordon-levitt-ellen-page-tom-hardy-and-ken-watanabe-a-team-break-in-to-the-subconscious-of-a-businessman-using-dream-sharing-technology-in-order-a-plant-a-seed-to-influence-his-decision-in-the-real-world-2C4X05R.jpg' },
+  { id: 8, title: 'Interstellar', ano: 2014, image: 'https://via.placeholder.com/140x200' },
+  { id: 9, title: 'The Dark Knight', ano: 2008, image: 'https://via.placeholder.com/140x200' },
+  { id: 10, title: 'Dune 2', ano: 2024, image: 'https://via.placeholder.com/140x200' },
   ];
 
   switchTab(tab: string) {

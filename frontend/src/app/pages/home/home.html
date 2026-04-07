@@ -17,19 +17,8 @@
   <div class="contenido px-4 py-3">
     <h5 class="text-white mb-3">Recomendaciones para ti</h5>
 
-    @for (fila of peliculasParaTi; track fila.categoria) {
-      <div class="mb-4">
-        <h6 class="text-white-50 mb-2">{{ fila.categoria }}</h6>
-        <div class="fila-peliculas">
-          @for (pelicula of fila.items; track pelicula.id) {
-            <div class="tarjeta-pelicula">
-              <div class="placeholder-img">🎬</div>
-              <p class="text-white mt-2 mb-0">{{ pelicula.titulo }}</p>
-              <small class="text-white-50">{{ pelicula.ano }}</small>
-            </div>
-          }
-        </div>
-      </div>
+    @for (genre of forYouFilms; track genre.name) {
+      <app-genre [genre]="genre"></app-genre>
     }
   </div>
 }
@@ -39,11 +28,7 @@
         <h5 class="text-white mb-3">Recomendaciones de otros usuarios</h5>
         <div class="fila-peliculas2">
             @for (pelicula of peliculasUsuarios; track pelicula.id) {
-                <div class="tarjeta-pelicula">
-                    <div class="placeholder-img">🎬</div>
-                    <p class="text-white mt-2 mb-0">{{ pelicula.titulo }}</p>
-                    <small class="text-white-50">{{ pelicula.ano }}</small>
-                </div>
+                <app-film [image]="pelicula.image" [title]="pelicula.title" [year]="pelicula.ano"></app-film>
             }
         </div>
     </div>
