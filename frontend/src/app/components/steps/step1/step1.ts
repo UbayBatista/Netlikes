@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 function validateAge(group: FormGroup) {
   const day = group.get('day')?.value;
@@ -41,7 +42,7 @@ export class Step1 {
   ];
   years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder) {
   this.form = this.fb.group({
     user_name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
@@ -53,10 +54,15 @@ export class Step1 {
 
   notifyNext() {
     if (this.form.valid) {
-      //console.log('Datos del paso 1:', this.form.value);
+      console.log('Datos del paso 1:', this.form.value);
       this.toNext.emit();
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  goBackToLogin() {
+    console.log('Redirigiendo a inicio de sesión');
+    this.router.navigate(['/login']);
   }
 }
