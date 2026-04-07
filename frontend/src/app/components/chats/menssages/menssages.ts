@@ -21,13 +21,19 @@ export class Menssages implements OnInit, OnDestroy{
     ];
 
         private intervalId: any; 
+        private countMessage = 0;
         constructor(private cdr: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.intervalId = setInterval(() => {
-            this.sendAutomaticMessage();
+            this.sendAutomaticMessage(); 
+            this.countMessage++;     
+            if (this.countMessage >= 5) {
+                clearInterval(this.intervalId); 
+            }
         }, 5000); 
     }
+
 
     ngOnDestroy() {
         if (this.intervalId) {
