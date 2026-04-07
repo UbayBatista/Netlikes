@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Genre } from "../../components/genre/genre";
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [Genre, CommonModule],
+  imports: [Genre, CommonModule, FormsModule],
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',
 })
 export class Catalog {
+  searchText = '';
   genres = [
     {
       name: 'Action',
       films: [
-        { title: 'Action 1', image: 'https://www.sonypictures.co.uk/sites/unitedkingdom/files/2020-12/Jumanji-keyArt_1.jpg' },
-        { title: 'Action 2', image: 'https://via.placeholder.com/300x450' },
+        { title: 'Jumanji: Welcome to the Jungle', image: 'https://www.sonypictures.co.uk/sites/unitedkingdom/files/2020-12/Jumanji-keyArt_1.jpg' },
+        { title: 'Jumanji', image: 'https://image.tmdb.org/t/p/original/vgpXmVaVyUL7GGiDeiK1mKEKzcX.jpg' },
         { title: 'Action 3', image: 'https://via.placeholder.com/300x450' },
         { title: 'Action 4', image: 'https://via.placeholder.com/300x450' },
         { title: 'Action 5', image: 'https://via.placeholder.com/300x450' },
@@ -29,7 +32,7 @@ export class Catalog {
     {
       name: 'Comedy',
       films: [
-        { title: 'Comedy 1', image: 'https://via.placeholder.com/300x450' },
+        { title: 'Welcome', image: 'https://tse4.mm.bing.net/th/id/OIP.yRLPu0rDKuIxexdejJAhywHaFj?rs=1&pid=ImgDetMain&o=7&rm=3' },
         { title: 'Comedy 2', image: 'https://via.placeholder.com/300x450' },
         { title: 'Comedy 3', image: 'https://via.placeholder.com/300x450' },
         { title: 'Comedy 4', image: 'https://via.placeholder.com/300x450' },
@@ -72,4 +75,17 @@ export class Catalog {
       ]
     }
   ];
+
+  get filteredGenres() {
+    const text = this.searchText.toLowerCase();
+
+    return this.genres
+      .map(g => ({
+        ...g,
+        films: g.films.filter(f =>
+          f.title.toLowerCase().includes(text)
+        )
+      }))
+      .filter(g => g.films.length > 0); // Oculta géneros vacíos
+  }
 }

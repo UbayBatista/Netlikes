@@ -2,11 +2,12 @@
   <input 
     type="text"
     class="form-control search-input"
-    placeholder="Buscar películas o géneros..."
+    placeholder="Buscar películas."
+    [(ngModel)]="searchText"
   >
 </div>
 
-@for (genre of genres; track $index) {
+@for (genre of filteredGenres; track $index) {
   <app-genre 
     [genre]="genre"
     [index]="$index">
