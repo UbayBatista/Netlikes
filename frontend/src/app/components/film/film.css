@@ -14,16 +14,28 @@
   .netflix-card img {
     height: 200px;
   }
+
+  .netflix-card {
+    width: 140px;
+  }
 }
 
 @media (max-width: 768px) {
   .netflix-card img {
     height: 160px;
   }
+
+  .netflix-card {
+    width: 110px;
+  }
 }
 
 @media (max-width: 480px) {
   .netflix-card img {
     height: 130px;
+  }
+
+  .netflix-card {
+    width: 90px;
   }
 }

@@ -1,11 +1,11 @@
 <div class="search-wrapper">
-  <input 
-    type="text"
-    class="form-control search-input"
-    placeholder="Buscar películas."
-    [(ngModel)]="searchText"
-  >
+  <app-search-bar 
+    [placeholderText]="'Busca tu proximo chat'"
+    (searchEvent)="filters($event)">
+  </app-search-bar>
 </div>
+
+
 
 @for (genre of filteredGenres; track $index) {
   <app-genre 
