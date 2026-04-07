@@ -1,10 +1,13 @@
 package software.ulpgc.netlikes.controller;
 
 import org.springframework.web.bind.annotation.*;
-import software.ulpgc.netlikes.model.Film;
-import software.ulpgc.netlikes.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+
+import software.ulpgc.netlikes.service.FilmService;
+
+import software.ulpgc.netlikes.dto.FilmRequestDTO;
+import software.ulpgc.netlikes.dto.FilmResponseDTO;
 
 @RestController
 @RequestMapping("/films")
@@ -14,23 +17,23 @@ public class FilmController {
     private final FilmService filmService;
 
     @GetMapping
-    public List<Film> getAllFilms() {
+    public List<FilmResponseDTO> getAllFilms() {
         return filmService.getAllFilms();
     }
 
     @PostMapping
-    public Film saveFilm(@RequestBody Film film) {
-        return filmService.saveFilm(film);
+    public FilmResponseDTO saveFilm(@RequestBody FilmRequestDTO dto) {
+        return filmService.saveFilm(dto);
     }
 
     @GetMapping("/{id}")
-    public Film getFilmById(@PathVariable Integer id) {
+    public FilmResponseDTO getFilmById(@PathVariable Integer id) {
         return filmService.getFilmById(id);
     }
 
     @PutMapping("/{id}")
-    public Film updateFilm(@PathVariable Integer id, @RequestBody Film film) {
-        return filmService.updateFilm(id, film);
+    public FilmResponseDTO updateFilm(@PathVariable Integer id, @RequestBody FilmRequestDTO dto) {
+        return filmService.updateFilm(id, dto);
     }
 
     @DeleteMapping("/{id}")

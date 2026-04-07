@@ -10,8 +10,6 @@ import software.ulpgc.netlikes.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import lombok.*;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class MarkService {
