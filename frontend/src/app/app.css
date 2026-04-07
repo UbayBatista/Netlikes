@@ -1,0 +1,16 @@
+
+.main-content {
+
+  padding-top: 70px;
+
+  /* MÓVIL */
+  padding-bottom: 90px; 
+  width: 100%;
+  box-sizing: border-box;
+
+  /* DESKTOP/TABLET */
+  @media (min-width: 768px) {
+    padding-bottom: 0;
+    padding-left: 110px; 
+  }
+}
