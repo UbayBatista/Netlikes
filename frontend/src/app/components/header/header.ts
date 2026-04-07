@@ -40,5 +40,6 @@ export class Header {
 
   openBox() {
     this.boxOpen = true;
+    this.hasNotifications = false;
   }
 }

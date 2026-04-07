@@ -9,6 +9,17 @@ nav {
   z-index: 1001;
 }
 
+nav,
+nav * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  caret-color: transparent;
+}
+
+
 .avatar {
   width: 36px;
   height: 36px;
@@ -28,4 +39,12 @@ svg:hover {
 
 .notification-wrapper {
   position: relative;
+}
+
+.notification-wrapper .badge {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
