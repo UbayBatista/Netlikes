@@ -1,12 +1,11 @@
-<div class="container-fluid vh-100 d-flex p-0 border border-dark border-2">
+<div class="foro-container">
 
-<div class="col-4 d-flex flex-column border-end border-dark border-2 bg-light">
-        <app-social-chats-users class="flex-grow-1"></app-social-chats-users>
-    </div>
+    <aside class="sidebar-foros">
+         <app-social-chats-users></app-social-chats-users>
+    </aside>
 
-    <div class="col-8 d-flex flex-column bg-white">
-        <app-social-chats-menssages class="flex-grow-1 d-flex flex-column"></app-social-chats-menssages>
-    </div>
+    <main class="chat-main">
+        <app-social-chats-menssages></app-social-chats-menssages>
+    </main>
 
 </div>
-

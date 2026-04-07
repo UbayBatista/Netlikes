@@ -1,18 +1,17 @@
-<div class="d-flex border-bottom border-dark border-2">
-    
-    <div 
-        class="window" 
+<div class="nav-bar d-flex">
+    <button 
+        class="nav-tab flex-fill py-3"
         [class.active]="selectedMode === 'Buscar Usuario'"
         (click)="changeMode('Buscar Usuario')">
         Buscar Usuarios
-    </div>
+    </button>
 
-    <div 
-        class="window" 
+    <button 
+        class="nav-tab flex-fill py-3"
         [class.active]="selectedMode === 'Chats'"
         (click)="changeMode('Chats')">
         Chats
-    </div>
+    </button>
 
 </div>
 

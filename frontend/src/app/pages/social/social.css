@@ -1,15 +1,35 @@
-.window {
-    flex: 1; 
-    text-align: center;
-    padding: 15px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background-color: white; 
-    border: 2px solid black;
-    border-bottom: none; 
+
+
+
+.nav-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #2a2a2a;
+  z-index: 100;
 }
 
-.active {
-    background-color: #dcdcdc;
-    font-weight: bold; 
+.nav-tab {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tab:hover {
+  color: rgb(95, 95, 95);
+}
+
+.nav-tab.active {
+  color: rgb(0, 0, 0);
+  border-bottom: 3px solid #000000;
+}
+
+app-social-chats {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    min-height: 0;
 }

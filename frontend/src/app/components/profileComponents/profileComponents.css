@@ -1,34 +1,3 @@
-.Informacion {
-    padding: 0 20px; 
-    font-family: sans-serif;
-}
-
-.section {
-    margin-bottom: 20px;
-}
-
-.sectionTitle{
-    font-size: 15px;
-    font-weight: normal;
-    margin: 0 0 5px 0; 
-}
-
-.sectionContent {
-    background-color: #d3d3d3;
-    width: 100%;
-    min-height: 100px; 
-    padding: 10px;
-    box-sizing: border-box; 
-}
-
-@media (max-width: 1024px){
-    .sectionContent { font-size: 1em; }   
-}
-
-@media (max-width: 768px){
-    .sectionContent { font-size: 0.85em; }   
-}
-
-@media (max-width: 480px){
-    .sectionContent { font-size: 0.7em; }   
+.card{
+    margin: 10px;
 }

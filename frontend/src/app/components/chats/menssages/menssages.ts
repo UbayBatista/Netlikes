@@ -1,12 +1,15 @@
-import { Component, Input, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
+import { Component, Input, Output, OnInit, OnDestroy, ChangeDetectorRef, EventEmitter } from "@angular/core";
+import { MessageBubble } from '../../message-bubble/message-bubble';
 
 interface Menssage{
+    user: string;
     text: string;
     itsMe: boolean;
 }
 
 @Component({
     selector: "app-social-chats-menssages",
+    imports: [MessageBubble],
     standalone: true,
     templateUrl: "./menssages.html",
     styleUrl: "./menssages.css"
@@ -14,10 +17,11 @@ interface Menssage{
 export class Menssages implements OnInit, OnDestroy{
     @Input() user: string="Cristiano"
     @Input() person: string="Messi"
+    @Output() return = new EventEmitter<void>();
 
     messageHistory: Menssage[] = [
-        { text: 'Hola, ¿qué tal?', itsMe: false },
-        { text: '¡Todo bien! Entrenando.', itsMe: true }
+        { text: 'Hola, ¿qué tal?', itsMe: false, user: this.person},
+        { text: '¡Todo bien! Entrenando.', itsMe: true, user: this.user }
     ];
 
         private intervalId: any; 
@@ -58,7 +62,7 @@ export class Menssages implements OnInit, OnDestroy{
         
 
         this.messageHistory.push(
-            { text: randomText, itsMe: false },
+            { text: randomText, itsMe: false, user: this.person },
         );
 
         this.cdr.detectChanges();
@@ -68,17 +72,20 @@ export class Menssages implements OnInit, OnDestroy{
         if (newText.trim() !== '') {
             this.messageHistory.push({
                 text: newText,
-                itsMe: true 
+                itsMe: true,
+                user: this.user
             });
         }
         
     }
 
-    
-
     height(textarea: HTMLTextAreaElement) {
         textarea.style.height = 'auto'; 
         textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    goBack() {
+        this.return.emit();
     }
 
 }

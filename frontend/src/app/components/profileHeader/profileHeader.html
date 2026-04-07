@@ -1,45 +1,52 @@
-<div class="profileHeader">
+<div class="position-relative p-4 border-bottom border-dark border-2 bg-light">
 
-    <div class="containerConfiguration">
-        <button class="configuration" (click)="Menu()">⚙️</button>
+    <div class="position-absolute top-0 end-0 p-3 z-3">
+        <button class="btn btn-light border-dark shadow-sm" (click)="Menu()">
+            <i class="bi bi-gear-fill"></i>
+        </button>
 
-        @if (openMenu){
-            @if (otherUser === "Yes"){
-                <div class="menu">
-                    <ul>
-                        <li>{{option}}</li>
-                    </ul>
-                </div>
-            }
-            @else{
-                <div class="menu">
-                    <ul>
-                        <li>{{option}}</li>
-                        <li (click)="logOut()">Cerrar sesión</li>
-                    </ul>
-                </div>
-            }
+        @if (openMenu) {
+            <div class="dropdown-menu show position-absolute end-0 mt-1 shadow" style="min-width: 150px; right: 1rem;">
+                @if (otherUser === "Yes") {
+                    <button class="dropdown-item">{{option}}</button>
+                } 
+                @else {
+                    <button class="dropdown-item fw-bold">{{option}}</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item text-danger fw-bold" (click)="logOut()">Cerrar sesión</button>
+                }
+            </div>
         }
     </div>
 
-    <div class="logoName">
-        <h4 class="userName">{{userName}}</h4>
-        <img class="userProfile" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
-    </div>
+    <div class="d-flex align-items-center w-100 pe-5">
 
-    <div class="buttonFollow">
-        <button  class="button">{{type}}</button>
-    </div>
+        <div class="d-flex align-items-center gap-4">
+            
+            <img class="rounded-circle border border-dark border-3 shadow-sm flex-shrink-0" 
+                 style="width: 120px; height: 120px; object-fit: cover;" 
+                 src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=" 
+                 alt="Perfil">
 
-    <div class="stats">
-        <div class="stat">
-            <h5 class="follow">Seguidores</h5>
-            <p class="number">123</p>
+            <div class="d-flex flex-column align-items-start gap-2">
+                <h3 class="fw-bold m-0">{{userName}}</h3>
+                <button class="btn btn-dark px-4 py-1 rounded-pill fw-bold shadow-sm">{{type}}</button>
+            </div>
+
         </div>
 
-        <div class="stat">
-            <h5 class="follow">Seguidos</h5>
-            <p class="number">123</p>
+        <div class="d-flex gap-4 ms-auto text-center">
+            
+            <div>
+                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 0.75rem;">Seguidores</h6>
+                <p class="fw-bold fs-4 m-0">123</p>
+            </div>
+
+            <div>
+                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 0.75rem;">Seguidos</h6>
+                <p class="fw-bold fs-4 m-0">123</p>
+            </div>
+
         </div>
 
     </div>
