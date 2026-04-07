@@ -12,6 +12,7 @@
   padding: 15px 25px;
   border-bottom: 1px solid #eee;
   background-color: #fff;
+  flex-shrink: 0;
 }
 
 .chat-header h2 {
@@ -59,6 +60,7 @@
   padding: 15px 20px;
   background-color: #fff;
   border-top: 1px solid #eee;
+  flex-shrink: 0;
 }
 
 .input-wrapper {

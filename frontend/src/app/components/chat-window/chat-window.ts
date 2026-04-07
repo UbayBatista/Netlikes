@@ -21,11 +21,11 @@ export class ChatWindow {
 
   messages = signal([
     { text: '¡Hola a todos! ¿Cuál es vuestra escena favorita?', isMine: false, user: 'User123' },
-    { text: 'A mi me encanta cuando Katniss se ofrece como tributo en lugar de su hermana', isMine: true, user: 'Yo' },
+    { text: 'A mí me encanta cuando Katniss se ofrece como tributo en lugar de su hermana', isMine: true, user: 'Yo' },
     { text: 'Totalmente de acuerdo', isMine: false, user: 'Cinefilo99' },
-    { text: 'Pues a mi me gusta la escena de las bayas', isMine: false, user: 'User123' },
-    { text: 'Siii, gracias a esa se inicia la revelión', isMine: false, user: 'Cinefilo99' },
-    { text: 'A mi me gustó las entrevistas a los tributos', isMine: false, user: 'User987' },
+    { text: 'Pues a mí me gusta la escena de las bayas', isMine: false, user: 'User123' },
+    { text: 'Siii, gracias a esa se inicia la rebelión', isMine: false, user: 'Cinefilo99' },
+    { text: 'A mí me gustaron las entrevistas a los tributos', isMine: false, user: 'User987' },
     { text: 'Ojalá hubieran añadido todas, así conoceríamos mejor a los participantes', isMine: true, user: 'Yo' }
   ]);
 

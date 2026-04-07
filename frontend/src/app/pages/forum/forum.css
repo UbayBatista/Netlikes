@@ -1,7 +1,7 @@
 .foro-container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
   background-color: #fff;
   overflow: hidden;
   position: relative;
@@ -11,6 +11,7 @@
   flex: 0 0 300px;
   border-right: 1px solid #eee;
   height: 100%;
+  overflow-y: auto;
   background-color: #f9f9f9;
 }
 
