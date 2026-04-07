@@ -6,7 +6,8 @@ import java.util.Map;
 
 @Data
 public class FilmRequestDTO {
-
+    
+    private Integer id;
     private boolean adult;
     private String title;
     private String filmUrl;
