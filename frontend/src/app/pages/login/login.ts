@@ -30,6 +30,7 @@ export class Login {
   login() {
     if (this.form.valid) {
       console.log('Datos:', this.form.value);
+      this.router.navigate(['/home']);
     } else {
       this.form.markAllAsTouched();
     }
