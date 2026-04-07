@@ -15,9 +15,11 @@ export class Header {
 
   constructor(private router: Router) {}
 
+  userName = "Cristiano Ronaldo"
+
   goToProfile() {
     console.log('Ir al perfil');
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile', this.userName]);
   }
 
   boxOpen = false;

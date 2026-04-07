@@ -13,7 +13,6 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'catalog', component: Catalog },
   { path: 'forum', component: Forum },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComplete },
+  { path: 'profile/:username', component: ProfileComplete },
   { path: 'social', component: Social },
 ];

@@ -1,16 +1,27 @@
 import { Component, Input } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
     selector: "app-profile-header",
     standalone: true,
+    imports:[RouterLink],
     templateUrl: "./profileHeader.html",
     styleUrl: "./profileHeader.css"
 })
 export class ProfileHeader{
     @Input() userName: string = "Cristiano";
+    @Input() type: string = "Editar Perfil"
     openMenu: boolean = false;
 
     Menu(){
         this.openMenu = !this.openMenu;
     }
+
+    constructor(private router: Router) {}
+
+    logOut() {
+        console.log('Ir al login');
+        this.router.navigate(['/login']);
+    }
+
 }

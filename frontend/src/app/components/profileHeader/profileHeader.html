@@ -7,6 +7,7 @@
             <div class="menu">
                 <ul>
                     <li>Ajustes</li>
+                    <li (click)="logOut()">Cerrar sesión</li>
                 </ul>
             </div>
         }
@@ -18,7 +19,7 @@
     </div>
 
     <div class="buttonFollow">
-        <button  class="button">Editar Perfil</button>
+        <button  class="button">{{type}}</button>
     </div>
 
     <div class="stats">

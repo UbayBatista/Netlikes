@@ -13,3 +13,7 @@
     box-shadow: none;
     outline: 1px solid #aaa;
 }
+
+.userName{
+    border-radius: 10%;
+}

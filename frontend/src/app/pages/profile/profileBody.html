@@ -2,18 +2,37 @@
 
 <div class="profileComple">
     
-    <app-profile-header> userName="Cristiano Ronaldo"></app-profile-header>
+    @if(!itsMe){
+        
+        <app-profile-header userName={{profileName}} type="Siguiendo"></app-profile-header>
 
-    <app-profile-components title="Bio">
-        <p>Hola soy el Bicho Oficial</p>
-    </app-profile-components>
+        <app-profile-components title="Bio">
+            <p>{{textBio}}</p>
+        </app-profile-components>
 
-    <app-profile-components title="Películas Vista">
-        <p>películas</p>
-    </app-profile-components>
+        <app-profile-components title="Películas Vista">
+            <p>Pulgarcito</p>
+        </app-profile-components>
 
-    <app-profile-components title="Ver más tarde">
-        <p>películas ver más</p>
-    </app-profile-components>
+        <app-profile-components title="Ver más tarde">
+            <p>Messirve</p>
+        </app-profile-components>
+    }
+    @else{
+        
+        <app-profile-header userName="Cristiano Ronaldo"></app-profile-header>
+
+        <app-profile-components title="Bio">
+            <p>Hola soy el Bicho Oficial</p>
+        </app-profile-components>
+
+        <app-profile-components title="Películas Vista">
+            <p>Bichitos</p>
+        </app-profile-components>
+
+        <app-profile-components title="Ver más tarde">
+            <p>Siuuuuuuu</p>
+        </app-profile-components>
+    }
 
 </div>
