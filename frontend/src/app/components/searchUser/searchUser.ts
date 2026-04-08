@@ -21,11 +21,15 @@ export class SearchUser{
 
     userList = ["Messi","Messi2", "Messi3", "Messi4", "Messi5", "Messi6"];
 
-    filteredUser = [...this.userList];
+    searchText = '';
 
     handleSearch(text: string) {
-        const searchLow = text.toLowerCase();
-        this.filteredUser = this.userList.filter(user => 
+        this.searchText = text.toLowerCase();
+    }
+
+    get filteredUsers(){
+        const searchLow = this.searchText.toLowerCase();
+        return this.userList.filter(user => 
             user.toLowerCase().includes(searchLow)
         );
     }
