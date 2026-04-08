@@ -13,6 +13,7 @@ public class TmdbApiClient {
     
     private static final String BASE_URL = "https://api.themoviedb.org/3";
     private static final int MAX_TMDB_PAGES = 500; 
+    private static final int MAX_RETRIES = 3;
 
     private final String apiToken;
     private final HttpClient httpClient;
@@ -97,22 +98,45 @@ public class TmdbApiClient {
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
+        
+        int attempt = 0;
 
-        try {
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        while (attempt < MAX_RETRIES) {
+            try {
+                HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
-                return objectMapper.readValue(response.body(), responseType);
-            } else if (response.statusCode() == 404) {
-                throw new TmdbApiException("Recurso no encontrado en TMDB (404) para: " + endpoint);
-            } else {
-                throw new TmdbApiException("Error en API TMDB. Status: " + response.statusCode() + " - " + response.body());
+                if (response.statusCode() == 200) {
+                    return objectMapper.readValue(response.body(), responseType);
+                } 
+                else if (response.statusCode() == 429) {
+                    attempt++;
+                    if (attempt >= MAX_RETRIES) {
+                        throw new TmdbApiException("Límite de peticiones excedido (429) tras " + MAX_RETRIES + " intentos para: " + endpoint);
+                    }
+                    
+                    long waitTimeMillis = response.headers().firstValueAsLong("Retry-After").orElse(1L) * 1000L;
+                    System.out.println("Límite 429 alcanzado. Reintentando en " + waitTimeMillis + "ms... (Intento " + attempt + " de " + MAX_RETRIES + ")");
+                    
+                    Thread.sleep(waitTimeMillis);
+                } 
+                // -------------------------------
+                else if (response.statusCode() == 404) {
+                    throw new TmdbApiException("Recurso no encontrado en TMDB (404) para: " + endpoint);
+                } else {
+                    throw new TmdbApiException("Error en API TMDB. Status: " + response.statusCode() + " - " + response.body());
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new TmdbApiException("La petición a TMDB fue interrumpida durante la espera de reintento.", e);
+            } catch (Exception e) {
+                // Si la excepción ya es nuestra (TmdbApiException), la lanzamos tal cual para no envolverla dos veces
+                if (e instanceof TmdbApiException) {
+                    throw (TmdbApiException) e;
+                }
+                throw new TmdbApiException("Error de red/parseo al contactar con TMDB: " + e.getMessage(), e);
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new TmdbApiException("La petición a TMDB fue interrumpida.", e);
-        } catch (Exception e) {
-            throw new TmdbApiException("Error de red/parseo al contactar con TMDB: " + e.getMessage(), e);
         }
+        
+        throw new TmdbApiException("Fallo inesperado al realizar la petición a TMDB tras múltiples intentos.");
     }
 }
