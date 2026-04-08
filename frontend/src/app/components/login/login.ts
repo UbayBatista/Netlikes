@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
-import { BrandPanel } from "../../components/brand-panel/brand-panel";
 
 @Component({
-  selector: 'app-login',
-  imports: [ReactiveFormsModule, NgClass, BrandPanel],
+  selector: 'app-login-form',
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class LoginForm {
+  @Output() toNext = new EventEmitter<void>();
 
   form: FormGroup;
   showPassword: boolean = false;
@@ -37,8 +37,7 @@ export class Login {
   }
 
   createAccount() {
-    console.log('Redirigiendo a creación de cuenta');
-    this.router.navigate(['/register']);
+    this.toNext.emit();
   }
 
   forgotPassword() {

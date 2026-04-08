@@ -28,6 +28,7 @@ function validateAge(group: FormGroup) {
 })
 export class Step1 {
   @Output() toNext = new EventEmitter<void>();
+  @Output() toPrev = new EventEmitter<void>();
 
   form: FormGroup;
 
@@ -62,7 +63,6 @@ export class Step1 {
   }
 
   goBackToLogin() {
-    console.log('Redirigiendo a inicio de sesión');
-    this.router.navigate(['/login']);
+    this.toPrev.emit();
   }
 }
