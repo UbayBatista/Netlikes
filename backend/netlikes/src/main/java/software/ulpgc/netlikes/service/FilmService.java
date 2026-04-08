@@ -98,7 +98,7 @@ public class FilmService {
             .toList();
         film.setPlatforms(platforms);
 
-        List<Actor> actors = dto.getPlatforms().entrySet().stream()
+        List<Actor> actors = dto.getActors().entrySet().stream()
             .map(entry -> actorRepository.findById(entry.getKey())
                 .orElseGet(() -> {
                     Actor newActor = new Actor();
