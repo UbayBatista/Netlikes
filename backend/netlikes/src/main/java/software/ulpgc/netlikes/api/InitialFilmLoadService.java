@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
-
-import software.ulpgc.netlikes.assembler.FilmAssembler;
-import software.ulpgc.netlikes.client.TmdbApiClient;
+import software.ulpgc.netlikes.service.FilmService;
 import software.ulpgc.netlikes.dto.FilmRequestDTO;
-import software.ulpgc.netlikes.exception.FilmAssemblyException;
-import software.ulpgc.netlikes.exception.ApiUnavailableException;
+import java.util.List;
 
 @Service
 @Slf4j

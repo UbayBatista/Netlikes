@@ -1,3 +1,5 @@
+package software.ulpgc.netlikes.api;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -79,6 +81,7 @@ public class TmdbModels {
         @JsonProperty("id") int id,
         @JsonProperty("results") List<Video> results
     ) {}
+
 
     // CLASES INTERMEDIAS PARA JACKSON (Solo uso interno)
     
@@ -170,7 +173,7 @@ public class TmdbModels {
             }
 
             return new Movie(
-                id, title, overview, adult, backdropPath, tagline, runtime, 
+                id, title, overview, adult, extractedAgeRating, backdropPath, tagline, runtime, 
                 releaseDate, posterPath, voteAverage, 
                 genres != null ? genres : Collections.emptyList(), 
                 extractedCast, extractedVideos, extractedProviders
