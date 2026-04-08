@@ -21,7 +21,7 @@
                 <img [src]="user.avatar" class="rounded-circle border" style="width: 50px; height: 50px; object-fit: cover;">
                 <div>
                   <p class="m-0 fw-bold">{{ user.name }}</p>
-                  @if (user.status) {
+                  @if (user.status && title === 'Seguidores') {
                     <small class="text-primary cursor-pointer">{{ user.status }}</small>
                   }
                 </div>
