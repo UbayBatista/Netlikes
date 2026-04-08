@@ -15,6 +15,8 @@ export class ProfileHeader{
     @Input() otherUser: string = 'No';
     openMenu: boolean = false;
 
+    @Output() openSocialModal = new EventEmitter<'Seguidores' | 'Seguidos'>();
+
     Menu(){
         this.openMenu = !this.openMenu;
     }
@@ -29,5 +31,9 @@ export class ProfileHeader{
     @Output() editClick = new EventEmitter<void>();
     onEdit() {
         this.editClick.emit();
+    }
+
+    openSocial(type: 'Seguidores' | 'Seguidos') {
+        this.openSocialModal.emit(type);
     }
 }

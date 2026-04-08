@@ -3,11 +3,12 @@ import {ProfileBody} from "../../components/profileComponents/profileComponents"
 import { ProfileHeader } from "../../components/profileHeader/profileHeader";
 import { ActivatedRoute } from '@angular/router'; 
 import { Film } from "../../components/film/film";
+import { SocialModal } from "../../components/social-modal/social-modal";
 
 @Component({
     selector:"app-profile-complete",
     standalone: true,
-    imports: [ProfileBody, ProfileHeader, Film],
+    imports: [ProfileBody, ProfileHeader, Film, SocialModal],
     templateUrl: "./profileBody.html",
     styleUrl: "./profile-body.css"
 })
@@ -16,6 +17,10 @@ export class ProfileComplete implements OnInit{
     textBio = '';
     itsMe = false;
     isEditing = false;
+
+    isSocialModalOpen = false;
+    socialType: 'Seguidores' | 'Seguidos' = 'Seguidores';
+    socialData: any[] = [];
     
     constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
@@ -35,6 +40,39 @@ export class ProfileComplete implements OnInit{
                 this.itsMe = false;
             }
         });
+    }
+    
+    showSocial(type: 'Seguidores' | 'Seguidos') {
+        this.socialType = type;
+        this.isSocialModalOpen = true;
+
+        if (type === 'Seguidores') {
+            this.socialData = [
+                { name: 'Luis Suárez', avatar: 'https://media.gettyimages.com/id/12345678', status: 'Seguir también' },
+                { name: 'Neymar Jr', avatar: 'https://media.gettyimages.com/id/87654321', status: 'Pendiente' },
+                { name: 'Paco', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
+                { name: 'Ilia Topuria', avatar: 'https://via.placeholder.com/150', status: '' },
+                { name: 'Antonio', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
+                { name: 'Zinedine Zidane', avatar: 'https://via.placeholder.com/150', status: '' },
+                { name: 'Kylian Mbappé', avatar: 'https://via.placeholder.com/150', status: 'Pendiente' },
+                { name: 'Andrés Iniesta', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
+                { name: 'Xavi Hernández', avatar: 'https://via.placeholder.com/150', status: '' },
+                { name: 'Carles Puyol', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' }
+            ];
+        } else {
+            this.socialData = [
+                { name: 'Lionel Messi', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Sergio Ramos', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Gerard Piqué', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Luka Modric', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Karim Benzema', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Toni Kroos', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Vinícius Jr', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Erling Haaland', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Kevin De Bruyne', avatar: 'https://via.placeholder.com/150' },
+                { name: 'Robert Lewandowski', avatar: 'https://via.placeholder.com/150' }
+            ];
+        }
     }
 
     @Input() filmsView: any[] = [
