@@ -1,11 +1,9 @@
 <div class="sidebar-container">
   <div class="search-box">
-    <input 
-      type="text" 
-      placeholder="Buscar foro" 
-      [(ngModel)]="search"
-      class="search-input"
-    >
+    <app-search-bar 
+      placeholderText="Buscar foro..." 
+      (searchEvent)="handleSearch($event)">
+    </app-search-bar>
   </div>
 
   <div class="list-container">
