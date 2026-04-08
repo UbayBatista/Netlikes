@@ -111,11 +111,11 @@
     }
 
     @if (isSocialModalOpen) {
-      <app-social-modal 
+    <app-social-modal 
         [title]="socialType" 
         [users]="socialData" 
-        (close)="isSocialModalOpen = false">
-      </app-social-modal>
+        (close)="isSocialModalOpen = false"
+        (tabChange)="showSocial($event)"> </app-social-modal>
     }
 
 </div>

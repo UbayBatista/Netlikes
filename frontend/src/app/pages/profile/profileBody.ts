@@ -48,29 +48,28 @@ export class ProfileComplete implements OnInit{
 
         if (type === 'Seguidores') {
             this.socialData = [
-                { name: 'Luis Suárez', avatar: 'https://media.gettyimages.com/id/12345678', status: 'Seguir también' },
-                { name: 'Neymar Jr', avatar: 'https://media.gettyimages.com/id/87654321', status: 'Pendiente' },
-                { name: 'Paco', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
-                { name: 'Ilia Topuria', avatar: 'https://via.placeholder.com/150', status: '' },
-                { name: 'Antonio', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
-                { name: 'Zinedine Zidane', avatar: 'https://via.placeholder.com/150', status: '' },
-                { name: 'Kylian Mbappé', avatar: 'https://via.placeholder.com/150', status: 'Pendiente' },
-                { name: 'Andrés Iniesta', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' },
-                { name: 'Xavi Hernández', avatar: 'https://via.placeholder.com/150', status: '' },
-                { name: 'Carles Puyol', avatar: 'https://via.placeholder.com/150', status: 'Seguir también' }
+                { name: 'Luis Suárez', avatar: 'https://elasticbeanstalk-us-east-1-911267631614.s3.amazonaws.com/imagenes/jugadores/SUAREZ%20LUIS%20(2).jpg', status: 'Seguir también' },
+                { name: 'Benzema', avatar: 'https://revsportz.in/wp-content/uploads/2023/06/Benzema.jpeg', status: 'Pendiente' },
+                { name: 'La Roca', avatar: 'https://wallpaperaccess.com/full/1264961.jpg', status: 'Seguir también' },
+                { name: 'Cristiano Ronaldo', avatar: 'https://i.pinimg.com/736x/f6/28/85/f628856f2e45836d5850d959a1ed5c75.jpg', status: '' },
+                { name: 'Messi', avatar: 'https://cdn2.telediario.mx/uploads/media/2022/12/18/lionel-messi-besa-copa-recibir.jpg', status: 'Seguir también' },
+                { name: 'Zinedine Zidane', avatar: 'https://assets.realmadrid.com/is/image/realmadrid/1330186270595?$Mobile$&fit=wrap&wid=312', status: '' },
+                { name: 'Kylian Mbappé', avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Picture_with_Mbapp%C3%A9_%28cropped%29_%28cropped%29.jpg/250px-Picture_with_Mbapp%C3%A9_%28cropped%29_%28cropped%29.jpg', status: 'Pendiente' },
+                { name: 'Andrés Iniesta', avatar: 'https://imageio.forbes.com/specials-images/imageserve/5ecead3f0ca011000726427e/0x0.jpg?format=jpg&crop=1669,1671,x0,y79,safe&height=416&width=416&fit=bounds', status: 'Seguir también' },
+                { name: 'Xavi Hernández', avatar: 'https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/949_xavi.jpg', status: '' },
+                { name: 'Carles Puyol', avatar: 'https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/704_puyol.jpg', status: 'Seguir también' }
             ];
         } else {
             this.socialData = [
-                { name: 'Lionel Messi', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Sergio Ramos', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Gerard Piqué', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Luka Modric', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Karim Benzema', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Toni Kroos', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Vinícius Jr', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Erling Haaland', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Kevin De Bruyne', avatar: 'https://via.placeholder.com/150' },
-                { name: 'Robert Lewandowski', avatar: 'https://via.placeholder.com/150' }
+                { name: 'Cristiano Ronaldo', avatar: 'https://i.pinimg.com/736x/f6/28/85/f628856f2e45836d5850d959a1ed5c75.jpg'},
+                { name: 'Zinedine Zidane', avatar: 'https://assets.realmadrid.com/is/image/realmadrid/1330186270595?$Mobile$&fit=wrap&wid=312'},
+                { name: 'Xavi Hernández', avatar: 'https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/949_xavi.jpg'},
+                { name: 'Luka Modric', avatar: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Ofrenda_de_la_Liga_y_la_Champions-57-L.Mill%C3%A1n_%2852109310843%29_%28Luka_Modri%C4%87%29.jpg' },
+                { name: 'Toni Kroos', avatar: 'https://s.hs-data.com/gfx/person/l/3198.jpg?fallback=male' },
+                { name: 'Vinícius Jr', avatar: 'https://cdn.britannica.com/45/273345-050-7B263FB8/Vinicius-Junior-Real-Madrid-football-soccer-player-UEFA-league-knockout--play-off-against-Manchester-City-2024-25.jpg' },
+                { name: 'Erling Haaland', avatar: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Erling_Haaland_June_2025.jpg' },
+                { name: 'Kevin De Bruyne', avatar: 'https://img.a.transfermarkt.technology/portrait/big/88755-1713391485.jpg?lm=1' },
+                { name: 'Robert Lewandowski', avatar: 'https://upload.wikimedia.org/wikipedia/commons/2/26/2019147183134_2019-05-27_Fussball_1.FC_Kaiserslautern_vs_FC_Bayern_M%C3%BCnchen_-_Sven_-_1D_X_MK_II_-_0228_-_B70I8527_%28cropped%29.jpg' }
             ];
         }
     }
