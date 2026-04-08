@@ -4,6 +4,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +19,7 @@ public class FilmSyncScheduler {
     // TODO: private final FilmSyncService syncService;  para el incremental diario
 
     @EventListener(ApplicationReadyEvent.class)
+    @Transactional
     public void onStartup() {
         log.info("Aplicación lista — comprobando si se necesita carga inicial...");
         initialLoadService.loadAll();
