@@ -1,7 +1,39 @@
+
+.dropdown-item:active, 
+.dropdown-item:focus {
+    background-color: #e2e2e2 !important;
+    color: #000 !important; 
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1; 
+}
+
 .text-center{
-    margin-right: 50px;
+    margin-right: 30px;
 }
 
 .dropdown-menu{
     margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .rounded-pill{
+        font-size: 0.8rem;
+        width: 130px;
+    }
+
+    .text-center{
+        margin-right: 20px;
+        
+    }
+
+    .text-uppercase {
+        font-size: 0.8rem !important;
+    }
+
+    .fs-4{
+        font-size: 1.3rem !important;
+    }
+
 }

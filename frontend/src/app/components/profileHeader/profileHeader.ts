@@ -26,4 +26,8 @@ export class ProfileHeader{
         this.router.navigate(['/login']);
     }
 
+    @Output() editClick = new EventEmitter<void>();
+    onEdit() {
+        this.editClick.emit();
+    }
 }

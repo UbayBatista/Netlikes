@@ -6,7 +6,14 @@
         </button>
 
         @if (openMenu) {
-            <div class="dropdown-menu show position-absolute end-0 mt-1 shadow" style="min-width: 150px; right: 1rem;">
+
+            <div class="position-fixed top-0 start-0 w-100 h-100" 
+                 style="z-index: 1040; cursor: default;" 
+                 (click)="openMenu = false">
+            </div>
+
+            <div class="dropdown-menu show position-absolute end-0 mt-1 shadow" 
+                 style="min-width: 150px; right: 1rem; z-index: 1050;">
                 @if (otherUser === "Yes") {
                     <button class="dropdown-item">{{option}}</button>
                 } 
@@ -30,7 +37,7 @@
 
             <div class="d-flex flex-column align-items-start gap-2">
                 <h3 class="fw-bold m-0">{{userName}}</h3>
-                <button class="btn btn-dark px-4 py-1 rounded-pill fw-bold shadow-sm">{{type}}</button>
+                <button class="btn btn-dark px-4 py-1 rounded-pill fw-bold shadow-sm" (click)="onEdit()">{{type}}</button>
             </div>
 
         </div>
@@ -38,12 +45,12 @@
         <div class="d-flex gap-4 ms-auto text-center">
             
             <div>
-                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 0.75rem;">Seguidores</h6>
+                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 1rem;">Seguidores</h6>
                 <p class="fw-bold fs-4 m-0">123</p>
             </div>
 
             <div>
-                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 0.75rem;">Seguidos</h6>
+                <h6 class="text-muted text-uppercase fw-bold mb-0" style="font-size: 1rem;">Seguidos</h6>
                 <p class="fw-bold fs-4 m-0">123</p>
             </div>
 

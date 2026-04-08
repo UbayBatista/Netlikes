@@ -15,6 +15,7 @@ export class ProfileComplete implements OnInit{
     profileName = ''; 
     textBio = '';
     itsMe = false;
+    isEditing = false;
     
     constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
@@ -115,12 +116,12 @@ export class ProfileComplete implements OnInit{
     @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
 
     scrollLeft() {
-    const el = this.scrollContainer.nativeElement;
+        const el = this.scrollContainer.nativeElement;
 
-    el.scrollBy({
-        left: -300,
-        behavior: 'smooth'
-    });
+        el.scrollBy({
+            left: -300,
+            behavior: 'smooth'
+        });
 
     setTimeout(() => this.updateScrollButtons(), 300);
     }
@@ -154,5 +155,10 @@ export class ProfileComplete implements OnInit{
         el.addEventListener('wheel', () => this.updateScrollButtons(), { passive: true });
         el.addEventListener('touchmove', () => this.updateScrollButtons(), { passive: true });
     }
+
+    Edit(){
+        this.isEditing = !this.isEditing;
+    }
+
 
 }

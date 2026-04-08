@@ -1,3 +1,8 @@
+.netflix-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .netflix-row {
   overflow-x: auto;
   scrollbar-width: none; 
@@ -76,12 +81,30 @@
 }
 
 @media (max-width: 768px) {
-  .pelicula-item {
+  .film-item {
     flex: 0 0 130px;
     height: 160px;
   }
 
   .genre-title {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .film-item {
+    flex: 0 0 90px;
+    height: 130px;
+  }
+
+  .genre-title {
+    font-size: 1.05rem;
+    margin: 0 0 0 10px;
+  }
+
+  .netflix-slider {
+    gap: 8px;
+    padding: 6px 0;
+    padding-left: 8px;
   }
 }

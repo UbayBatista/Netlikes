@@ -9,4 +9,6 @@ import { Component, Input } from "@angular/core";
 
 export class ProfileBody{
     @Input() title: string = 'bio';
+
+    @Input() isEditing: boolean = false;
 }
