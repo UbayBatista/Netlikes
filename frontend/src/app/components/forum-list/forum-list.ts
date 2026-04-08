@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SearchBarComponent } from "../search-bar/search-bar";
+import { SearchBarComponent } from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-forum-list',
@@ -22,20 +22,15 @@ export class ForumList {
     { title: 'Avatar', active: false }
   ];
 
-  filteredFilms = [...this.filmsForum];
-
-  selectForum(selectedFilm: any) {
+  selectForum(index: number) {
     this.filmsForum.forEach(p => p.active = false);
-    selectedFilm.active = true;
+    this.filmsForum[index].active = true;
     
-    this.clickedForum.emit({ title: selectedFilm.title });
-    console.log('Cambiando al foro de:', selectedFilm.title);
+    this.clickedForum.emit({ title: this.filmsForum[index].title });
+    console.log('Cambiando al foro de:', this.filmsForum[index].title);
   }
 
   handleSearch(text: string) {
-    const searchLow = text.toLowerCase();
-    this.filteredFilms = this.filmsForum.filter(film => 
-      film.title.toLowerCase().includes(searchLow)
-    );
+    this.search.set(text);
   }
 }
