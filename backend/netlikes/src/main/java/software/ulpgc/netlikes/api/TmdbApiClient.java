@@ -9,36 +9,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TmdbApiClient {
 
-    private static volatile TmdbApiClient instance;
-    
     private static final String BASE_URL = "https://api.themoviedb.org/3";
-    private static final int MAX_TMDB_PAGES = 500; 
+    private static final int MAX_TMDB_PAGES = 500;
     private static final int MAX_RETRIES = 3;
 
     private final String apiToken;
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    private TmdbApiClient(String apiToken) {
+    public TmdbApiClient(@Value("${tmdb.api.key}") String apiToken) {
         this.apiToken = apiToken;
         this.httpClient = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
-    }
-
-    public static TmdbApiClient getInstance(String apiToken) {
-        if (instance == null) {
-            synchronized (TmdbApiClient.class) {
-                if (instance == null) {
-                    instance = new TmdbApiClient(apiToken);
-                }
-            }
-        }
-        return instance;
     }
 
     public List<TmdbModels.Genre> getAllMovieGenres() {

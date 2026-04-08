@@ -65,6 +65,7 @@ public class FilmService {
     }
 
     private void applyDtoToEntity(FilmRequestDTO dto, Film film) {
+        film.setId(dto.getId());
         film.setAdult(dto.isAdult());
         film.setTitle(dto.getTitle());
         film.setFilmUrl(dto.getFilmUrl());
