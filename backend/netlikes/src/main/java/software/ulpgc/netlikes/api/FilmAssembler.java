@@ -4,28 +4,25 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import software.ulpgc.netlikes.dto.FilmRequestDTO;
-import software.ulpgc.netlikes.api.TmdbApiClient;
 import software.ulpgc.netlikes.api.TmdbModels.Movie;
 import software.ulpgc.netlikes.api.TmdbModels.Video;
 import software.ulpgc.netlikes.api.TmdbModels.Genre;
 import software.ulpgc.netlikes.api.TmdbModels.Provider;
 import software.ulpgc.netlikes.api.TmdbModels.CastMember;
 import java.sql.Date;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class FilmAssembler {
 
     private final TmdbApiClient apiClient;
-
-    public FilmAssembler(TmdbApiClient apiClient) {
-        this.apiClient = apiClient;
-    }
 
     public FilmRequestDTO toFilmRequestDTO(int filmId) throws RuntimeException {
         try {
@@ -56,14 +53,14 @@ public class FilmAssembler {
         try {
             LocalDate localDate = LocalDate.parse(dateStr);
             return java.sql.Date.valueOf(localDate);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return null;
         }
     }
 
     private String getTrailerUrl(List<Video> videos) {
         return videos.stream()
-            .filter(video -> "Trailer".equalsIgnoreCase(video.type()) && "YouTube".equalsIgnoreCase(video.site()))
+            .filter(video -> "Trailer".equalsIgnoreCase(video.type()))
             .findFirst()
             .map(video -> "https://www.youtube.com/watch?v=" + video.key())
             .orElse(null);
