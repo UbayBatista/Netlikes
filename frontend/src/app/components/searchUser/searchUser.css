@@ -1,6 +1,6 @@
 .search-box .form-control:focus {
   box-shadow: none;
-  border-color: #dee2e6; /* Color gris suave de Bootstrap */
+  border-color: #dee2e6;
 }
 
 .search-box:focus-within {
