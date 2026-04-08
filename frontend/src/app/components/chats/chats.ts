@@ -10,4 +10,15 @@ import { Menssages } from "./menssages/menssages";
 })
 export class Chats{
 
+    currentUser: string = 'Messi';
+    selectedChat: boolean = false;
+
+    seeChat(event: { user: string }) {
+        this.currentUser = event.user;
+        this.selectedChat = true;
+    }
+
+    returnToList() {
+        this.selectedChat = false;
+    }
 }

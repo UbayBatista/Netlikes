@@ -19,6 +19,10 @@ export class Menssages implements OnInit, OnDestroy{
     @Input() person: string="Messi"
     @Output() return = new EventEmitter<void>();
 
+    @Input() set selectedUserChat(value: string) {
+        this.person = value;
+    }
+
     messageHistory: Menssage[] = [
         { text: 'Hola, ¿qué tal?', itsMe: false, user: this.person},
         { text: '¡Todo bien! Entrenando.', itsMe: true, user: this.user }

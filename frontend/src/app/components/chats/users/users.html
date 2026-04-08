@@ -1,8 +1,27 @@
-<div class="p-3">
-    <input type="text" class="form-control rounded-pill bg-secondary bg-opacity-25 border-0" placeholder="🔍 Buscar Usuarios">
-</div>
 
-<div class="d-flex align-items-center p-3 border-bottom userItem">
-    <img class="userPhoto" src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=">
-    <h4 class="userName m-0 ms-2">{{person}}</h4>
+<div class="sidebar-container">
+  <div class="search-box">
+    <input 
+      type="text" 
+      placeholder="Buscar foro" 
+      [(ngModel)]="search"
+      class="search-input"
+    >
+  </div>
+
+  <div class="list-container">
+    @for (user of Friends; track user.name; let i = $index) {
+      <div 
+      class="foro-item" 
+      [class.active]="user.active"
+      (click)="selectUser(i)"
+      >
+      <div class="foro-info" (click)="selectUser(1)">
+        <span class="foro-name"> {{ user.name }}</span>
+      </div>
+    </div>
+    } @empty {
+      <div class="p-3 text-muted">No tienes ningun amigo.</div>
+    }
+  </div>
 </div>
