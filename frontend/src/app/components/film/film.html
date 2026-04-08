@@ -1,3 +1,10 @@
 <div class="netflix-card">
   <img [src]="image" [alt]="title">
+
+  @if(recommendations > 0) {
+    <div class="recommend-badge">
+      <i class="bi bi-arrow-up-short"></i>
+      <span class="count">{{ recommendations }}</span>
+    </div>
+  }
 </div>

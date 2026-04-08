@@ -28,7 +28,7 @@
         <h5 class="text-black mb-3">Recomendaciones de otros usuarios</h5>
         <div class="fila-peliculas2">
             @for (pelicula of peliculasUsuarios; track pelicula.id) {
-                <app-film [image]="pelicula.image" [title]="pelicula.title" [year]="pelicula.ano"></app-film>
+                <app-film [image]="pelicula.image" [title]="pelicula.title" [recommendations]="pelicula.recomendations"  [year]="pelicula.ano"></app-film>
             }
         </div>
     </div>

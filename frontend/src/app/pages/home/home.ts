@@ -32,10 +32,10 @@ export class Home {
   ];
 
   peliculasUsuarios = [
-  { id: 7, title: 'Inception', ano: 2010,  image: 'https://c8.alamy.com/comp/2C4X05R/inception-2010-directed-by-christopher-nolan-and-starring-leonardo-dicaprio-joseph-gordon-levitt-ellen-page-tom-hardy-and-ken-watanabe-a-team-break-in-to-the-subconscious-of-a-businessman-using-dream-sharing-technology-in-order-a-plant-a-seed-to-influence-his-decision-in-the-real-world-2C4X05R.jpg' },
-  { id: 8, title: 'Interstellar', ano: 2014, image: 'https://via.placeholder.com/140x200' },
-  { id: 9, title: 'The Dark Knight', ano: 2008, image: 'https://via.placeholder.com/140x200' },
-  { id: 10, title: 'Dune 2', ano: 2024, image: 'https://via.placeholder.com/140x200' },
+  { id: 7, title: 'Inception', ano: 2010, recomendations: 8,  image: 'https://c8.alamy.com/comp/2C4X05R/inception-2010-directed-by-christopher-nolan-and-starring-leonardo-dicaprio-joseph-gordon-levitt-ellen-page-tom-hardy-and-ken-watanabe-a-team-break-in-to-the-subconscious-of-a-businessman-using-dream-sharing-technology-in-order-a-plant-a-seed-to-influence-his-decision-in-the-real-world-2C4X05R.jpg' },
+  { id: 8, title: 'Interstellar', ano: 2014, recomendations: 12, image: 'https://via.placeholder.com/140x200' },
+  { id: 9, title: 'The Dark Knight', ano: 2008, recomendations: 15, image: 'https://via.placeholder.com/140x200' },
+  { id: 10, title: 'Dune 2', ano: 2024, recomendations: 10, image: 'https://via.placeholder.com/140x200' },
   ];
 
   switchTab(tab: string) {

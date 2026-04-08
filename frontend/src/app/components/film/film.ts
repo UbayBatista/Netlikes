@@ -11,5 +11,6 @@ export class Film {
   @Input() title!: string;
   @Input() year!: number;
   @Input() id!: number;
+  @Input() recommendations!: number;
 }
 
