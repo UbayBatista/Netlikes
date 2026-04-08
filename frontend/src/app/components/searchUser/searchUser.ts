@@ -5,7 +5,7 @@ import { SearchBarComponent } from "../search-bar/search-bar";
 @Component({
     selector: "app-social-search-user",
     standalone: true,
-    imports: [RouterLink, SearchBarComponent],
+    imports: [ SearchBarComponent ],
     templateUrl: "./searchUser.html",
     styleUrl: "./searchUser.css"
 })

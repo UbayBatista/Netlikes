@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-profile-header",
     standalone: true,
-    imports:[RouterLink],
+    imports:[],
     templateUrl: "./profileHeader.html",
     styleUrl: "./profileHeader.css"
 })
