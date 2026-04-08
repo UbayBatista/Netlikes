@@ -15,7 +15,6 @@ export class Users{
 
     search = signal('');
     
-
     Friends = [
         { name: 'Messi', active: true },
         { name: 'Luis Suarez', active: false },
@@ -23,21 +22,26 @@ export class Users{
         { name: 'La Roca', active: false }
     ];
 
-    filteredUser = [...this.Friends];
-
-    selectUser(index: number) {
-        this.Friends.forEach(p => p.active = false);
-        this.Friends[index].active = true;
-        
-        this.clickedUser.emit({ user: this.Friends[index].name });
-        console.log('Cambiando al chat de:', this.Friends[index].name);
-    }
+    searchText = '';
 
     handleSearch(text: string) {
-        const searchLow = text.toLowerCase();
-        this.filteredUser = this.Friends.filter(user => 
+        this.searchText = text.toLowerCase();
+    }
+
+    get filteredUsers(){
+        const searchLow = this.searchText.toLowerCase();
+        return this.Friends.filter(user => 
             user.name.toLowerCase().includes(searchLow)
         );
     }
+
+    selectUser(index: number) {
+        this.filteredUsers.forEach(p => p.active = false);
+        this.filteredUsers[index].active = true;
+        
+        this.clickedUser.emit({ user: this.filteredUsers[index].name });
+        console.log('Cambiando al chat de:', this.filteredUsers[index].name);
+    }
+
 
 }
