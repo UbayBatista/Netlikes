@@ -1,0 +1,8 @@
+.card{
+    margin: 10px;
+}
+
+.btn-danger{
+    background-color: black;
+    border-color: black;
+}

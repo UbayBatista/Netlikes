@@ -1,0 +1,15 @@
+<div class="search-wrapper">
+  <app-search-bar 
+    [placeholderText]="'Busca tus películas favoritas...'"
+    (searchEvent)="filters($event)">
+  </app-search-bar>
+</div>
+
+
+
+@for (genre of filteredGenres; track $index) {
+  <app-genre 
+    [genre]="genre"
+    [index]="$index">
+  </app-genre>
+}

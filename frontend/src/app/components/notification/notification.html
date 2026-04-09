@@ -1,0 +1,9 @@
+<div class="notification-container">
+  @if (image && image.trim() !== '') {
+  <img 
+  [src]="image" 
+  alt="notification image" 
+  class="notification-image"/>
+  }
+  <p class="notification-message">{{ message }}</p>
+</div>

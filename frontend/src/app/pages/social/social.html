@@ -1,0 +1,23 @@
+<div class="nav-bar d-flex">
+    <button 
+        class="nav-tab flex-fill py-3"
+        [class.active]="selectedMode === 'Buscar Usuario'"
+        (click)="changeMode('Buscar Usuario')">
+        Buscar Usuarios
+    </button>
+
+    <button 
+        class="nav-tab flex-fill py-3"
+        [class.active]="selectedMode === 'Chats'"
+        (click)="changeMode('Chats')">
+        Chats
+    </button>
+
+</div>
+
+@if (selectedMode == "Buscar Usuario"){
+    <app-social-search-user></app-social-search-user>
+}
+@else{
+    <app-social-chats></app-social-chats>
+}

@@ -1,0 +1,31 @@
+<nav class="app-navigation">
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/home" routerLinkActive="active" #rlaHome="routerLinkActive">
+        <i class="bi" [ngClass]="rlaHome.isActive ? 'bi-house-fill' : 'bi-house'"></i>
+      </a>
+    </li>
+    
+    <li>
+      <a routerLink="/forum" routerLinkActive="active" #rlaMessages="routerLinkActive">
+        <i class="bi" [ngClass]="rlaMessages.isActive ? 'bi-chat-square-fill' : 'bi-chat-square'"></i>
+      </a>
+    </li>
+    
+    <li>
+      <a routerLink="/catalog" routerLinkActive="active" #rlaCollections="routerLinkActive">
+        <i class="bi" [ngClass]="rlaCollections.isActive ? 'bi-collection-fill' : 'bi-collection'"></i>
+      </a>
+    </li>
+    
+    <li>
+      <a routerLink="/social" routerLinkActive="active" #rlaUsers="routerLinkActive">
+        <i class="bi" [ngClass]="rlaUsers.isActive ? 'bi-people-fill' : 'bi-people'"></i>
+      </a>
+    </li>
+  </ul>
+
+  <div class="copyright">
+    Copyright &copy; {{ currentYear }} NetLikes. Todos los derechos reservados.
+  </div>
+</nav>

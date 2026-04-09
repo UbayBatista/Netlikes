@@ -1,0 +1,25 @@
+
+<div class="sidebar-container">
+  <div class="search-box">
+    <app-search-bar 
+      placeholderText="Buscar amigo..." 
+      (searchEvent)="handleSearch($event)">
+    </app-search-bar>
+  </div>
+
+  <div class="list-container">
+    @for (user of filteredUsers; track user.name; let i = $index) {
+      <div 
+      class="foro-item" 
+      [class.active]="user.active"
+      (click)="selectUser(i)"
+      >
+      <div class="foro-info" (click)="selectUser(1)">
+        <span class="foro-name"> {{ user.name }}</span>
+      </div>
+    </div>
+    } @empty {
+      <div class="p-3 text-muted">No tienes ningún amigo</div>
+    }
+  </div>
+</div>

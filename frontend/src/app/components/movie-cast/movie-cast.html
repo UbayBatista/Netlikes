@@ -1,0 +1,22 @@
+@if (cast && cast.length > 0) {
+  <div class="cast-section mb-4">
+    <h3 class="fw-bold mb-3">Reparto principal</h3>
+    
+    <div class="horizontal-scroll gap-3 pb-2">
+      @for (actor of cast; track actor.id) {
+        <div class="card actor-card border-0 shadow-sm flex-shrink-0">
+          <img [src]="imgBaseUrl + actor.profile_path" 
+               [alt]="actor.name" 
+               class="card-img-top actor-photo">
+          
+          <div class="card-body p-2">
+            <p class="card-text text-black mb-0">
+              <strong>{{ actor.name }}</strong><br>
+              <span class="character-name">{{ actor.character }}</span>
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

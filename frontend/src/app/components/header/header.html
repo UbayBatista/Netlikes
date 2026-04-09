@@ -1,0 +1,32 @@
+<nav class="navbar px-4 py-3">
+  <a class="navbar-brand text-black fw-bold fs-4" routerLink="/home"> Netlikes </a>
+
+  <div class="d-flex align-items-center gap-3">
+
+    <div class="notification-wrapper position-relative">
+      <button (click)="openBox()" class="btn btn-link p-0 text-black">
+        <i class="bi bi-bell-fill fs-5"></i>
+      </button>
+
+      <app-notification-panel
+        [isOpen]="boxOpen"
+        [notifications]="notifications"
+        (closed)="boxOpen = false">
+      </app-notification-panel>
+
+      @if (hasNotifications) {
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{ notifications.length }}
+        </span>
+      }
+    </div>
+
+    <div (click)="goToProfile()">
+      <img
+        [src]="avatarUrl"
+        alt="Perfil"
+        class="rounded-circle avatar"
+      />
+    </div>
+  </div>
+</nav>

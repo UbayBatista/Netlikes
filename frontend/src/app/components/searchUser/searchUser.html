@@ -1,0 +1,40 @@
+<div class="container py-5">
+    
+    <div class="search-box">
+        <app-search-bar 
+        placeholderText="Buscar usuario..." 
+        (searchEvent)="handleSearch($event)">
+        </app-search-bar>
+    </div>
+
+    <div class="row g-4">
+        
+        @for (user of filteredUsers; track user) {
+            
+            <div class="col-6 col-md-4 col-lg-3">
+                
+                <div class="tarjeta-gris d-flex flex-column align-items-center justify-content-center p-3 w-100 mx-auto" (click)="goToProfile(user)">
+                    
+                    <img 
+                        class="rounded-circle object-fit-cover mb-3 shadow-sm" 
+                        width="100" 
+                        height="100" 
+                        src="https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U="
+                        alt="Foto de perfil"
+                    >
+                    
+                    <h6 class="m-0 fw-bold text-truncate w-100 text-center">{{user}}</h6>
+                
+                </div>
+            </div>
+
+        }
+
+        @empty {
+            <div class="col-12 text-center text-muted mt-5">
+                <h5>No se encontraron usuarios.</h5>
+            </div>
+        }
+
+    </div>
+</div>

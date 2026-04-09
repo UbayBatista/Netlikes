@@ -1,0 +1,43 @@
+
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.actor-card {
+  width: 160px; 
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.actor-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;   
+}
+
+.character-name {
+  color: #666;
+  font-size: 0.85rem;
+  display: block;
+  line-height: 1.2;
+}
+
+.fw-bold {
+  font-weight: 700;
+}

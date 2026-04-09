@@ -1,0 +1,35 @@
+<div class="nav-bar d-flex">
+  <button 
+    class="nav-tab flex-fill py-3"
+    [class.active]="tabActive === 'paraTi'"
+    (click)="switchTab('paraTi')">
+    Para ti
+  </button>
+  <button 
+    class="nav-tab flex-fill py-3"
+    [class.active]="tabActive === 'usuarios'"
+    (click)="switchTab('usuarios')">
+    Usuarios
+  </button>
+</div>
+
+@if (tabActive === 'paraTi') {
+  <div class="contenido px-4 py-3">
+    <h5 class="text-black mb-3">Recomendaciones para ti</h5>
+
+    @for (genre of forYouFilms; track genre.name) {
+      <app-genre [genre]="genre"></app-genre>
+    }
+  </div>
+}
+
+@if (tabActive === 'usuarios') {
+    <div class="contenido px-4 py-3">
+        <h5 class="text-black mb-3">Recomendaciones de otros usuarios</h5>
+        <div class="fila-peliculas2">
+            @for (f of users_films; track f.id) {
+                <app-film [image]="f.filmUrl" [title]="f.title" [recommendations]="12"  [year]="2023"></app-film>
+            }
+        </div>
+    </div>
+}

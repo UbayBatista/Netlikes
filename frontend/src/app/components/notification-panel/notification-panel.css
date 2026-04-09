@@ -1,0 +1,83 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 998;
+}
+
+.panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 360px;
+  max-height: 70vh;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  overflow-y: auto;
+  z-index: 999;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panel.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Ocultar scrollbar */
+.panel::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+    max-height: none;
+
+    border-radius: 0;
+    padding: 20px;
+
+    transform: translateY(0);
+  }
+
+  .panel.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .panel-header h2 {
+    font-size: 1.4rem;
+  }
+}

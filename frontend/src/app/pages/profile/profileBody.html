@@ -1,0 +1,123 @@
+<div class="profileComple">
+    
+    @if(!itsMe){
+        
+        <app-profile-header userName={{profileName}} [type]="isEditing ? 'Siguiendo' : 'Seguir'" 
+            (editClick)="Edit()"
+            option="Bloquear" otherUser="Yes"></app-profile-header>
+
+        <app-profile-components title="Bio">
+            <p>{{textBio}}</p>
+        </app-profile-components>
+
+        <app-profile-components title="Películas Vista">
+            
+            <div class="netflix-wrapper">
+                 @if (canScrollLeft) {
+                    <button class="nav-btn left" (click)="scrollLeft()"></button>
+                }
+
+                <div class="netflix-row" #scrollContainer>
+                    <div class="netflix-slider">
+                        @for(film of filmsViewOther; track film) {
+                            <div class="film-item">
+                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @if (canScrollRight) {
+                    <button class="nav-btn right" (click)="scrollRight()"></button>
+                }
+            </div>
+
+        </app-profile-components>
+
+        <app-profile-components title="Ver más tarde">
+            <div class="netflix-wrapper">
+                @if (canScrollLeft) {
+                    <button class="nav-btn left" (click)="scrollLeft()"></button>
+                }
+                <div class="netflix-row" #scrollContainer>
+                    <div class="netflix-slider">
+                        @for(film of filmsLaterOther; track film) {
+                            <div class="film-item">
+                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                            </div>
+                        }
+                    </div>
+                </div>
+            
+                @if (canScrollRight) {
+                    <button class="nav-btn right" (click)="scrollRight()"></button>
+                }
+            </div>
+        </app-profile-components>
+    }
+    @else{
+        
+        <app-profile-header 
+            userName="Cristiano Ronaldo" 
+            [type]="isEditing ? 'Continuar' : 'Editar Perfil'" 
+            (editClick)="Edit()"
+            (openSocialModal)="showSocial($event)">
+        </app-profile-header>
+        <app-profile-components title="Bio" [isEditing]="isEditing">
+            <p>{{textBio}}</p>
+        </app-profile-components>
+
+        <app-profile-components title="Películas Vista" [isEditing]="isEditing">
+            <div class="netflix-wrapper">
+                @if (canScrollLeft) {
+                    <button class="nav-btn left" (click)="scrollLeft()"></button>
+                }
+
+                <div class="netflix-row" #scrollContainer>
+                    <div class="netflix-slider">
+                        @for(film of filmsView; track film) {
+                            <div class="film-item">
+                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @if (canScrollRight) {
+                    <button class="nav-btn right" (click)="scrollRight()"></button>
+                }
+            </div>
+        </app-profile-components>
+
+        <app-profile-components title="Ver más tarde" [isEditing]="isEditing">
+            <div class="netflix-wrapper">
+                @if (canScrollLeft) {
+                    <button class="nav-btn left" (click)="scrollLeft()"></button>
+                }
+
+                <div class="netflix-row" #scrollContainer>
+                    <div class="netflix-slider">
+                        @for(film of filmsLater; track film) {
+                            <div class="film-item">
+                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @if (canScrollRight) {
+                    <button class="nav-btn right" (click)="scrollRight()"></button>
+                }
+            </div>
+        </app-profile-components>
+    }
+
+    @if (isSocialModalOpen) {
+    <app-social-modal 
+        [title]="socialType" 
+        [users]="socialData" 
+        (close)="isSocialModalOpen = false"
+        (tabChange)="showSocial($event)"> </app-social-modal>
+    }
+
+</div>

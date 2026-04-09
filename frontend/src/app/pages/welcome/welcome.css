@@ -1,0 +1,58 @@
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-side {
+    flex: 1;
+    height: 100%;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.form-box {
+    width: 100%;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .right-side {
+        padding: 30px;
+    }
+}
+
+/* Móvil*/
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .left-side, .right-side {
+        flex: none;
+        width: 100%;
+        height: auto;
+    }
+
+    .right-side {
+        padding: 40px 20px;
+        align-items: flex-start;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+    }
+}

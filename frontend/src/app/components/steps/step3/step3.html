@@ -1,0 +1,68 @@
+<div class="step-form">
+  <h2 class="subtitle">Términos y Condiciones de uso</h2>
+  
+  <div class="terms-box">
+    <p><strong>Fecha de última actualización:</strong> 06/04/2026</p>
+    <p>Bienvenido a NetLikes. Al acceder o utilizar nuestro sitio web, usted acepta cumplir con los siguientes Términos y Condiciones. Lea este documento detenidamente antes de crear una cuenta.</p>
+
+    <h5>1. Requisitos de Edad y Registro</h5>
+    <ul>
+      <li>Para utilizar esta red social, el usuario debe tener al menos 16 años de edad.</li>
+      <li>Al registrarse, usted garantiza que la información proporcionada es verídica y actual.</li>
+      <li>Usted es el único responsable de mantener la confidencialidad de su contraseña y de las actividades que ocurran bajo su cuenta.</li>
+    </ul>
+
+    <h5>2. Descripción del Servicio</h5>
+    <p>NetLikes es un espacio de interacción social centrado en el cine, las series y la literatura. Los servicios incluyen, pero no se limitan a:</p>
+    <ul>
+      <li>Creación de perfiles y selección de preferencias.</li>
+      <li>Participación en foros de discusión y mensajería privada.</li>
+      <li>Sistemas de valoración, listas de seguimiento y algoritmos de recomendación.</li>
+    </ul>
+
+    <h5>3. Código de Conducta y Moderación</h5>
+    <p>Nuestra prioridad es fomentar una interacción sana y respetuosa. Queda estrictamente prohibido:</p>
+    <ul>
+      <li><strong>Spoilers:</strong> El acceso a los foros de discusión de una obra específica (película, serie o libro) está condicionado a que el usuario marque previamente dicho contenido como "Visto" o "Leído" en su perfil personal. Al realizar esta acción, el usuario declara haber consumido la obra y acepta que dentro del foro se discutirá el contenido íntegro de la misma, incluyendo giros de trama y finales. Queda estrictamente prohibido publicar detalles reveladores (spoilers) en perfiles públicos o foros de obras distintas a la tratada.</li>
+      <li><strong>Conducta Inapropiada:</strong> No se tolerará el acoso, el discurso de odio, la difamación, las amenazas ni el lenguaje obsceno. La interacción debe mantenerse dentro de los límites del respeto mutuo y la crítica constructiva.</li>
+      <li><strong>Spam:</strong> El uso de los foros o la mensajería para fines comerciales no autorizados.</li>
+      <li><strong>Moderación:</strong> La plataforma se reserva el derecho de eliminar contenido o suspender cuentas que infrinjan estas normas.</li>
+    </ul>
+
+    <h5>4. Propiedad Intelectual</h5>
+    <ul>
+      <li><strong>Contenido del Usuario:</strong> Usted conserva los derechos de autor sobre las opiniones o textos que publique, pero otorga a NetLikes una licencia no exclusiva para mostrar y distribuir dicho contenido dentro del sitio.</li>
+      <li><strong>Contenido de la Plataforma:</strong> El diseño, los algoritmos y las marcas comerciales son propiedad exclusiva del proyecto.</li>
+      <li><strong>Datos de Terceros:</strong> Las imágenes de carátulas, sinopsis y datos de películas/libros se utilizan bajo licencias de bases de datos de terceros (como TMDB o similares) o con fines informativos y de crítica, respetando los derechos de las productoras y editoriales.</li>
+    </ul>
+
+    <h5>5. Limitación de Responsabilidad</h5>
+    <ul>
+      <li><strong>Disponibilidad:</strong> Dado que el proyecto se encuentra en una fase de desarrollo, no garantizamos que el servicio sea ininterrumpido o libre de errores.</li>
+      <li><strong>Interacciones:</strong> La plataforma no se hace responsable de los encuentros o disputas que puedan surgir entre usuarios fuera del entorno digital.</li>
+    </ul>
+
+    <h5>6. Privacidad y Datos Personales</h5>
+    <p>El uso de sus datos personales se rige por nuestra Política de Privacidad. Al utilizar el servicio, usted consiente la recopilación de sus preferencias de entretenimiento para alimentar nuestro algoritmo de recomendación y personalizar su experiencia.</p>
+
+    <h5>7. Modificaciones del Servicio</h5>
+    <p>Debido a la naturaleza evolutiva del proyecto, nos reservamos el derecho de modificar o suspender funcionalidades (como la inclusión de nuevas categorías o cambios en el sistema de insignias) en cualquier momento, informando a los usuarios a través de notificaciones en el sitio.</p>
+
+    <h5>8. Legislación Aplicable</h5>
+    <p>Estos términos se rigen por las leyes de España. Cualquier disputa será sometida a los tribunales competentes de dicha jurisdicción.</p>
+  </div>
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="terms" [(ngModel)]="termsAccepted">
+    <label for="terms">He leído y acepto los términos y condiciones.</label>
+  </div>
+
+  <div class="button-group">
+    <button class="arrow-btn" (click)="notifyPrev()"><i class="bi bi-arrow-left"></i></button>
+    <button class="arrow-btn" 
+            (click)="notifyNext()" 
+            [style.opacity]="termsAccepted ? '1' : '0.3'">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>
