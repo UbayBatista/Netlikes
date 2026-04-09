@@ -18,22 +18,46 @@
 }
 
 @media (max-width: 768px) {
-    .rounded-pill{
-        font-size: 0.8rem;
-        width: 130px;
+    .rounded-circle {
+        width: 80px !important;
+        height: 80px !important;
     }
 
-    .text-center{
-        margin-right: 20px;
-        
+    .d-flex.align-items-center.w-100 {
+        padding-right: 10px !important;
+        gap: 10px;
+    }
+
+    .ms-auto.text-center {
+        gap: 15px !important;
+        margin-right: 0 !important;
     }
 
     .text-uppercase {
-        font-size: 0.8rem !important;
+        font-size: 0.65rem !important;
     }
 
-    .fs-4{
-        font-size: 1.3rem !important;
+    .fs-4 {
+        font-size: 1.1rem !important;
     }
 
+    .rounded-pill {
+        font-size: 0.75rem;
+        width: 110px;
+        padding: 4px 10px !important;
+    }
+    .position-absolute.top-0.end-0 {
+        padding: 10px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .rounded-circle {
+        width: 65px !important;
+        height: 65px !important;
+    }
+    
+    .d-flex.gap-4 {
+        gap: 10px !important;
+    }
 }

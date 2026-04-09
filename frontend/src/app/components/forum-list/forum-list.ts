@@ -22,15 +22,27 @@ export class ForumList {
     { title: 'Avatar', active: false }
   ];
 
-  selectForum(index: number) {
-    this.filmsForum.forEach(p => p.active = false);
-    this.filmsForum[index].active = true;
-    
-    this.clickedForum.emit({ title: this.filmsForum[index].title });
-    console.log('Cambiando al foro de:', this.filmsForum[index].title);
-  }
+  searchText = '';
 
   handleSearch(text: string) {
-    this.search.set(text);
+      this.searchText = text.toLowerCase();
   }
+
+  get filtereForums(){
+      const searchLow = this.searchText.toLowerCase();
+      return this.filmsForum.filter(forum => 
+          forum.title.toLowerCase().includes(searchLow)
+      );
+  } 
+
+  selectForum(index: number) {
+    this.filtereForums.forEach(p => p.active = false);
+    this.filtereForums[index].active = true;
+    
+    this.clickedForum.emit({ title: this.filtereForums[index].title });
+    console.log('Cambiando al foro de:', this.filtereForums[index].title);
+  }
+
+
+
 }

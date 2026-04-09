@@ -7,7 +7,7 @@
   </div>
 
   <div class="list-container">
-    @for (pelicula of filmsForum; track pelicula.title; let i = $index) {
+    @for (pelicula of filtereForums; track pelicula.title; let i = $index) {
       <div 
       class="foro-item" 
       [class.active]="pelicula.active"

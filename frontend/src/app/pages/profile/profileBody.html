@@ -55,9 +55,12 @@
     }
     @else{
         
-        <app-profile-header userName="Cristiano Ronaldo" [type]="isEditing ? 'Continuar' : 'Editar Perfil'" 
-            (editClick)="Edit()"></app-profile-header>
-
+        <app-profile-header 
+            userName="Cristiano Ronaldo" 
+            [type]="isEditing ? 'Continuar' : 'Editar Perfil'" 
+            (editClick)="Edit()"
+            (openSocialModal)="showSocial($event)">
+        </app-profile-header>
         <app-profile-components title="Bio" [isEditing]="isEditing">
             <p>{{textBio}}</p>
         </app-profile-components>
@@ -105,6 +108,14 @@
                 }
             </div>
         </app-profile-components>
+    }
+
+    @if (isSocialModalOpen) {
+    <app-social-modal 
+        [title]="socialType" 
+        [users]="socialData" 
+        (close)="isSocialModalOpen = false"
+        (tabChange)="showSocial($event)"> </app-social-modal>
     }
 
 </div>

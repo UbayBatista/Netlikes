@@ -9,7 +9,7 @@
 
     <div class="row g-4">
         
-        @for (user of userList; track user) {
+        @for (user of filteredUsers; track user) {
             
             <div class="col-6 col-md-4 col-lg-3">
                 
@@ -28,6 +28,12 @@
                 </div>
             </div>
 
+        }
+
+        @empty {
+            <div class="col-12 text-center text-muted mt-5">
+                <h5>No se encontraron usuarios.</h5>
+            </div>
         }
 
     </div>

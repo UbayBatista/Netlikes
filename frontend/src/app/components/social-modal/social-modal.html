@@ -1,0 +1,39 @@
+<div class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      
+      <div class="modal-header border-0 d-flex justify-content-center position-relative">
+        <h5 class="modal-title fw-bold text-uppercase">{{ title }}</h5>
+        <button type="button" class="btn-close position-absolute end-0 me-3" (click)="closeModal()"></button>
+      </div>
+
+      <div class="d-flex border-bottom border-top">
+        <button class="flex-fill py-2 btn btn-light rounded-0 fw-bold" [class.active-tab]="title === 'Seguidores'" (click)="changeTab('Seguidores')">Seguidores</button>
+        <button class="flex-fill py-2 btn btn-light rounded-0 fw-bold" [class.active-tab]="title === 'Seguidos'" (click)="changeTab('Seguidos')">Seguidos</button>
+      </div>
+
+      <div class="modal-body p-0" style="max-height: 400px; overflow-y: auto;">
+        <div class="list-group list-group-flush">
+          @for (user of users; track user.name) {
+            <div class="list-group-item d-flex align-items-center justify-content-between py-3 border-bottom">
+              <div class="d-flex align-items-center gap-3">
+                <img [src]="user.avatar" class="rounded-circle border" style="width: 50px; height: 50px; object-fit: cover;">
+                <div>
+                  <p class="m-0 fw-bold">{{ user.name }}</p>
+                  @if (user.status && title === 'Seguidores') {
+                    <small class="text-primary cursor-pointer">{{ user.status }}</small>
+                  }
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm rounded-pill px-3" (click)="handleAction(user)">
+                {{ title === 'Seguidores' ? 'Eliminar' : 'Dejar de seguir' }}
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
