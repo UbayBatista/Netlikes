@@ -1,0 +1,78 @@
+<div class="container my-5">
+
+  <div class="main-block p-4 mb-4 text-white" 
+       style="background-color: #0f172a;" 
+       [style.background-image]="'radial-gradient(circle at 15% 40%, ' + dominantColor + ' 0%, transparent 70%)'">
+    
+    <div class="row align-items-center">
+      <div class="col-md-3 text-center mb-4 mb-md-0">
+        <img [src]="movieData.posterPath" alt="Portada de {{ movieData.title }}" class="img-fluid poster-shadow mb-3 rounded poster-img">
+        
+        <div class="d-flex justify-content-center gap-4 mb-2">
+          <i class="bi fs-3 btn-icon" [class.bi-eye]="!isWatched" [class.bi-eye-fill]="isWatched" [class.active]="isWatched" (click)="toggleWatched()" title="Marcar como vista"></i>
+          <i class="bi fs-3 btn-icon" [class.bi-clock]="!isWatchLater" [class.bi-clock-fill]="isWatchLater" [class.active]="isWatchLater" (click)="toggleWatchLater()" title="Ver más tarde"></i>
+          <i class="bi bi-share fs-3 btn-icon" (click)="shareMovie()" title="Compartir"></i>
+        </div>
+
+        <div class="d-flex justify-content-center gap-4 rating-container" [class.is-visible]="isWatched">
+          <i class="bi fs-4 btn-icon" [class.bi-emoji-frown]="currentRating !== 'dislike'" [class.bi-emoji-frown-fill]="currentRating === 'dislike'" [class.active]="currentRating === 'dislike'" (click)="rateMovie('dislike')"></i>
+          <i class="bi fs-4 btn-icon" [class.bi-emoji-smile]="currentRating !== 'like'" [class.bi-emoji-smile-fill]="currentRating === 'like'" [class.active]="currentRating === 'like'" (click)="rateMovie('like')"></i>
+          <i class="bi fs-4 btn-icon" [class.bi-emoji-heart-eyes]="currentRating !== 'love'" [class.bi-emoji-heart-eyes-fill]="currentRating === 'love'" [class.active]="currentRating === 'love'" (click)="rateMovie('love')"></i>
+        </div>
+      </div>
+
+      <div class="col-md-9 details-content text-center text-md-start">
+        <h1 class="fw-bold">{{ movieData.title }} <span class="fw-light opacity-75 fs-4">({{ movieData.year }})</span></h1>
+        
+        <p class="opacity-75 small d-flex align-items-center justify-content-center justify-content-md-start gap-2 flex-wrap">
+          <span class="border border-light rounded px-2 py-1 fw-bold">{{ movieData.qualification }}</span>
+          <span>• {{ movieData.date }} • {{ formatGenres(movieData.genres) }} • {{ movieData.duration }}</span>
+        </p>
+
+        <h5 class="fw-bold mt-4">Eslogan</h5>
+        <p class="fst-italic">{{ movieData.slogan }}</p>
+
+        <h5 class="fw-bold mt-3">Descripción</h5>
+        <p>{{ movieData.description }}</p>
+
+        <div class="mt-4">
+          <h5 class="fw-bold">Dónde ver</h5>
+          <div class="d-flex justify-content-center justify-content-md-start gap-3 flex-wrap mt-3">
+            @for (platform of movieData.platforms; track platform) {
+              <img [src]="platform" class="platform-img">
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cast-section mb-4">
+    <h3 class="fw-bold mb-3">Reparto principal</h3>
+    <div class="horizontal-scroll gap-3 pb-2">
+      @for (actor of movieData.cast; track actor.name) {
+        <div class="card actor-card border-0 shadow-sm flex-shrink-0">
+          <img [src]="actor.photoPath" [alt]="actor.name" class="card-img-top actor-photo">
+          <div class="card-body p-2">
+            <p class="card-text text-black mb-0">
+              <strong>{{ actor.name }}</strong><br>
+              <span class="character-name">{{ actor.character }}</span>
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="trailers-section mb-5">
+    <h3 class="fw-bold mb-3">Tráileres y más</h3>
+    <div class="horizontal-scroll gap-3 pb-2">
+      @for (trailer of safeTrailers; track $index) {
+        <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm flex-shrink-0 trailer-card">
+          <iframe [src]="trailer" allowfullscreen></iframe>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>
