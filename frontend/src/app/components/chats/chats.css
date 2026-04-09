@@ -59,13 +59,6 @@
         transform: translateX(-100%);
     }
 
-    app-social-chats-menssages {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        height: 100%;
-        min-height: 0;
-    }
 }
 
 /* --- TABLETS/PC --- */

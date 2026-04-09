@@ -11,7 +11,7 @@ import { NotificationPanel } from '../notification-panel/notification-panel';
 export class Header {
   hasNotifications: boolean = true;
   showNotifications: boolean = false;
-  avatarUrl: string = 'https://i.pravatar.cc/150?img=54';
+  avatarUrl: string = 'https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U=';
 
   constructor(private router: Router) {}
 

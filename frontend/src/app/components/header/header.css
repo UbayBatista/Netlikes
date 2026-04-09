@@ -48,3 +48,7 @@ svg:hover {
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+.rounded-circle{
+  border-color: black;
+}
