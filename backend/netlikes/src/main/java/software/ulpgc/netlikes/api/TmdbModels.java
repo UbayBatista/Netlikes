@@ -27,7 +27,8 @@ public class TmdbModels {
         @JsonProperty("id") String id,
         @JsonProperty("name") String name,
         @JsonProperty("key") String key,
-        @JsonProperty("type") String type
+        @JsonProperty("type") String type,
+        @JsonProperty("site") String site
     ) {}
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -78,10 +79,20 @@ public class TmdbModels {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record MovieVideosResponse(
-        @JsonProperty("id") int id,
-        @JsonProperty("results") List<Video> results
-    ) {}
-
+        int id,
+        List<Video> results
+    ) {
+        @JsonCreator
+        public static MovieVideosResponse fromJson(
+            @JsonProperty("id") int id,
+            @JsonProperty("results") List<Video> results
+        ) {
+            List<Video> youtubeVideos = results != null 
+                ? results.stream().filter(v -> "YouTube".equalsIgnoreCase(v.site())).toList() 
+                : Collections.emptyList();
+            return new MovieVideosResponse(id, youtubeVideos);
+        }
+    }
 
     // CLASES INTERMEDIAS PARA JACKSON (Solo uso interno)
     
@@ -143,7 +154,12 @@ public class TmdbModels {
             @JsonProperty("release_dates") ReleaseDatesNode releaseDates
         ) {
             List<CastMember> extractedCast = credits != null && credits.cast() != null ? credits.cast() : Collections.emptyList();
-            List<Video> extractedVideos = videos != null && videos.results() != null ? videos.results() : Collections.emptyList();
+            
+            List<Video> extractedVideos = videos != null && videos.results() != null 
+                ? videos.results().stream()
+                    .filter(v -> "YouTube".equalsIgnoreCase(v.site()))
+                    .toList() 
+                : Collections.emptyList();
             
             // Extracción específica de Providers para España (ES) uniendo las diferentes opciones (flatrate, rent, buy)
             List<Provider> extractedProviders = new ArrayList<>();

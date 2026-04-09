@@ -60,7 +60,7 @@ public class FilmAssembler {
 
     private String getTrailerUrl(List<Video> videos) {
         return videos.stream()
-            .filter(video -> "Trailer".equalsIgnoreCase(video.type()))
+            .filter(video -> "Trailer".equalsIgnoreCase(video.type()) && "YouTube".equalsIgnoreCase(video.site()))
             .findFirst()
             .map(video -> "https://www.youtube.com/watch?v=" + video.key())
             .orElse(null);
