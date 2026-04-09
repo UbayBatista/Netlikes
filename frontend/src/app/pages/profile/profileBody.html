@@ -2,7 +2,9 @@
     
     @if(!itsMe){
         
-        <app-profile-header userName={{profileName}} type="Siguiendo" option="Bloquear" otherUser="Yes"></app-profile-header>
+        <app-profile-header userName={{profileName}} [type]="isEditing ? 'Siguiendo' : 'Seguir'" 
+            (editClick)="Edit()"
+            option="Bloquear" otherUser="Yes"></app-profile-header>
 
         <app-profile-components title="Bio">
             <p>{{textBio}}</p>
