@@ -37,15 +37,18 @@ public class FilmAssembler {
     private FilmRequestDTO buildDTO(Movie filmDetail) {
         FilmRequestDTO dto = new FilmRequestDTO();
         dto.setId(Integer.valueOf(filmDetail.id()));
-        dto.setAdult(filmDetail.adult());
         dto.setTitle(filmDetail.title());
-        dto.setFilmUrl("https://image.tmdb.org/t/p/original" + filmDetail.posterPath());
-        dto.setSummary(filmDetail.overview());
+        dto.setOverView(filmDetail.overview());
+        dto.setAdult(filmDetail.adult());
+        dto.setAgeRating(filmDetail.ageRating());
+        dto.setTagline(filmDetail.tagline());
+        dto.setRuntime(filmDetail.runtime());
         dto.setReleaseDate(parseDate(filmDetail.releaseDate()));
-        dto.setTrailer(getTrailerUrl(filmDetail.videos()));
+        dto.setPosterPath("https://image.tmdb.org/t/p/original" + filmDetail.posterPath());
+        dto.setVideos(getVideoInformation(filmDetail.videos()));
         dto.setGenres(extractGenres(filmDetail.genres()));
-        dto.setPlatforms(extractProviders(filmDetail.watchProviders()));
-        dto.setActors(extractActors(filmDetail.cast()));
+        dto.setWatchProviders(extractProviders(filmDetail.watchProviders()));
+        dto.setCast(extractActors(filmDetail.cast()));
         return dto;
     }
 
@@ -58,12 +61,18 @@ public class FilmAssembler {
         }
     }
 
-    private String getTrailerUrl(List<Video> videos) {
+    private List<Map<String, String>> getVideoInformation(List<Video> videos) {
         return videos.stream()
-            .filter(video -> "Trailer".equalsIgnoreCase(video.type()) && "YouTube".equalsIgnoreCase(video.site()))
-            .findFirst()
-            .map(video -> "https://www.youtube.com/watch?v=" + video.key())
-            .orElse(null);
+            .map(video -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", video.id());
+                map.put("name", video.name());
+                map.put("key", video.key());
+                map.put("type", video.type());
+                map.put("site", video.site());
+                return map;
+            })
+            .toList();
     }
 
     private Map<Integer, String> extractGenres(List<Genre> genres) {
@@ -71,13 +80,27 @@ public class FilmAssembler {
             .collect(Collectors.toMap(Genre::id, Genre::name));
     }
 
-    private Map<Integer, String> extractProviders(List<Provider> providers) {
+    private List<Map<String, String>> extractProviders(List<Provider> providers) {
         return providers.stream()
-            .collect(Collectors.toMap(Provider::providerId, Provider::providerName));
+            .map(provider -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", String.valueOf(provider.providerId()));
+                map.put("name", provider.providerName());
+                map.put("logoPath", provider.logoPath());
+                return map;
+            })
+            .toList();
     }
 
-    private Map<Integer, String> extractActors(List<CastMember> cast) {
+    private List<Map<String, String>> extractActors(List<CastMember> cast) {
         return cast.stream()
-            .collect(Collectors.toMap(CastMember::id, CastMember::name));
+            .map(actor -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", String.valueOf(actor.id()));
+                map.put("name", actor.name());
+                map.put("profilePath", actor.profilePath());
+                return map;
+            })
+            .toList();
     }
 }

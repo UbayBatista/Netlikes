@@ -8,15 +8,15 @@ import java.util.List;
 public class FilmResponseDTO {
 
     private Integer id;
-    private boolean adult;
     private String title;
-    private String filmUrl;
-    private String summary;
+    private String posterPath;
+    private String overView;
+    private boolean adult;
     private Date releaseDate;
-    private String trailer;
-
+    
     private List<String> genres;
-    private List<String> platforms;
     private List<String> actors;
+    private List<String> videos;
+    private List<String> watchProviders;
 }
 

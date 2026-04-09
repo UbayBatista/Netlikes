@@ -15,23 +15,29 @@ public class Film{
     @Id
     private Integer id;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String title;
+    
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String overView;
+
     @Column(nullable = false)
     private boolean adult;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String title;
+    @Column(columnDefinition = "TEXT")
+    private String ageRating;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String filmUrl;
+    @Column(columnDefinition = "TEXT")
+    private String tagLine;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String summary;
+    @Column(columnDefinition = "INTEGER")
+    private Integer runtime;
 
     @Column(nullable = false)
     private Date releaseDate;
 
-    @Column(columnDefinition = "TEXT")
-    private String trailer;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String posterPath;
 
     @ManyToMany
     @JoinTable(name = "available", 
@@ -39,7 +45,7 @@ public class Film{
         inverseJoinColumns = @JoinColumn(name = "platformId")    
     )
 
-    private List<Platform> platforms;
+    private List<Platform> watchProviders;
 
     @OneToMany(mappedBy = "film")
     @JsonIgnore
@@ -59,5 +65,10 @@ public class Film{
         joinColumns = @JoinColumn(name = "filmId"),
         inverseJoinColumns = @JoinColumn(name = "actorId")
     )
-    private List<Actor> participateIn;
+    private List<Actor> cast;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Video> videos;
+
 }
