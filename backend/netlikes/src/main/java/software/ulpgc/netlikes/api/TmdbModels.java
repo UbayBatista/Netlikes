@@ -121,12 +121,10 @@ public class TmdbModels {
         String overview,
         boolean adult,
         String ageRating,
-        String backdropPath,
         String tagline,
         Integer runtime,
         String releaseDate,
         String posterPath,
-        Double voteAverage,
         List<Genre> genres,
         List<CastMember> cast,
         List<Video> videos,
@@ -139,12 +137,10 @@ public class TmdbModels {
             @JsonProperty("title") String title,
             @JsonProperty("overview") String overview,
             @JsonProperty("adult") boolean adult,
-            @JsonProperty("backdrop_path") String backdropPath,
             @JsonProperty("tagline") String tagline,
             @JsonProperty("runtime") Integer runtime,
             @JsonProperty("release_date") String releaseDate,
             @JsonProperty("poster_path") String posterPath,
-            @JsonProperty("vote_average") Double voteAverage,
             @JsonProperty("genres") List<Genre> genres,
             
             // Nodos anidados para aplanar
@@ -189,8 +185,8 @@ public class TmdbModels {
             }
 
             return new Movie(
-                id, title, overview, adult, extractedAgeRating, backdropPath, tagline, runtime, 
-                releaseDate, posterPath, voteAverage, 
+                id, title, overview, adult, extractedAgeRating, tagline, runtime,
+                releaseDate, posterPath,
                 genres != null ? genres : Collections.emptyList(), 
                 extractedCast, extractedVideos, extractedProviders
             );
