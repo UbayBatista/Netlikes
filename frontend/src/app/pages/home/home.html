@@ -27,8 +27,8 @@
     <div class="contenido px-4 py-3">
         <h5 class="text-black mb-3">Recomendaciones de otros usuarios</h5>
         <div class="fila-peliculas2">
-            @for (pelicula of peliculasUsuarios; track pelicula.id) {
-                <app-film [image]="pelicula.image" [title]="pelicula.title" [recommendations]="pelicula.recomendations"  [year]="pelicula.ano"></app-film>
+            @for (f of users_films; track f.id) {
+                <app-film [image]="f.filmUrl" [title]="f.title" [recommendations]="12"  [year]="2023"></app-film>
             }
         </div>
     </div>
