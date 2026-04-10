@@ -23,14 +23,14 @@ public class InitialFilmLoadService implements LoadService {
     @Override
     public void loadAll() {
         if (filmService.getAllFilms().size() > 0) {
-            log.info("BD ya tiene datos, omitiendo carga inicial");
+            log.info("La base de datos ya tiene datos, omitiendo carga inicial");
             return;
         }
         loadFilms();
     }
 
     private void loadFilms() {
-        List<Integer> ids = apiClient.getPopularMovieIds(maxFilms);
+        List<Integer> ids = apiClient.getPopularFilmIds(maxFilms);
         int success = 0, failed = 0;
 
         for (int filmId : ids) {
@@ -44,6 +44,6 @@ public class InitialFilmLoadService implements LoadService {
             }
         }
 
-        log.info("Carga completada: {} OK, {} fallidas", success, failed);
+        log.info("Carga inicial completada: {} OK, {} fallidas", success, failed);
     }
 }

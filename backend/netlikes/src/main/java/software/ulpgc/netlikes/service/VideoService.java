@@ -26,10 +26,8 @@ public class VideoService {
         Video existingVideo = videoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video not found"));
 
-        existingVideo.setName(video.getName());
         existingVideo.setKey(video.getKey());
         existingVideo.setType(video.getType());
-        existingVideo.setSite(video.getSite());
 
         return videoRepository.save(existingVideo);
     }

@@ -120,10 +120,8 @@ public class FilmService {
             .map(entry -> {
                 Video video = new Video();
                 video.setId(entry.get("id"));
-                video.setName(entry.get("name"));
                 video.setKey(entry.get("key"));
                 video.setType(entry.get("type"));
-                video.setSite(entry.get("site"));
                 video.setFilm(film);
                 return video;
             })
@@ -146,7 +144,7 @@ public class FilmService {
         dto.setGenres(film.getGenres().stream().map(Genre::getName).toList());
         dto.setWatchProviders(film.getWatchProviders().stream().map(Platform::getName).toList());
         dto.setActors(film.getCast().stream().map(Actor::getName).toList());
-        dto.setVideos(film.getVideos().stream().map(Video::getName).toList());
+        dto.setVideos(film.getVideos().stream().map(Video::getKey).toList());
 
         return dto;
     }

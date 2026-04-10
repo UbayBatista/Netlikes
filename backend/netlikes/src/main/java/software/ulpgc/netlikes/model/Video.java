@@ -13,16 +13,10 @@ public class Video {
     private String id;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String name;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String key;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String type;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String site;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "film_id")
