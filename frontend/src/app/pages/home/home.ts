@@ -1,15 +1,8 @@
-export interface GenreGroup {
-  name: string;
-  films: {
-    title: string;
-    image: string;
-  }[];
-}
-
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Genre } from '../../components/genre/genre';
-import { Filmdto, FilmService } from '../../services/film.service';
+import { FilmService } from '../../services/film.service';
 import { Film } from '../../components/film/film';
+import { FilmListItem, GenreGroup } from '../../models/film.models';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +14,7 @@ export class Home implements OnInit {
   tabActive: string = 'paraTi';
 
   forYouFilms: GenreGroup[] = [];
-  users_films: Filmdto[] = [];
+  users_films: FilmListItem[] = [];
   
   constructor(private filmService: FilmService, private cdr: ChangeDetectorRef) {}
 

@@ -7,9 +7,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './film.css',
 })
 export class Film {
-  @Input() image!: string;
+  @Input() posterPath!: string;
   @Input() title!: string;
-  @Input() year!: number;
   @Input() id!: number;
   @Input() recommendations!: number;
 }

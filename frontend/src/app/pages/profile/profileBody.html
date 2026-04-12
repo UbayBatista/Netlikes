@@ -21,7 +21,7 @@
                     <div class="netflix-slider">
                         @for(film of filmsViewOther; track film) {
                             <div class="film-item">
-                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                                <app-film [posterPath]="film.image" [title]="film.title"></app-film>
                             </div>
                         }
                     </div>
@@ -43,7 +43,7 @@
                     <div class="netflix-slider">
                         @for(film of filmsLaterOther; track film) {
                             <div class="film-item">
-                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                                <app-film [posterPath]="film.image" [title]="film.title"></app-film>
                             </div>
                         }
                     </div>
@@ -77,7 +77,7 @@
                     <div class="netflix-slider">
                         @for(film of filmsView; track film) {
                             <div class="film-item">
-                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                                <app-film [posterPath]="film.image" [title]="film.title"></app-film>
                             </div>
                         }
                     </div>
@@ -99,7 +99,7 @@
                     <div class="netflix-slider">
                         @for(film of filmsLater; track film) {
                             <div class="film-item">
-                                <app-film [image]="film.image" [title]="film.title"></app-film>
+                                <app-film [posterPath]="film.image" [title]="film.title"></app-film>
                             </div>
                         }
                     </div>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CastMember } from '../../models/movie.models';
+import { CastMember } from '../../models/film.models';
 
 @Component({
   selector: 'app-movie-cast',
