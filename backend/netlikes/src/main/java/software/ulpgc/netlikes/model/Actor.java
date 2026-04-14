@@ -2,6 +2,7 @@ package software.ulpgc.netlikes.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "actor")
@@ -19,4 +20,7 @@ public class Actor {
 
     @Column(columnDefinition = "TEXT")
     private String profilePath;
+
+    @OneToMany(mappedBy = "actor")
+    private List<Participate> performances; 
 }

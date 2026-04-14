@@ -59,13 +59,8 @@ public class Film{
     )
     private List<Genre> genres;
 
-    @ManyToMany
-    @JoinTable(
-        name = "participate",
-        joinColumns = @JoinColumn(name = "filmId"),
-        inverseJoinColumns = @JoinColumn(name = "actorId")
-    )
-    private List<Actor> cast;
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private List<Participate> cast;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

@@ -1,12 +1,15 @@
 package software.ulpgc.netlikes.service;
 
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 import software.ulpgc.netlikes.model.Film;
 import software.ulpgc.netlikes.model.Genre;
+import software.ulpgc.netlikes.model.Participate;
 import software.ulpgc.netlikes.model.Platform;
 import software.ulpgc.netlikes.model.Video;
 import software.ulpgc.netlikes.model.Actor;
@@ -15,8 +18,7 @@ import software.ulpgc.netlikes.repository.FilmRepository;
 import software.ulpgc.netlikes.repository.GenreRepository;
 import software.ulpgc.netlikes.repository.PlatformRepository;
 import software.ulpgc.netlikes.repository.ActorRepository;
-import software.ulpgc.netlikes.repository.VideoRepository;
-
+import software.ulpgc.netlikes.dto.CastDTO;
 import software.ulpgc.netlikes.dto.FilmRequestDTO;
 import software.ulpgc.netlikes.dto.FilmResponseDTO;
 
@@ -42,6 +44,7 @@ public class FilmService {
         return toDTO(film);
     }
 
+    @Transactional
     public FilmResponseDTO saveFilm(FilmRequestDTO dto) {
 
         Film film = new Film();
@@ -78,14 +81,17 @@ public class FilmService {
         film.setPosterPath(dto.getPosterPath());
 
         List<Genre> genres = dto.getGenres().entrySet().stream()
-            .map(entry -> genreRepository.findById(entry.getKey())
-                .orElseGet(() -> {
-                    Genre newGenre = new Genre();
-                    newGenre.setId(entry.getKey());
-                    newGenre.setName(entry.getValue());
-                    return genreRepository.save(newGenre);
-                })
-            )
+            .map(entry -> {
+                Integer genreId = Integer.valueOf(entry.getKey().toString());
+                
+                return genreRepository.findById(genreId)
+                    .orElseGet(() -> {
+                        Genre newGenre = new Genre();
+                        newGenre.setId(genreId);
+                        newGenre.setName(entry.getValue());
+                        return genreRepository.save(newGenre);
+                    });
+            })
             .toList();
 
         film.setGenres(genres);
@@ -103,18 +109,24 @@ public class FilmService {
             .toList();
         film.setWatchProviders(platforms);
 
-        List<Actor> actors = dto.getCast().stream()
-            .map(entry -> actorRepository.findById(Integer.parseInt(entry.get("id")))
+        List<Participate> participations = dto.getCast().stream()
+            .map(entry -> {
+                Actor actor = actorRepository.findById(Integer.parseInt(entry.get("id")))
                 .orElseGet(() -> {
                     Actor newActor = new Actor();
                     newActor.setId(Integer.parseInt(entry.get("id")));
                     newActor.setName(entry.get("name"));
                     newActor.setProfilePath(entry.get("profilePath"));
                     return actorRepository.save(newActor);
-                })
-            )
+                });
+                Participate participation = new Participate();
+                participation.setActor(actor);
+                participation.setFilm(film);
+                participation.setCharacter(entry.get("character"));
+                return participation;
+            })
             .toList();
-        film.setCast(actors);
+        film.setCast(participations);
 
         List<Video> videos = dto.getVideos().stream()
             .map(entry -> {
@@ -142,8 +154,17 @@ public class FilmService {
         dto.setReleaseDate(film.getReleaseDate());
         
         dto.setGenres(film.getGenres().stream().map(Genre::getName).toList());
-        dto.setWatchProviders(film.getWatchProviders().stream().map(Platform::getName).toList());
-        dto.setActors(film.getCast().stream().map(Actor::getName).toList());
+        dto.setWatchProviders(film.getWatchProviders());
+        dto.setCast(film.getCast()
+        .stream()
+        .map(participate -> {
+            CastDTO cast = new CastDTO();
+            cast.setCharacter(participate.getCharacter());
+            cast.setName(participate.getActor().getName());
+            cast.setProfilePath(participate.getActor().getProfilePath());
+            return cast;
+        })
+        .toList());
         dto.setVideos(film.getVideos().stream().map(Video::getKey).toList());
 
         return dto;
