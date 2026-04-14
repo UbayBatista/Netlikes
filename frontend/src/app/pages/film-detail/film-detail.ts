@@ -1,0 +1,50 @@
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FilmService } from '../../services/film.service';
+import { FilmHeader } from '../../components/film-header/film-header';
+import { FilmCast } from '../../components/film-cast/film-cast';
+import { FilmTrailers } from '../../components/film-trailers/film-trailers';
+import { Film } from '../../models/film.models';
+
+@Component({
+  selector: 'app-film-detail',
+  standalone: true,
+  imports: [
+    FilmHeader, 
+    FilmCast, 
+    FilmTrailers
+  ],
+  templateUrl: './film-detail.html',
+  styleUrl: './film-detail.css'
+})
+export class FilmDetail implements OnInit {
+  
+  filmData: Film | null = null;
+
+  private route = inject(ActivatedRoute);
+  private filmService = inject(FilmService);
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+
+    console.log('ID de película obtenido de la URL:', idParam);
+
+    if (idParam) {
+      const filmId = Number(idParam);
+      
+      this.filmService.getFilmById(filmId).subscribe({
+        next: (realDataFromBackend) => {
+          this.filmData = realDataFromBackend;
+          this.cdr.detectChanges();
+          console.log('Datos de película obtenidos del backend:', this.filmData);
+          console.log('Géneros:', this.filmData.title);
+        },
+        error: (err) => {
+          console.error('El servidor Java no respondió o dio error. Usando película por defecto.', err);
+        }
+      });
+    }
+  }
+}
