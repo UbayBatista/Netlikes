@@ -2,6 +2,12 @@
   position: relative;
   border: none;
   background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.netflix-card:hover {
+  transform: scale(1.05);
 }
 
 .netflix-card img {
@@ -15,18 +21,14 @@
   position: absolute;
   top: 8px;
   right: 8px;
-
   background: rgba(0, 0, 0, 0.75);
   color: white;
-
   padding: 6px 10px;
   border-radius: 20px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
-
   font-family: inherit;
   z-index: 10;
 }
@@ -43,19 +45,16 @@
 }
 
 @media (max-width: 1024px) {
-  .netflix-card img {
-    height: 200px;
-  }
-
   .netflix-card {
     width: 140px;
   }
-
+  .netflix-card img {
+    height: 200px;
+  }
   .recommend-badge {
     padding: 4px 8px;
-    gap: 1px;
+    gap: 1px; 
   }
-
   .recommend-badge i {
     font-size: 16px;
   }
@@ -65,19 +64,15 @@
 }
 
 @media (max-width: 768px) {
-  .netflix-card img {
-    height: 160px;
-  }
-
   .netflix-card {
     width: 110px;
   }
-
+  .netflix-card img {
+    height: 160px;
+  }
   .recommend-badge {
     padding: 3px 6px;
-    gap: 1px;
   }
-
   .recommend-badge i {
     font-size: 14px;
   }
@@ -87,19 +82,15 @@
 }
 
 @media (max-width: 480px) {
-  .netflix-card img {
-    height: 130px;
-  }
-
   .netflix-card {
     width: 90px;
   }
-
+  .netflix-card img {
+    height: 130px;
+  }
   .recommend-badge {
     padding: 3px 5px;
-    gap: 1px;
   }
-
   .recommend-badge i {
     font-size: 12px;
   }
