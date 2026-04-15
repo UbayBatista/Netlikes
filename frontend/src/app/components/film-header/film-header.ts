@@ -12,6 +12,8 @@ import { Film } from '../../models/film.models';
 export class FilmHeader implements OnInit {
   @Input() film!: Film;
 
+  readonly imgBaseUrl = 'https://image.tmdb.org/t/p/w500';
+
   dominantColor = 'rgba(255, 255, 255, 0)'; 
   isWatched = false;
   isWatchLater = false;
@@ -21,7 +23,7 @@ export class FilmHeader implements OnInit {
 
   ngOnInit(): void {
     if (this.film?.posterPath) {
-      this.extractColorFromImage('https://image.tmdb.org/t/p/w500' + this.film.posterPath);
+      this.extractColorFromImage(this.imgBaseUrl + this.film.posterPath);
     }
   }
 

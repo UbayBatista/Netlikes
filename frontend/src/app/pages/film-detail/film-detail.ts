@@ -29,8 +29,6 @@ export class FilmDetail implements OnInit {
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
 
-    console.log('ID de película obtenido de la URL:', idParam);
-
     if (idParam) {
       const filmId = Number(idParam);
       
@@ -38,8 +36,6 @@ export class FilmDetail implements OnInit {
         next: (realDataFromBackend) => {
           this.filmData = realDataFromBackend;
           this.cdr.detectChanges();
-          console.log('Datos de película obtenidos del backend:', this.filmData);
-          console.log('Géneros:', this.filmData.title);
         },
         error: (err) => {
           console.error('El servidor Java no respondió o dio error. Usando película por defecto.', err);

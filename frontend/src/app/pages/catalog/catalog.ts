@@ -45,7 +45,6 @@ export class Catalog implements OnInit {
   
   get filteredGenres() {
     const text = this.searchText.toLowerCase();
-    console.log('Filtering genres with search text:', this.searchText);
     return this.genres
       .map(g => ({
         ...g,

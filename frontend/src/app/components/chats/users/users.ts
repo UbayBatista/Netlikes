@@ -40,7 +40,6 @@ export class Users{
         this.filteredUsers[index].active = true;
         
         this.clickedUser.emit({ user: this.filteredUsers[index].name });
-        console.log('Cambiando al chat de:', this.filteredUsers[index].name);
     }
 
 

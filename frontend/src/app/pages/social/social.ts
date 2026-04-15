@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SearchUser } from "../../components/searchUser/searchUser";
+import { SearchUser } from "../../components/search-user/search-user";
 import { Chats } from "../../components/chats/chats";
 
 @Component({

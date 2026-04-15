@@ -1,10 +1,10 @@
 export interface Film {
   id: number;
   title: string;
-  overview: string;
+  overView: string;
   adult: boolean;
   ageRating: string;
-  tagline: string;
+  tagLine: string;
   runtime: number;
   releaseDate: string;
   posterPath: string;
@@ -30,7 +30,7 @@ export interface CastMember {
 export interface Provider {
   id: number;
   name: string;
-  logoPath: string;
+  logo: string;
 }
 
 export interface GenreGroup {

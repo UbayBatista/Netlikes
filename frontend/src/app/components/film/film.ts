@@ -9,13 +9,14 @@ import { RouterLink } from '@angular/router';
   styleUrl: './film.css',
 })
 export class Film implements OnInit{
-  @Input() image!: string;
+  @Input() posterPath!: string;
   @Input() title!: string;
   @Input() year!: number;
   @Input() id!: number;
   @Input() recommendations!: number;
 
+  readonly imgBaseUrl = 'https://media.themoviedb.org/t/p/w300_and_h450_face';
+
   ngOnInit(): void {
-    console.log('Film component initialized with id:', this.id);
   }
 }
