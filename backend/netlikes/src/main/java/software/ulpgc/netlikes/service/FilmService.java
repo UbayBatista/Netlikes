@@ -152,6 +152,9 @@ public class FilmService {
         dto.setPosterPath(film.getPosterPath());
         dto.setOverView(film.getOverView());
         dto.setReleaseDate(film.getReleaseDate());
+        dto.setRuntime(film.getRuntime().toString());
+        dto.setAgeRating(film.getAgeRating());
+        dto.setTagLine(film.getTagLine());
         
         dto.setGenres(film.getGenres().stream().map(Genre::getName).toList());
         dto.setWatchProviders(film.getWatchProviders());

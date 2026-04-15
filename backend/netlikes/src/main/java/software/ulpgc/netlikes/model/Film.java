@@ -33,7 +33,7 @@ public class Film{
     @Column(columnDefinition = "INTEGER")
     private Integer runtime;
 
-    @Column(nullable = false)
+    @Column()
     private Date releaseDate;
 
     @Column(nullable = false, columnDefinition = "TEXT")

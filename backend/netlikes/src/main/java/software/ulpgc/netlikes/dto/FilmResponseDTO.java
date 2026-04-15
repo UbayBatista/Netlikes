@@ -12,6 +12,7 @@ public class FilmResponseDTO {
     private Integer id;
     private String title;
     private String posterPath;
+    private String tagLine;
     private String overView;
     private String runtime;
     private String ageRating;
