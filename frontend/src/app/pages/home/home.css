@@ -32,3 +32,8 @@
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 16px;
 }
+
+.fila-peliculas2 .netflix-card:hover {
+  transform: scale(1.08);
+  transition: transform 0.2s ease ;
+}

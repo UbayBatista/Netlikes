@@ -25,7 +25,7 @@ export class Home implements OnInit {
   loadFilms() {
     this.filmService.getFilms().subscribe({
       next: (data) => {
-        this.users_films = data;
+        this.users_films = data.slice(0,10);
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -34,7 +34,7 @@ export class Home implements OnInit {
     });
     this.filmService.getFilmsByGenre().subscribe({
       next: (data) => {
-        this.forYouFilms = data;
+        this.forYouFilms = data.slice(9,30);
         this.cdr.detectChanges();
       },
       error: (error) => {
