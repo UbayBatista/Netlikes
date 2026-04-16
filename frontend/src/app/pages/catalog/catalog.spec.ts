@@ -3,6 +3,7 @@ import { Catalog } from './catalog';
 import { FilmService } from '../../services/film.service';
 import { of } from 'rxjs';
 import { vi } from 'vitest'; // <--- Importamos Vitest
+import { provideRouter } from '@angular/router';
 
 describe('Catalog', () => {
   let component: Catalog;
@@ -24,7 +25,8 @@ describe('Catalog', () => {
     await TestBed.configureTestingModule({
       imports: [Catalog],
       providers: [
-        { provide: FilmService, useValue: filmServiceMock }
+        { provide: FilmService, useValue: filmServiceMock }, 
+        provideRouter([])
       ]
     }).compileComponents();
 
