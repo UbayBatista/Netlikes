@@ -27,6 +27,7 @@ public class ActorService {
         return actorRepository.findById(id)
                 .map(actor -> {
                     actor.setName(updatedActor.getName());
+                    actor.setProfilePath(updatedActor.getProfilePath());
                     return actorRepository.save(actor);
                 })
                 .orElse(null);

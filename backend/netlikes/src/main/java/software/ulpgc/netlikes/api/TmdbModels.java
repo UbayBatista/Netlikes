@@ -72,25 +72,25 @@ public class TmdbModels {
     // MODELOS PARA RESPUESTAS INDIVIDUALES
     
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record MovieCreditsResponse(
+    public record FilmCreditsResponse(
         @JsonProperty("id") int id,
         @JsonProperty("cast") List<CastMember> cast
     ) {}
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record MovieVideosResponse(
+    public record FilmVideosResponse(
         int id,
         List<Video> results
     ) {
         @JsonCreator
-        public static MovieVideosResponse fromJson(
+        public static FilmVideosResponse fromJson(
             @JsonProperty("id") int id,
             @JsonProperty("results") List<Video> results
         ) {
             List<Video> youtubeVideos = results != null 
                 ? results.stream().filter(v -> "YouTube".equalsIgnoreCase(v.site())).toList() 
                 : Collections.emptyList();
-            return new MovieVideosResponse(id, youtubeVideos);
+            return new FilmVideosResponse(id, youtubeVideos);
         }
     }
 
@@ -112,10 +112,10 @@ public class TmdbModels {
         @JsonProperty("buy") List<Provider> buy
     ) {}
 
-    // EL OBJETO MOVIE PLANO FINAL
+    // EL OBJETO FILM PLANO FINAL
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record Movie(
+    public record Film(
         int id,
         String title,
         String overview,
@@ -132,7 +132,7 @@ public class TmdbModels {
     ) {
 
         @JsonCreator
-        public static Movie fromJson(
+        public static Film fromJson(
             @JsonProperty("id") int id,
             @JsonProperty("title") String title,
             @JsonProperty("overview") String overview,
@@ -184,7 +184,7 @@ public class TmdbModels {
                     .orElse("NR");
             }
 
-            return new Movie(
+            return new Film(
                 id, title, overview, adult, extractedAgeRating, tagline, runtime,
                 releaseDate, posterPath,
                 genres != null ? genres : Collections.emptyList(), 

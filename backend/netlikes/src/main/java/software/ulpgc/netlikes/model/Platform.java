@@ -17,4 +17,7 @@ public class Platform {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String logo;
 }

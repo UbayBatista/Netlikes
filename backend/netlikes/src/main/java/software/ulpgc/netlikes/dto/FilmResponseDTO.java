@@ -1,6 +1,8 @@
 package software.ulpgc.netlikes.dto;
 
 import lombok.Data;
+import software.ulpgc.netlikes.model.Platform;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -8,15 +10,18 @@ import java.util.List;
 public class FilmResponseDTO {
 
     private Integer id;
-    private boolean adult;
     private String title;
-    private String filmUrl;
-    private String summary;
+    private String posterPath;
+    private String tagLine;
+    private String overView;
+    private String runtime;
+    private String ageRating;
+    private boolean adult;
     private Date releaseDate;
-    private String trailer;
-
+    
     private List<String> genres;
-    private List<String> platforms;
-    private List<String> actors;
+    private List<CastDTO> cast;
+    private List<String> videos;
+    private List<Platform> watchProviders;
 }
 

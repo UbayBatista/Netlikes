@@ -29,7 +29,7 @@ public class TmdbApiClient {
         this.objectMapper = new ObjectMapper();
     }
 
-    public List<TmdbModels.Genre> getAllMovieGenres() {
+    public List<TmdbModels.Genre> getAllFilmGenres() {
         String endpoint = "/genre/movie/list?language=es-ES";
         TmdbModels.GenreListResponse response = makeRequest(endpoint, TmdbModels.GenreListResponse.class);
         
@@ -38,15 +38,15 @@ public class TmdbApiClient {
                : Collections.emptyList();
     }
 
-    public List<Integer> getPopularMovieIds(int quantity) {
+    public List<Integer> getPopularFilmIds(int quantity) {
         if (quantity <= 0) {
             return new ArrayList<>();
         }
 
-        List<Integer> movieIds = new ArrayList<>();
+        List<Integer> filmIds = new ArrayList<>();
         int currentPage = 1;
 
-        while (movieIds.size() < quantity && currentPage <= MAX_TMDB_PAGES) {
+        while (filmIds.size() < quantity && currentPage <= MAX_TMDB_PAGES) {
             String endpoint = String.format("/discover/movie?language=es-ES&sort_by=popularity.desc&page=%d", currentPage);
             TmdbModels.DiscoverResponse response = makeRequest(endpoint, TmdbModels.DiscoverResponse.class);
 
@@ -55,33 +55,33 @@ public class TmdbApiClient {
             }
 
             for (TmdbModels.DiscoverResult result : response.results()) {
-                movieIds.add(result.id());
-                
-                if (movieIds.size() == quantity) {
-                    return movieIds;
+                filmIds.add(result.id());
+            
+                if (filmIds.size() == quantity) {
+                    return filmIds;
                 }
             }
             currentPage++;
         }
 
-        return movieIds;
+        return filmIds;
     }
 
-    public TmdbModels.Movie getCompleteMovie(int movieId) {
-        String endpoint = "/movie/" + movieId + "?append_to_response=credits,videos,watch/providers,release_dates&language=es-ES";
-        return makeRequest(endpoint, TmdbModels.Movie.class);
+    public TmdbModels.Film getCompleteFilm(int filmId) {
+        String endpoint = "/movie/" + filmId + "?append_to_response=credits,videos,watch/providers,release_dates&language=es-ES";
+        return makeRequest(endpoint, TmdbModels.Film.class);
     }
 
-    public TmdbModels.Movie getMovieDetails(int movieId) {
-        return makeRequest("/movie/" + movieId + "?language=es-ES", TmdbModels.Movie.class);
+    public TmdbModels.Film getFilmDetails(int filmId) {
+        return makeRequest("/movie/" + filmId + "?language=es-ES", TmdbModels.Film.class);
     }
 
-    public TmdbModels.MovieCreditsResponse getMovieCredits(int movieId) {
-        return makeRequest("/movie/" + movieId + "/credits?language=es-ES", TmdbModels.MovieCreditsResponse.class);
+    public TmdbModels.FilmCreditsResponse getFilmCredits(int filmId) {
+        return makeRequest("/movie/" + filmId + "/credits?language=es-ES", TmdbModels.FilmCreditsResponse.class);
     }
 
-    public TmdbModels.MovieVideosResponse getMovieVideos(int movieId) {
-        return makeRequest("/movie/" + movieId + "/videos?language=es-ES", TmdbModels.MovieVideosResponse.class);
+    public TmdbModels.FilmVideosResponse getFilmVideos(int filmId) {
+        return makeRequest("/movie/" + filmId + "/videos?language=es-ES", TmdbModels.FilmVideosResponse.class);
     }
 
     private <T> T makeRequest(String endpoint, Class<T> responseType) {
@@ -112,7 +112,6 @@ public class TmdbApiClient {
                     
                     Thread.sleep(waitTimeMillis);
                 } 
-                // -------------------------------
                 else if (response.statusCode() == 404) {
                     throw new TmdbApiException("Recurso no encontrado en TMDB (404) para: " + endpoint);
                 } else {
@@ -122,7 +121,6 @@ public class TmdbApiClient {
                 Thread.currentThread().interrupt();
                 throw new TmdbApiException("La petición a TMDB fue interrumpida durante la espera de reintento.", e);
             } catch (Exception e) {
-                // Si la excepción ya es nuestra (TmdbApiException), la lanzamos tal cual para no envolverla dos veces
                 if (e instanceof TmdbApiException) {
                     throw (TmdbApiException) e;
                 }

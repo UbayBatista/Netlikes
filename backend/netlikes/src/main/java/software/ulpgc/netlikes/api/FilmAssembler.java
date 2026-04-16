@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import software.ulpgc.netlikes.dto.FilmRequestDTO;
-import software.ulpgc.netlikes.api.TmdbModels.Movie;
+import software.ulpgc.netlikes.api.TmdbModels.Film;
 import software.ulpgc.netlikes.api.TmdbModels.Video;
 import software.ulpgc.netlikes.api.TmdbModels.Genre;
 import software.ulpgc.netlikes.api.TmdbModels.Provider;
@@ -26,7 +26,7 @@ public class FilmAssembler {
 
     public FilmRequestDTO toFilmRequestDTO(int filmId) throws RuntimeException {
         try {
-            Movie filmDetail = apiClient.getCompleteMovie(filmId);
+            Film filmDetail = apiClient.getCompleteFilm(filmId);
             return buildDTO(filmDetail);
         } catch (Exception e) {
             log.error("Error al obtener detalles de la película con ID {}: {}", filmId, e.getMessage());
@@ -34,18 +34,21 @@ public class FilmAssembler {
         }  
     }
 
-    private FilmRequestDTO buildDTO(Movie filmDetail) {
+    private FilmRequestDTO buildDTO(Film filmDetail) {
         FilmRequestDTO dto = new FilmRequestDTO();
         dto.setId(Integer.valueOf(filmDetail.id()));
-        dto.setAdult(filmDetail.adult());
         dto.setTitle(filmDetail.title());
-        dto.setFilmUrl("https://image.tmdb.org/t/p/original" + filmDetail.posterPath());
-        dto.setSummary(filmDetail.overview());
+        dto.setOverView(filmDetail.overview());
+        dto.setAdult(filmDetail.adult());
+        dto.setAgeRating(filmDetail.ageRating());
+        dto.setTagline(filmDetail.tagline());
+        dto.setRuntime(filmDetail.runtime());
         dto.setReleaseDate(parseDate(filmDetail.releaseDate()));
-        dto.setTrailer(getTrailerUrl(filmDetail.videos()));
+        dto.setPosterPath(filmDetail.posterPath());
+        dto.setVideos(extractVideos(filmDetail.videos()));
         dto.setGenres(extractGenres(filmDetail.genres()));
-        dto.setPlatforms(extractProviders(filmDetail.watchProviders()));
-        dto.setActors(extractActors(filmDetail.cast()));
+        dto.setWatchProviders(extractWatchProviders(filmDetail.watchProviders()));
+        dto.setCast(extractActors(filmDetail.cast()));
         return dto;
     }
 
@@ -58,26 +61,46 @@ public class FilmAssembler {
         }
     }
 
-    private String getTrailerUrl(List<Video> videos) {
-        return videos.stream()
-            .filter(video -> "Trailer".equalsIgnoreCase(video.type()) && "YouTube".equalsIgnoreCase(video.site()))
-            .findFirst()
-            .map(video -> "https://www.youtube.com/watch?v=" + video.key())
-            .orElse(null);
-    }
-
     private Map<Integer, String> extractGenres(List<Genre> genres) {
         return genres.stream()
             .collect(Collectors.toMap(Genre::id, Genre::name));
     }
 
-    private Map<Integer, String> extractProviders(List<Provider> providers) {
-        return providers.stream()
-            .collect(Collectors.toMap(Provider::providerId, Provider::providerName));
+    private List<Map<String, String>> extractVideos(List<Video> videos) {
+        return videos.stream()
+            .filter(video -> video.site().toLowerCase().equals("youtube"))
+            .map(video -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", video.id());
+                map.put("key", video.key());
+                map.put("type", video.type());
+                return map;
+            })
+            .toList();
     }
 
-    private Map<Integer, String> extractActors(List<CastMember> cast) {
+    private List<Map<String, String>> extractWatchProviders(List<Provider> watchProviders) {
+        return watchProviders.stream()
+            .map(provider -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", String.valueOf(provider.providerId()));
+                map.put("name", provider.providerName());
+                map.put("logoPath", provider.logoPath());
+                return map;
+            })
+            .toList();
+    }
+
+    private List<Map<String, String>> extractActors(List<CastMember> cast) {
         return cast.stream()
-            .collect(Collectors.toMap(CastMember::id, CastMember::name));
+            .map(actor -> {
+                Map<String, String> map = new java.util.HashMap<>();
+                map.put("id", String.valueOf(actor.id()));
+                map.put("name", actor.name());
+                map.put("profilePath", actor.profilePath());
+                map.put("character", actor.character());
+                return map;
+            })
+            .toList();
     }
 }

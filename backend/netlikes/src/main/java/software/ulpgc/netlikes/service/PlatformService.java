@@ -27,6 +27,7 @@ public class PlatformService {
         return platformRepository.findById(id)
                 .map(platform -> {
                     platform.setName(updatedPlatform.getName());
+                    platform.setLogo(updatedPlatform.getLogo());
                     return platformRepository.save(platform);
                 })
                 .orElse(null);
