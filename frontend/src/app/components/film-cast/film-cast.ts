@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { CastMember } from '../../models/movie.models';
+import { CastMember } from '../../models/film.models';
 
 @Component({
-  selector: 'app-movie-cast',
+  selector: 'app-film-cast',
   standalone: true,
   imports: [], 
-  templateUrl: './movie-cast.html',
-  styleUrl: './movie-cast.css',
+  templateUrl: './film-cast.html',
+  styleUrl: './film-cast.css',
 })
-export class MovieCast {
+export class FilmCast {
   @Input() cast: CastMember[] = [];
   readonly imgBaseUrl = 'https://media.themoviedb.org/t/p/w300_and_h450_face';
 }

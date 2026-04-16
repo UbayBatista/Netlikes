@@ -1,0 +1,11 @@
+@if (filmData) {
+  <div class="container my-5">
+    
+    <app-film-header [film]="filmData"></app-film-header>
+    
+    <app-film-cast [cast]="filmData.cast"></app-film-cast>
+    
+    <app-film-trailers [videos]="filmData.videos"></app-film-trailers>
+
+  </div>
+}

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileBody } from './profileComponents';
+import { FilmHeader } from './film-header';
 
-describe('Profileheader', () => {
-  let component: ProfileBody;
-  let fixture: ComponentFixture<ProfileBody>;
+describe('FilmHeader', () => {
+  let component: FilmHeader;
+  let fixture: ComponentFixture<FilmHeader>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileBody],
+      imports: [FilmHeader],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ProfileBody);
+    fixture = TestBed.createComponent(FilmHeader);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

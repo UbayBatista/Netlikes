@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef,ViewChild, ElementRef } from "@angular/core";
-import {ProfileBody} from "../../components/profileComponents/profileComponents";
-import { ProfileHeader } from "../../components/profileHeader/profileHeader";
+import {ProfileBody} from "../../components/profile-components/profile-components";
+import { ProfileHeader } from "../../components/profile-header/profile-header";
 import { ActivatedRoute } from '@angular/router'; 
 import { Film } from "../../components/film/film";
 import { SocialModal } from "../../components/social-modal/social-modal";
@@ -9,7 +9,7 @@ import { SocialModal } from "../../components/social-modal/social-modal";
     selector:"app-profile-complete",
     standalone: true,
     imports: [ProfileBody, ProfileHeader, Film, SocialModal],
-    templateUrl: "./profileBody.html",
+    templateUrl: "./profile-body.html",
     styleUrl: "./profile-body.css"
 })
 export class ProfileComplete implements OnInit{

@@ -1,17 +1,12 @@
-export interface GenreGroup {
-  name: string;
-  films: {
-    title: string;
-    image: string;
-  }[];
-}
+
 
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Genre } from "../../components/genre/genre";
 import { FormsModule } from '@angular/forms';
 import { SearchBarComponent } from '../../components/search-bar/search-bar';
-import { Filmdto, FilmService } from '../../services/film.service';
+import { FilmService } from '../../services/film.service';
+import { GenreGroup } from '../../models/film.models';
 
 
 @Component({
@@ -50,7 +45,6 @@ export class Catalog implements OnInit {
   
   get filteredGenres() {
     const text = this.searchText.toLowerCase();
-    console.log('Filtering genres with search text:', this.searchText);
     return this.genres
       .map(g => ({
         ...g,

@@ -9,7 +9,7 @@
     class="nav-tab flex-fill py-3"
     [class.active]="tabActive === 'usuarios'"
     (click)="switchTab('usuarios')">
-    Usuarios
+    De usuarios
   </button>
 </div>
 
@@ -28,7 +28,9 @@
         <h5 class="text-black mb-3">Recomendaciones de otros usuarios</h5>
         <div class="fila-peliculas2">
             @for (f of users_films; track f.id) {
-                <app-film [image]="f.filmUrl" [title]="f.title" [recommendations]="12"  [year]="2023"></app-film>
+                <div class="netflix-card">
+                  <app-film [posterPath]="f.posterPath" [title]="f.title" [id]="f.id" [recommendations]="12"></app-film>
+                </div>
             }
         </div>
     </div>

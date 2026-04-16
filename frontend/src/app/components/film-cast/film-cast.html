@@ -3,9 +3,9 @@
     <h3 class="fw-bold mb-3">Reparto principal</h3>
     
     <div class="horizontal-scroll gap-3 pb-2">
-      @for (actor of cast; track actor.id) {
+      @for (actor of cast; track $index) {
         <div class="card actor-card border-0 shadow-sm flex-shrink-0">
-          <img [src]="imgBaseUrl + actor.profile_path" 
+          <img [src]="imgBaseUrl + actor.profilePath" 
                [alt]="actor.name" 
                class="card-img-top actor-photo">
           

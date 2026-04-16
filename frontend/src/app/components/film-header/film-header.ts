@@ -1,16 +1,18 @@
 import { Component, Input, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Movie } from '../../models/movie.models';
+import { Film } from '../../models/film.models';
 
 @Component({
-  selector: 'app-movie-header',
+  selector: 'app-film-header',
   standalone: true,
   imports: [DatePipe], 
-  templateUrl: './movie-header.html',
-  styleUrl: './movie-header.css',
+  templateUrl: './film-header.html',
+  styleUrl: './film-header.css',
 })
-export class MovieHeader implements OnInit {
-  @Input() movie!: Movie;
+export class FilmHeader implements OnInit {
+  @Input() film!: Film;
+
+  readonly imgBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   dominantColor = 'rgba(255, 255, 255, 0)'; 
   isWatched = false;
@@ -20,14 +22,13 @@ export class MovieHeader implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    if (this.movie?.posterPath) {
-      this.extractColorFromImage('https://image.tmdb.org/t/p/w500' + this.movie.posterPath);
+    if (this.film?.posterPath) {
+      this.extractColorFromImage(this.imgBaseUrl + this.film.posterPath);
     }
   }
 
   formatGenres(): string {
-    const names = this.movie.genres.map(g => g.name);
-    return names.length ? names.join(', ').replace(/, ([^,]*)$/, ' y $1') : '';
+    return this.film.genres.length ? this.film.genres.join(', ').replace(/, ([^,]*)$/, ' y $1') : '';
   }
 
   formatRuntime(minutes: number): string {
@@ -51,12 +52,12 @@ export class MovieHeader implements OnInit {
     }
   }
 
-  rateMovie(rating: string) { 
+  rateFilm(rating: string) { 
     if (!this.isWatched) return; 
     this.currentRating = this.currentRating === rating ? null : rating;
   }
 
-  shareMovie() { console.log('Compartir película:', this.movie.title); }
+  shareFilm() { console.log('Compartir película:', this.film.title); }
 
   extractColorFromImage(imageUrl: string) {
     const img = new Image();

@@ -6,8 +6,8 @@ import { SearchBarComponent } from "../search-bar/search-bar";
     selector: "app-social-search-user",
     standalone: true,
     imports: [ SearchBarComponent ],
-    templateUrl: "./searchUser.html",
-    styleUrl: "./searchUser.css"
+    templateUrl: "./search-user.html",
+    styleUrl: "./search-user.css"
 })
 export class SearchUser{
     @Input() usuario: string = "Messi";

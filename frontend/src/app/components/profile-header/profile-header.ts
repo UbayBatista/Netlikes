@@ -5,8 +5,8 @@ import { Router } from "@angular/router";
     selector: "app-profile-header",
     standalone: true,
     imports:[],
-    templateUrl: "./profileHeader.html",
-    styleUrl: "./profileHeader.css"
+    templateUrl: "./profile-header.html",
+    styleUrl: "./profile-header.css"
 })
 export class ProfileHeader{
     @Input() userName: string = "Cristiano";

@@ -3,9 +3,9 @@ import { Welcome } from './pages/welcome/welcome';
 import { Home } from './pages/home/home';
 import { Catalog } from './pages/catalog/catalog';
 import { Forum } from './pages/forum/forum';
-import { ProfileComplete } from './pages/profile/profileBody';
+import { ProfileComplete } from './pages/profile/profile-body';
 import { Social } from './pages/social/social';
-import { MovieDetail } from './pages/movie-detail/movie-detail';
+import { FilmDetail } from './pages/film-detail/film-detail';
 
 export const routes: Routes = [
   { path: 'login', component: Welcome },
@@ -15,5 +15,5 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'profile/:username', component: ProfileComplete },
   { path: 'social', component: Social },
-  { path: 'movie-details', component: MovieDetail },
+  { path: 'film-details/:id', component: FilmDetail },
 ];

@@ -1,5 +1,5 @@
-<div class="netflix-card">
-  <img [src]="image" [alt]="title">
+<div class="netflix-card" [routerLink]="['/film-details', id]">
+  <img [src]="imgBaseUrl + posterPath" [alt]="title">
 
   @if(recommendations > 0) {
     <div class="recommend-badge">

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef,ChangeDetectorRef, Input } from '@angular/core';
 import { Film } from '../film/film';
 import { CommonModule } from '@angular/common';
+import { GenreGroup } from '../../models/film.models';
 
 @Component({
   selector: 'app-genre',
@@ -11,12 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Genre {
 
-  @Input() genre!: {
-    name: string;
-    films: any[];
-    canScrollLeft?: boolean;
-    canScrollRight?: boolean;
-  };
+  @Input() genre!: GenreGroup;
 
   @Input() index!: number;
 
@@ -52,8 +48,8 @@ export class Genre {
   updateScrollButtons() {
     const el = this.scrollContainer.nativeElement;
 
-    this.genre.canScrollLeft = el.scrollLeft > 0;
-    this.genre.canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth;
+    this.canScrollLeft = el.scrollLeft > 0;
+    this.canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth;
 
     this.cdr.detectChanges();
   }
