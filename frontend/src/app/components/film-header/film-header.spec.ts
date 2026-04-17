@@ -65,4 +65,16 @@ describe('FilmHeader', () => {
     
     expect(hasProviders).toBeFalsy();
   });
+
+  it('NO debería mostrar el encabezado de "Descripción" si film.overView está vacío', () => {
+    component.film = { ...mockFilm, overView: '' } as any;
+    
+    fixture.detectChanges(); 
+    
+    const compiled = fixture.nativeElement;
+    const headers = Array.from(compiled.querySelectorAll('h5'));
+    const hasDescriptionHeader = headers.some((h: any) => h.textContent.includes('Descripción'));
+    
+    expect(hasDescriptionHeader).toBeFalsy();
+  });
 });
