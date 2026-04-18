@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Catalog } from './catalog';
 import { FilmService } from '../../services/film.service';
 import { of } from 'rxjs';
-import { vi } from 'vitest'; // <--- Importamos Vitest
+import { vi } from 'vitest'; 
 import { provideRouter } from '@angular/router';
 
 describe('Catalog', () => {
@@ -67,4 +67,16 @@ describe('Catalog', () => {
     expect(results.length).toBe(1);
     expect(results[0].films[0].title).toContain('más');
   });
+
+
+  it('Dado un usuario, cuando accede a la página de "Catálogo", entonces se le cargan las películas', () => {
+
+    expect(filmServiceMock.getFilmsByGenre).toHaveBeenCalled();
+
+    expect(component.filteredGenres).toBeDefined();
+    expect(component.filteredGenres.length).toBe(4);
+    expect(component.filteredGenres[0].name).toBe('Acción');
+    expect(component.filteredGenres[0].films[0].title).toBe('Matrix');
+  });
+
 });
