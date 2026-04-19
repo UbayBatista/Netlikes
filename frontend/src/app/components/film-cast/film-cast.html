@@ -5,14 +5,26 @@
     <div class="horizontal-scroll gap-3 pb-2">
       @for (actor of cast; track $index) {
         <div class="card actor-card border-0 shadow-sm flex-shrink-0">
-          <img [src]="imgBaseUrl + actor.profilePath" 
-               [alt]="actor.name" 
-               class="card-img-top actor-photo">
+          
+          @if (actor.profilePath) {
+            <img [src]="imgBaseUrl + actor.profilePath" 
+                 [alt]="actor.name" 
+                 class="card-img-top actor-photo">
+          } @else {
+            <div class="card-img-top actor-photo d-flex flex-column align-items-center justify-content-center" 
+                 style="background-color: #f8f9fa;"
+                 [attr.aria-label]="'Foto de ' + actor.name + ' no disponible'">
+              <i class="bi bi-person text-secondary opacity-50" style="font-size: 4rem;"></i>
+            </div>
+          }
           
           <div class="card-body p-2">
             <p class="card-text text-black mb-0">
               <strong>{{ actor.name }}</strong><br>
-              <span class="character-name">{{ actor.character }}</span>
+              
+              @if (actor.character) {
+                <span class="character-name">{{ actor.character }}</span>
+              }
             </p>
           </div>
         </div>
