@@ -10,7 +10,7 @@ Durante el desarrollo de este se asentaron las bases sobre las que tendrá lugar
 
 Como podrá observar, nuestro poyecto posee un fichero llamado docker-compose, en el se encuentra lo necesario para construir el contenedor y que el servicio comience a funcionar de forma local.
 
-En primer lugar, deberá añadir a dicho fichero la clave que se encuentra en el fichero "Clave de la API", en el directorio NetLikes, de la entrega realizada en el campus digital, ya que al tratarse de una clave asociada a nuestra imagen no queremos que caiga en las manos equivocadas. En concreto, deberá añadirla en el apartado enviroment de backend. Una vez realizados estos cambios, y despuér de haberlos guardado, deberá ejecutar el siguiente comando, asegurándose de que se encuentra en la carpeta raíz del proyecto:
+En primer lugar, deberá añadir a dicho fichero la clave que se encuentra en el fichero "Clave de la API", en el directorio NetLikes, de la entrega realizada en el campus virtual, ya que al tratarse de una clave asociada a nuestra imagen no queremos que caiga en las manos equivocadas. En concreto, deberá añadirla en el apartado enviroment de backend. Una vez realizados estos cambios, y después de haberlos guardado, deberá ejecutar el siguiente comando, asegurándose de que se encuentra en la carpeta raíz del proyecto:
 
 ```
 docker-compose up --build
