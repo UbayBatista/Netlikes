@@ -28,14 +28,18 @@ export class FilmHeader implements OnInit {
   }
 
   formatGenres(): string {
-    return this.film.genres.length ? this.film.genres.join(', ').replace(/, ([^,]*)$/, ' y $1') : '';
+    return this.film?.genres?.length 
+      ? this.film.genres.join(', ').replace(/, ([^,]*)$/, ' y $1') 
+      : '';
   }
 
-  formatRuntime(minutes: number): string {
-    if (!minutes) return '';
+  formatRuntime(minutes: number | undefined): string {
+    if (!minutes || minutes <= 0) return '';
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}h ${mins}min`;
+    
+    if (hours === 0) return `${mins}min`;
+    return mins === 0 ? `${hours}h` : `${hours}h ${mins}min`;
   }
 
   toggleWatched() { 

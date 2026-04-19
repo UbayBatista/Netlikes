@@ -4,9 +4,19 @@
   
   <div class="row align-items-center">
     <div class="col-md-3 text-center mb-4 mb-md-0">
-      <img [src]="imgBaseUrl + film.posterPath" 
-           alt="Portada de {{ film.title }}" 
-           class="img-fluid poster-shadow mb-3 rounded poster-img">
+      
+      @if (film.posterPath) {
+        <img [src]="imgBaseUrl + film.posterPath" 
+             alt="Portada de {{ film.title }}" 
+             class="img-fluid poster-shadow mb-3 rounded poster-img">
+      } @else {
+        <div class="img-fluid poster-shadow mb-3 rounded poster-img d-flex flex-column align-items-center justify-content-center px-3" 
+             style="aspect-ratio: 2/3; background-color: rgba(255, 255, 255, 0.05);"
+             [attr.aria-label]="'Portada de ' + film.title + ' no disponible'">
+          <i class="bi bi-image text-light opacity-25 mb-2" style="font-size: 3rem;"></i>
+          <span class="small text-light opacity-50 text-center">Carátula no disponible</span>
+        </div>
+      }
       
       <div class="d-flex justify-content-center gap-4 mb-2">
         <i class="bi fs-3 btn-icon" [class.bi-eye]="!isWatched" [class.bi-eye-fill]="isWatched" [class.active]="isWatched" (click)="toggleWatched()"></i>
@@ -22,22 +32,44 @@
     </div>
 
     <div class="col-md-9 details-content text-center text-md-start">
-      <h1 class="fw-bold">{{ film.title }} <span class="fw-light opacity-75 fs-4">({{ film.releaseDate | date:'yyyy' }})</span></h1>
+      <h1 class="fw-bold">
+        {{ film.title }} 
+        @if (film.releaseDate) {
+          <span class="fw-light opacity-75 fs-4">({{ film.releaseDate | date:'yyyy' }})</span>
+        }
+      </h1>
       
-      <p class="opacity-75 small d-flex align-items-center justify-content-center justify-content-md-start gap-2 flex-wrap">
-        <span class="border border-light rounded px-2 py-1 fw-bold">{{ film.ageRating }}</span>
-        <span>• {{ film.releaseDate | date:'dd/MM/yyyy' }} (ES) • {{ formatGenres() }} • {{ formatRuntime(film.runtime) }}</span>
-      </p>
+      <div class="opacity-75 small d-flex align-items-center justify-content-center justify-content-md-start gap-2 flex-wrap mb-3">
+        @if (film.ageRating) {
+          <span class="border border-light rounded px-2 py-1 fw-bold">{{ film.ageRating }}</span>
+        }
+        
+        @if (film.releaseDate) {
+          <span>{{ film.releaseDate | date:'dd/MM/yyyy' }} (ES)</span>
+        }
+        
+        @if (film.genres?.length) {
+          @if (film.releaseDate) { <span>•</span> }
+          <span>{{ formatGenres() }}</span>
+        }
+        
+        @if (film.runtime) {
+          @if (film.releaseDate || film.genres?.length) { <span>•</span> }
+          <span>{{ formatRuntime(film.runtime) }}</span>
+        }
+      </div>
 
       @if (film.tagLine) {
         <h5 class="fw-bold mt-4">Eslogan</h5>
         <p class="fst-italic">{{ film.tagLine }}</p>
       }
 
-      <h5 class="fw-bold mt-3">Descripción</h5>
-      <p>{{ film.overView }}</p>
+      @if (film.overView) {
+        <h5 class="fw-bold mt-3">Descripción</h5>
+        <p>{{ film.overView }}</p>
+      }
 
-      @if (film.watchProviders.length) {
+      @if (film.watchProviders?.length) {
         <div class="mt-4">
           <h5 class="fw-bold">Dónde ver</h5>
           <div class="d-flex justify-content-center justify-content-md-start gap-3 flex-wrap mt-3">
