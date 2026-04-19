@@ -13,7 +13,12 @@ describe('Genre', () => {
 
     fixture = TestBed.createComponent(Genre);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    component.genre = { 
+      name: 'Acción', 
+      films: [] 
+    } as any;
+
+    fixture.detectChanges();
   });
 
   it('should create', () => {

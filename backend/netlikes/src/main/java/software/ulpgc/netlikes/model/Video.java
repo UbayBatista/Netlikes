@@ -12,7 +12,7 @@ public class Video {
     @Id
     private String id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "videokey", nullable = false, columnDefinition = "TEXT")
     private String key;
 
     @Column(nullable = false, columnDefinition = "TEXT")
