@@ -1,17 +1,20 @@
 <div class="step-form">
   <h2 class="subtitle">¿Qué te gusta ver?</h2>
+  
   <p class="instruction" [class.text-danger]="totalSelected < 3 && totalSelected > 0">
     Selecciona al menos 3 géneros (Llevas: {{ totalSelected }}/3)
   </p>
 
   <div class="genres-grid">
-    @for (genero of generos; track genero.name; let i = $index) {
+    @for (genero of generos(); track genero.id; let i = $index) {
       <div 
           class="genre-chip" 
           [class.selected]="genero.selected"
           (click)="toggleGenero(i)">
         {{ genero.name }}
       </div>
+    } @empty {
+      <p>Cargando géneros...</p>
     }
   </div>
 
@@ -19,6 +22,7 @@
     <button class="arrow-btn" (click)="toPrev.emit()">
       <i class="bi bi-arrow-left"></i>
     </button>
+    
     <button 
       class="btn-finish" 
       [disabled]="totalSelected < 3"
