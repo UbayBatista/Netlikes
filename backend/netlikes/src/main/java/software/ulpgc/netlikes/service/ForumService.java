@@ -2,9 +2,12 @@ package software.ulpgc.netlikes.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import software.ulpgc.netlikes.model.Forum;
 import software.ulpgc.netlikes.repository.ForumRepository;
 
+@Service
 public class ForumService {
     private final ForumRepository forumRepository;
 
