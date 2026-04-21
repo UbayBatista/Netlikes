@@ -10,10 +10,8 @@ import jakarta.transaction.Transactional;
 import software.ulpgc.netlikes.api.LoadService;
 import software.ulpgc.netlikes.api.TmdbApiClient;
 import software.ulpgc.netlikes.api.TmdbModels;
-import software.ulpgc.netlikes.dto.FilmRequestDTO;
 import software.ulpgc.netlikes.dto.FilmResponseDTO;
 import software.ulpgc.netlikes.model.Film;
-import software.ulpgc.netlikes.model.Video;
 import software.ulpgc.netlikes.repository.FilmRepository;
 import software.ulpgc.netlikes.service.FilmService;
 

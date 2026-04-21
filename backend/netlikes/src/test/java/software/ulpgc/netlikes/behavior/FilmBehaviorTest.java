@@ -27,7 +27,6 @@ public class FilmBehaviorTest {
 
     @Test
     void deletingFilmShouldRemoveItFromDatabase() {
-        int initialCount = (int) filmRepository.count();
         filmService.deleteFilm(101); 
         
         assertThat(filmRepository.existsById(101)).isFalse();
