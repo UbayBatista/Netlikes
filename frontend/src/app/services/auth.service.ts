@@ -1,48 +1,57 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Credentials, User, RegisterData } from '../models/user.models';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Credentials, User, RegisterData} from '../models/user.models';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
+
 export interface LoginResponse {
   user: User;
-  token: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser$ = new BehaviorSubject<User | null>(null);
-  readonly dbUrl = 'http://localhost:8080/users';
+  private readonly apiUrl = 'http://localhost:8080/users';
 
-  constructor(private http: HttpClient){}
-
-  login(credentials: Credentials): Observable<User>{
-    return this.http.post<User>(`${this.dbUrl}/login`, credentials);
-  }
-  
-  register(data: RegisterData): Observable<User>{
-    return this.http.post<User>('/api/auth/register', data);
+  constructor(private http: HttpClient) {
+    this.loadUserFromStorage();
   }
 
-  logout(): void{
-    localStorage.removeItem('token');
+  login(credentials: Credentials): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(user => this.saveUser(user))
+    );
+  }
+
+  register(data: RegisterData): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, data).pipe(
+      tap(user => this.saveUser(user))
+    );
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
     this.currentUser$.next(null);
   }
 
-  isAuthenticated(): boolean{
-    return !!this.getToken();
+  isAuthenticated(): boolean {
+    return this.currentUser$.value !== null;
   }
 
-  getToken(): string | null{
-    return localStorage.getItem('token');
-  }
-
-  setToken(token: string): void{
-    localStorage.setItem('token', token);
-  }
-
-  getCurrentUser(): Observable<User | null>{
+  getCurrentUser(): Observable<User | null> {
     return this.currentUser$.asObservable();
   }
 
+  private saveUser(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser$.next(user);
+  }
+
+  private loadUserFromStorage(): void {
+    const stored = localStorage.getItem('user');
+    if (stored) this.currentUser$.next(JSON.parse(stored));
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-email?email=${email}`);
+  }
 }
