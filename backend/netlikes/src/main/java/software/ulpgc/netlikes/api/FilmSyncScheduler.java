@@ -1,6 +1,7 @@
 package software.ulpgc.netlikes.api;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableScheduling
 @Slf4j
 @RequiredArgsConstructor
+@Profile("!test")
 public class FilmSyncScheduler {
 
     private final InitialFilmLoadService initialLoadService;
