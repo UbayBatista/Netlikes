@@ -4,6 +4,8 @@ import lombok.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity 
@@ -60,7 +62,7 @@ public class Film{
     private List<Genre> genres;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Participate> cast;
+    private Set<Participate> cast;
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
