@@ -93,6 +93,24 @@ public class UserService {
         return toDTO(saved);
     }
 
+    public boolean existsEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public String getSecurityQuestion(String email) {
+        User user = userRepository.findById(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return user.getSecurityQuestion();
+    }
+
+    public boolean isValidAnswer(String email, String answer) {
+        User user = userRepository.findById(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return user.getAnswer().equals(answer);
+    }
+
+
+
     private void applyDtoToEntity(UserRequestDTO dto, User user) {
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
