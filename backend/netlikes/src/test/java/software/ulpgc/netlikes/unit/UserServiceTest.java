@@ -138,4 +138,68 @@ class UserServiceTest {
 
         assertThrows(RuntimeException.class, () -> userService.login(request));
     }
+
+    @Test
+    void existsEmail_shouldReturnTrue_whenEmailExists() {
+        when(userRepository.existsByEmail("juan@email.com")).thenReturn(true);
+
+        boolean result = userService.existsEmail("juan@email.com");
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void existsEmail_shouldReturnFalse_whenEmailNotExists() {
+        when(userRepository.existsByEmail("noexiste@email.com")).thenReturn(false);
+
+        boolean result = userService.existsEmail("noexiste@email.com");
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void getSecurityQuestion_shouldReturnQuestion_whenUserExists() {
+        User user = new User();
+        user.setEmail("juan@email.com");
+        user.setSecurityQuestion("¿Nombre de tu mascota?");
+
+        when(userRepository.findById("juan@email.com")).thenReturn(Optional.of(user));
+
+        String result = userService.getSecurityQuestion("juan@email.com");
+
+        assertThat(result).isEqualTo("¿Nombre de tu mascota?");
+    }
+
+    @Test
+    void getSecurityQuestion_shouldThrowException_whenUserNotFound() {
+        when(userRepository.findById("noexiste@email.com")).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> userService.getSecurityQuestion("noexiste@email.com"));
+    }
+
+    @Test
+    void isValidAnswer_shouldReturnTrue_whenAnswerIsCorrect() {
+        User user = new User();
+        user.setEmail("juan@email.com");
+        user.setAnswer("Firulais");
+
+        when(userRepository.findById("juan@email.com")).thenReturn(Optional.of(user));
+
+        boolean result = userService.isValidAnswer("juan@email.com", "Firulais");
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void isValidAnswer_shouldReturnFalse_whenAnswerIsWrong() {
+        User user = new User();
+        user.setEmail("juan@email.com");
+        user.setAnswer("Firulais");
+
+        when(userRepository.findById("juan@email.com")).thenReturn(Optional.of(user));
+
+        boolean result = userService.isValidAnswer("juan@email.com", "RespuestaErronea");
+
+        assertThat(result).isFalse();
+    }
 }

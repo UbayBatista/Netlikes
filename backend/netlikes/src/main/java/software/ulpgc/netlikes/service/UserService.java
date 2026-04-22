@@ -109,8 +109,6 @@ public class UserService {
         return user.getAnswer().equals(answer);
     }
 
-
-
     private void applyDtoToEntity(UserRequestDTO dto, User user) {
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
