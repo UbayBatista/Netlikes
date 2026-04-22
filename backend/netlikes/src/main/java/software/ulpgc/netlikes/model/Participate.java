@@ -4,7 +4,8 @@ import lombok.*;
 
 @Entity 
 @Table(name = "participate")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Participate {
@@ -27,5 +28,18 @@ public class Participate {
 
     public String getCharacter() {
         return this.participateId.getCharacter();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Participate)) return false;
+        Participate that = (Participate) o;
+        return participateId != null && participateId.equals(that.getParticipateId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
