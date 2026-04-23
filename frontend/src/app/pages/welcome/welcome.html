@@ -20,7 +20,7 @@
             }
             @case (3) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>
-                <app-step3 (toNext)="nextStep()" (toPrev)="prevStep()"></app-step3>
+                <app-step3 [initialStatus]="termsAccepted" (toNext)="handleStep3($event)" (toPrev)="prevStep()"></app-step3>
             }
             @case (4) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>

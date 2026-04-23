@@ -17,6 +17,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class Welcome {
     currentStep: number = 0;
+    termsAccepted: boolean = false;
     registrationData: RegisterData = {
         userName: '',
         email: '',
@@ -43,15 +44,16 @@ export class Welcome {
 
     handleStep1(data: {userName: string, email: string, birthdate: string}) {
         this.registrationData = { ...this.registrationData, ...data };
-        this.currentStep++;
+        this.nextStep();
     }
 
     handleStep2(data: {password: string, securityQuestion: string, answer: string}) {
         this.registrationData = { ...this.registrationData, ...data };
-        this.currentStep++;
+        this.nextStep();
     }
 
-    handleStep3() {
+    handleStep3(status: boolean) {
+        this.termsAccepted = status
         this.nextStep();
     }
 

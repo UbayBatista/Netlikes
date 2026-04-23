@@ -11,15 +11,18 @@ import { CommonModule } from '@angular/common';
 })
 export class Step3 {
   @Input() initialStatus: boolean = false;
-  @Output() toNext = new EventEmitter<void>();
+  @Output() toNext = new EventEmitter<boolean>();
   @Output() toPrev = new EventEmitter<void>();
 
   termsAccepted: boolean = false;
 
+  ngOnInit() {
+    this.termsAccepted = this.initialStatus;
+  }
+
   notifyNext() {
     if (this.termsAccepted) {
-      this.termsAccepted = this.initialStatus;
-      this.toNext.emit();
+      this.toNext.emit(this.termsAccepted);
     } else {
       alert('Debes aceptar los términos y condiciones para continuar.');
     }

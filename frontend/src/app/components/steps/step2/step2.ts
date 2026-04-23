@@ -45,6 +45,7 @@ export class Step2 {
     if (this.initialData) {
       this.form.patchValue({
         password: this.initialData.password,
+        confirmPassword: this.initialData.password,
         question: this.initialData.securityQuestion,
         answer: this.initialData.answer
       });
