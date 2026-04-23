@@ -19,3 +19,8 @@ export interface RegisterData{
     favoriteGenres: {id: number, genre: string}[];
 }
 
+export interface AnswerResponse {
+    email: string;
+    answer: string;
+}
+

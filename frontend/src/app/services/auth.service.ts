@@ -54,4 +54,8 @@ export class AuthService {
   checkEmailExists(email: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/check-email?email=${email}`);
   }
+
+  getSecurityQuestion(email:string): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/security-question`, { params: { email: email }, responseType: 'text' as 'json' });
+  }
 }

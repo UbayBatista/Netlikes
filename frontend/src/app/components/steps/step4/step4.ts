@@ -26,13 +26,13 @@ export class Step4 implements OnInit{
   }
 
   get totalSelected(): number {
-    return this.generos().filter(g => g.selected).length; // Nota los paréntesis ()
+    return this.generos().filter(g => g.selected).length;
   }
 
   toggleGenero(index: number) {
     const current = this.generos();
     current[index].selected = !current[index].selected;
-    this.generos.set([...current]); // Actualizamos la señal
+    this.generos.set([...current]);
   }
 
   handleEnd() {
