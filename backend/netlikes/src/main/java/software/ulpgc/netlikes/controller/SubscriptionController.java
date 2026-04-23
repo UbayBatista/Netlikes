@@ -31,7 +31,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/{email}")
-    public List<Subscription> getMethodName(@PathVariable String email) {
+    public List<Subscription> getByUserId(@PathVariable String email) {
         return this.subscriptionService.getByUserId(email);
     }
     
@@ -41,7 +41,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/{email}/unsuscribe/{forumId}")
-    public void delete(@PathVariable String email, @PathVariable String forumId) {
+    public void delete(@PathVariable String email, @PathVariable Integer forumId) {
         this.subscriptionService.deleteSubscription(new SubscriptionId(email, forumId));
     }
 }

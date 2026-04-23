@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SubscriptionId implements Serializable  {
     private String email;
-    private String forumId;
+    private Integer forumId;
 }

@@ -19,6 +19,6 @@ public class Subscription {
 
     @ManyToOne
     @MapsId("forumId")
-    @JoinColumn(name = "forum_id", referencedColumnName = "forumId")
+    @JoinColumn(name = "forum_id")
     private Forum forum;
 }
