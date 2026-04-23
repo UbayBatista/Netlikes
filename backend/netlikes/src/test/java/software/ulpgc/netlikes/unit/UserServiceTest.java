@@ -213,4 +213,13 @@ class UserServiceTest {
 
         assertThat(result).isFalse();
     }
+
+    @Test
+    void login_shouldThrowException_whenUserDoesNotExist() {
+        when(userRepository.findById("noexiste@email.com")).thenReturn(Optional.empty());
+
+        LoginRequestDTO request = new LoginRequestDTO("noexiste@email.com", "1234");
+
+        assertThrows(RuntimeException.class, () -> userService.login(request));
+    }
 }
