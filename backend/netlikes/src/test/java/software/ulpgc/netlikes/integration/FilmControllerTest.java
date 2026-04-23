@@ -12,6 +12,8 @@ import org.springframework.web.context.WebApplicationContext;
 import software.ulpgc.netlikes.api.FilmSyncScheduler;
 import software.ulpgc.netlikes.model.Film;
 import software.ulpgc.netlikes.repository.FilmRepository;
+
+import java.util.HashSet;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -55,7 +57,7 @@ public class FilmControllerTest {
         film.setPosterPath("a");
         film.setRuntime(136);
         film.setGenres(List.of());
-        film.setCast(List.of());    
+        film.setCast(new HashSet<>());    
         film.setVideos(List.of());
         
         Film filmsave = filmRepository.save(film);

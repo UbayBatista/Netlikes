@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Profile("!test")
 @EnableScheduling
 @Slf4j
 @RequiredArgsConstructor
-@Profile("!test")
 public class FilmSyncScheduler {
 
     private final InitialFilmLoadService initialLoadService;
