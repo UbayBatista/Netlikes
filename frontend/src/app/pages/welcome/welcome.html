@@ -12,11 +12,11 @@
             }
             @case (1) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>
-                <app-step1 (toNext)="nextStep()" (toPrev)="prevStep()"></app-step1>
+                <app-step1 [initialData]="registrationData" (toNext)="handleStep1($event)" (toPrev)="prevStep()"></app-step1>
             }
             @case (2) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>
-                <app-step2 (toNext)="nextStep()" (toPrev)="prevStep()"></app-step2>
+                <app-step2 [initialData]="registrationData" (toNext)="handleStep2($event)" (toPrev)="prevStep()"></app-step2>
             }
             @case (3) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>
