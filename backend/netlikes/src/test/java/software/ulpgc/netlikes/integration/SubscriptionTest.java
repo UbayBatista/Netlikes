@@ -89,7 +89,7 @@ class SubscriptionRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe guardar una suscripción con sus dependencias en una BD real")
-    void testSaveSubscription() {
+    void shouldSaveSubscription() {
         Subscription subscription = this.prepareSub(Stream.of("usuario@test.com")).get(0);
 
         assertThat(subscription).isNotNull();
@@ -100,7 +100,7 @@ class SubscriptionRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe eliminar la subscripción indicada a un foro")
-    void testRemoveSubscription() {
+    void shouldRemoveSubscription() {
         List<Subscription> subscriptions = this.prepareSub(Stream.of("usuario@test.com", "usuario2@test.com", "usuario3@test.com"));
 
         repository.delete(subscriptions.get(0));
@@ -113,7 +113,7 @@ class SubscriptionRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe eliminar la última subscripción a un foro")
-    void testRemoveLastSubscription() {
+    void shouldRemoveLastSubscription() {
         Subscription subscription = this.prepareSub(Stream.of("usuario@test.com")).get(0);
 
         repository.delete(subscription);

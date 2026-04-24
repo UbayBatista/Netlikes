@@ -45,7 +45,7 @@ class ForumRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe guardar un foro para una película creada")
-    void testSaveForum() {
+    void shouldSaveForum() {
         Film film = this.createFilm(500);
         Forum forum = repository.save(this.createForum(film));
 
@@ -58,7 +58,7 @@ class ForumRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe guardar un foro para cada película creada")
-    void testSaveMultipleForums() {
+    void shouldSaveMultipleForums() {
         List<Film> films = Stream.of(501, 502, 503, 504, 505)
                             .map(i -> this.createFilm(i)).toList();
 
@@ -75,7 +75,7 @@ class ForumRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe eliminar un foro creado")
-    void testDeleteForum() {
+    void shouldDeleteForum() {
         Film film = this.createFilm(500);
         Forum forum = this.repository.save(this.createForum(film));
 
@@ -89,7 +89,7 @@ class ForumRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Debe eliminar un único foro de varios creados")
-    void testDeleteOneForum() {
+    void shouldDeleteOneForum() {
         List<Film> films = Stream.of(501, 502, 503, 504, 505)
                             .map(i -> this.createFilm(i)).toList();
 
