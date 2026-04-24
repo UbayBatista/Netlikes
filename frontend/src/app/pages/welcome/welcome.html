@@ -8,7 +8,7 @@
     <div class="form-box">   
         @switch (currentStep) {
             @case (0) {
-                <app-login-form (toNext)="nextStep()"></app-login-form>
+                <app-login-form (toNext)="nextStep()" (logIn)="logIn($event)" [credentialsError]="credentialsError$"></app-login-form>
             }
             @case (1) {
                 <h2 class="text-black fw-bold mb-3">Registrarse</h2>

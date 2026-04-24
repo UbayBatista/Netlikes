@@ -8,6 +8,8 @@ import { Step4 } from '../../components/steps/step4/step4';
 import { Router } from '@angular/router';
 import { RegisterData } from '../../models/user.models';
 import { AuthService } from '../../services/auth.service';
+import { Credentials } from '../../models/user.models';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-welcome',
@@ -18,6 +20,7 @@ import { AuthService } from '../../services/auth.service';
 export class Welcome {
     currentStep: number = 0;
     termsAccepted: boolean = false;
+    credentialsError$ = new Subject<void>();
     registrationData: RegisterData = {
         userName: '',
         email: '',
@@ -68,6 +71,16 @@ export class Welcome {
                 this.router.navigate(['/home']);
             },
             error: (err) => console.error('Error al registrar:', err)
+        });
+    }
+
+    logIn(credentials: Credentials){
+        this.authService.login(credentials).subscribe({
+            next: (user) => {
+                console.log('Inicio exitoso:', user);
+                this.router.navigate(['/home']);
+            },
+            error: (err) => this.credentialsError$.next()
         });
     }
 }
