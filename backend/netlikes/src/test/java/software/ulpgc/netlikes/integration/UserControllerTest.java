@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -23,8 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.sql.Date;
-
-
+import org.springframework.transaction.annotation.Transactional;
 import software.ulpgc.netlikes.dto.LoginRequestDTO;
 import software.ulpgc.netlikes.dto.RegisterRequestDTO;
 import software.ulpgc.netlikes.model.User;
@@ -38,6 +38,8 @@ import software.ulpgc.netlikes.repository.GenreRepository;
         "spring.profiles.active=test"
     }
 )
+@ActiveProfiles("test")
+@Transactional
 class UserControllerTest {
 
     private MockMvc mockMvc;
