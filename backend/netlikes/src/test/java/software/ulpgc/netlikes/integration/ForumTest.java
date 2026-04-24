@@ -107,4 +107,24 @@ class ForumRepositoryIntegrationTest {
         assertThat(repository.findById(forums.get(0).getId())).isEmpty();
         assertThat(repository.findAll().size()).isEqualTo(4);
     }
+
+    @Test
+    void shouldRemoveForumAfterFilmIsRemoved() {
+        Film film = this.createFilm(500);
+        Forum forum = this.createForum(film);
+        
+        film.setForum(forum);
+
+        repository.save(forum);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Film filmToDelete = entityManager.find(Film.class, film.getId());
+
+        if (filmToDelete != null) entityManager.remove(filmToDelete);
+
+        assertThat(repository.findAll()).isEmpty();
+        assertThat(repository.findById(forum.getId())).isEmpty();
+    }
 }
