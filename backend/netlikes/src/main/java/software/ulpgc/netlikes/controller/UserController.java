@@ -2,7 +2,12 @@ package software.ulpgc.netlikes.controller;
 
 import software.ulpgc.netlikes.dto.UserRequestDTO;
 import software.ulpgc.netlikes.dto.UserResponseDTO;
+import software.ulpgc.netlikes.dto.LoginRequestDTO;
+import software.ulpgc.netlikes.dto.RegisterRequestDTO;
+import software.ulpgc.netlikes.dto.ValidAnswerRequestDTO;
 import software.ulpgc.netlikes.service.UserService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -43,5 +48,46 @@ public class UserController {
     @DeleteMapping("/{email}")
     public void deleteUser(@PathVariable String email) {
         userService.deleteUser(email);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
+        try {
+            return ResponseEntity.ok(userService.login(request));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request) {
+        try {
+            return ResponseEntity.ok(userService.register(request));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/exists/{email}")
+    public ResponseEntity<?> existsEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.existsEmail(email));
+    }
+
+    @GetMapping("/securityQuestion/{email}")
+    public ResponseEntity<?> getSecurityQuestion(@PathVariable String email) {
+        try {
+            return ResponseEntity.ok(userService.getSecurityQuestion(email));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/isValidAnswer")
+    public ResponseEntity<?> isValidAnswer(@RequestBody ValidAnswerRequestDTO request) {
+        try {
+            return ResponseEntity.ok(userService.isValidAnswer(request.getEmail(), request.getAnswer()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 }

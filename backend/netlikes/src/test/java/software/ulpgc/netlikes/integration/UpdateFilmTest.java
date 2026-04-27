@@ -10,10 +10,8 @@ import jakarta.transaction.Transactional;
 import software.ulpgc.netlikes.api.LoadService;
 import software.ulpgc.netlikes.api.TmdbApiClient;
 import software.ulpgc.netlikes.api.TmdbModels;
-import software.ulpgc.netlikes.dto.FilmRequestDTO;
 import software.ulpgc.netlikes.dto.FilmResponseDTO;
 import software.ulpgc.netlikes.model.Film;
-import software.ulpgc.netlikes.model.Video;
 import software.ulpgc.netlikes.repository.FilmRepository;
 import software.ulpgc.netlikes.service.FilmService;
 
@@ -22,6 +20,7 @@ import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Set;
 
 @SpringBootTest
 public class UpdateFilmTest {
@@ -105,7 +104,7 @@ public class UpdateFilmTest {
         filmsave1.setPosterPath("b");      
         filmsave1.setRuntime(136);    
         filmsave1.setGenres(List.of());     
-        filmsave1.setCast(List.of());    
+        filmsave1.setCast(Set.of());    
         filmsave1.setVideos(List.of()); 
 
         Film filmsave2 = new Film();
@@ -117,7 +116,7 @@ public class UpdateFilmTest {
         filmsave2.setPosterPath("a");
         filmsave2.setRuntime(136);
         filmsave2.setGenres(List.of());
-        filmsave2.setCast(List.of());    
+        filmsave2.setCast(Set.of());    
         filmsave2.setVideos(List.of()); 
 
         filmrepository.save(filmsave1);

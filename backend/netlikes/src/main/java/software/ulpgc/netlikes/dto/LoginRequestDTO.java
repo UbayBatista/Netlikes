@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
-public class UserResponseDTO {
+@AllArgsConstructor
+public class LoginRequestDTO {
 
     private String email;
-    private String userName;
-    private String profilePicture;
+    private String password;
 }

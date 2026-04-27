@@ -2,14 +2,18 @@ package software.ulpgc.netlikes.service;
 
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import software.ulpgc.netlikes.model.Film;
 import software.ulpgc.netlikes.model.Genre;
 import software.ulpgc.netlikes.model.Participate;
+import software.ulpgc.netlikes.model.ParticipateId;
 import software.ulpgc.netlikes.model.Platform;
 import software.ulpgc.netlikes.model.Video;
 import software.ulpgc.netlikes.model.Actor;
@@ -44,7 +48,7 @@ public class FilmService {
         return toDTO(film);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public FilmResponseDTO saveFilm(FilmRequestDTO dto) {
 
         Film film = new Film();
@@ -109,7 +113,7 @@ public class FilmService {
             .toList();
         film.setWatchProviders(platforms);
 
-        List<Participate> participations = dto.getCast().stream()
+        Set<Participate> participations = dto.getCast().stream()
             .map(entry -> {
                 Actor actor = actorRepository.findById(Integer.parseInt(entry.get("id")))
                 .orElseGet(() -> {
@@ -123,9 +127,14 @@ public class FilmService {
                 participation.setActor(actor);
                 participation.setFilm(film);
                 participation.setCharacter(entry.get("character"));
+                ParticipateId participateId = new ParticipateId();
+                participateId.setActorId(actor.getId());
+                participateId.setCharacter(entry.get("character"));
+                participateId.setFilmId(film.getId());
+                participation.setParticipateId(participateId);
                 return participation;
             })
-            .toList();
+            .collect(Collectors.toSet());
         film.setCast(participations);
 
         List<Video> videos = dto.getVideos().stream()
