@@ -11,7 +11,7 @@ describe('AuthService', () => {
   const apiUrl = 'http://localhost:8080/users';
 
   const mockUser: User = {
-    name: 'Juan Perez',
+    userName: 'Juan Perez',
     email: 'test@test.com',
     profilePicture: 'assets/img.png'
   };
