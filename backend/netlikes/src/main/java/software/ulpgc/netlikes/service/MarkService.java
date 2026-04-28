@@ -7,6 +7,10 @@ import software.ulpgc.netlikes.model.MarkId;
 import software.ulpgc.netlikes.repository.FilmRepository;
 import software.ulpgc.netlikes.repository.MarkRepository;
 import software.ulpgc.netlikes.repository.UserRepository;
+
+import java.util.stream.Collectors;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import lombok.*;
 
@@ -18,7 +22,7 @@ public class MarkService {
     private final UserRepository userRepository;
     private final FilmRepository filmRepository;
     
-    public Mark typeFilm(String email, Integer filmId, String type) {
+    public Mark typeFilm(String email, Integer filmId, Mark.Type type) {
         
         MarkId id = new MarkId(email, filmId);
 
@@ -45,4 +49,15 @@ public class MarkService {
         markRepository.deleteById(id);
     }
 
+    public boolean exists(String email, Integer filmId) {
+        return markRepository.existsById(new MarkId(email, filmId));
+    }
+
+    public List<Film> getFilmsByMarkType(String email, Mark.Type type) {
+        // Buscamos todas las marcas del usuario y filtramos por el tipo (SEEN o WATCHLATER)
+        return markRepository.findAll().stream()
+                .filter(m -> m.getUser().getEmail().equals(email) && m.getType() == type)
+                .map(Mark::getFilm)
+                .collect(Collectors.toList());
+    }
 }
