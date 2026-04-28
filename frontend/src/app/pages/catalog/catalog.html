@@ -5,11 +5,23 @@
   </app-search-bar>
 </div>
 
-
-
-@for (genre of filteredGenres; track $index) {
+@if (!isSearching) {
+  @for (genre of genres; track $index) {
+    <app-genre 
+      [genre]="genre"
+      [index]="$index">
+    </app-genre>
+  }
+} 
+@else {
   <app-genre 
-    [genre]="genre"
-    [index]="$index">
+    [genre]="{ name: 'Resultados de tu búsqueda', films: searchResults }"
+    [index]="0">
   </app-genre>
+
+  @if (searchResults.length === 0) {
+    <div class="no-results-message">
+      <p>No hemos encontrado ninguna película con ese nombre. ¡Prueba con otra!</p>
+    </div>
+  }
 }
