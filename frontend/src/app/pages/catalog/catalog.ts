@@ -15,7 +15,7 @@ import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [Genre, CommonModule, FormsModule, SearchBarComponent],
+  imports: [Film, Genre, CommonModule, FormsModule, SearchBarComponent],
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',
 })
