@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Film } from '../../models/film.models';
+import { UserInteractionService } from '../../services/user-interaction.service';
 
 @Component({
   selector: 'app-film-header',
@@ -20,11 +21,30 @@ export class FilmHeader implements OnInit {
   currentRating: string | null = null; 
 
   private cdr = inject(ChangeDetectorRef);
+  private interactionService = inject(UserInteractionService);
 
   ngOnInit(): void {
     if (this.film?.posterPath) {
       this.extractColorFromImage(this.imgBaseUrl + this.film.posterPath);
     }
+    this.loadInitialMarkStatus();
+  }
+
+  private loadInitialMarkStatus() {
+    if (!this.film?.id) return;
+    this.interactionService.getMarkStatus(this.film.id).subscribe({
+      next: (mark) => {
+        if (mark) {
+          this.isWatched = (mark.type === 'SEEN');
+          this.isWatchLater = (mark.type === 'WATCHLATER');
+        } else {
+          this.isWatched = false;
+          this.isWatchLater = false;
+        }
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error al recuperar estado', err)
+    });
   }
 
   formatGenres(): string {
@@ -43,17 +63,40 @@ export class FilmHeader implements OnInit {
   }
 
   toggleWatched() { 
-    this.isWatched = !this.isWatched; 
-    if (this.isWatched) this.isWatchLater = false; 
-    else this.currentRating = null; 
+    const previousState = this.isWatched;
+    this.isWatched = !this.isWatched;
+    if (this.isWatched) {
+      this.isWatchLater = false;
+    } else {
+      this.currentRating = null;
+    }
+
+    this.interactionService.toggleMark(this.film.id, 'SEEN').subscribe({
+      next: (res) => console.log('Servidor actualizado:', res),
+      error: (err) => {
+        this.isWatched = previousState;
+        this.cdr.detectChanges();
+        console.error('Error en servidor, revirtiendo cambio visual', err);
+      }
+    });
   }
 
   toggleWatchLater() { 
-    this.isWatchLater = !this.isWatchLater; 
+    const previousState = this.isWatchLater;
+    this.isWatchLater = !this.isWatchLater;
     if (this.isWatchLater) {
       this.isWatched = false;
       this.currentRating = null;
     }
+
+    this.interactionService.toggleMark(this.film.id, 'WATCHLATER').subscribe({
+      next: (res) => console.log('Servidor actualizado:', res),
+      error: (err) => {
+        this.isWatchLater = previousState;
+        this.cdr.detectChanges();
+        console.error('Error', err);
+      }
+    });
   }
 
   rateFilm(rating: string) { 
