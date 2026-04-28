@@ -1,11 +1,17 @@
 package software.ulpgc.netlikes.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import lombok.RequiredArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -71,6 +77,17 @@ public class FilmService {
 
     public void deleteFilm(Integer id) {
         filmRepository.deleteById(id);
+    }
+
+    public ResponseEntity<List<FilmResponseDTO>> searchBy(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        // Limitamos a los 10 primeros resultados para optimizar la red
+        Pageable topTen = PageRequest.of(0, 10);
+        List<FilmResponseDTO> results = filmRepository.findByTitleContainingIgnoreCase(query, topTen).stream().map(this::toDTO).toList();
+        
+        return ResponseEntity.ok(results);
     }
 
     private void applyDtoToEntity(FilmRequestDTO dto, Film film) {

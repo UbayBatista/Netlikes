@@ -1,5 +1,7 @@
 package software.ulpgc.netlikes.controller;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
@@ -8,6 +10,7 @@ import software.ulpgc.netlikes.service.FilmService;
 
 import software.ulpgc.netlikes.dto.FilmRequestDTO;
 import software.ulpgc.netlikes.dto.FilmResponseDTO;
+
 
 @RestController
 @RequestMapping("/films")
@@ -39,5 +42,10 @@ public class FilmController {
     @DeleteMapping("/{id}")
     public void deleteFilm(@PathVariable Integer id) {
         filmService.deleteFilm(id);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<FilmResponseDTO>> searchFilm(@RequestParam String query) {
+        return this.filmService.searchBy(query);
     }
 }
