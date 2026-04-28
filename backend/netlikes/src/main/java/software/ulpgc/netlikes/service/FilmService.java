@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,10 +41,15 @@ public class FilmService {
     private final ActorRepository actorRepository;
 
     public List<FilmResponseDTO> getAllFilms() {
-        return filmRepository.findAll()
-                .stream()
-                .map(this::toDTO)
-                .toList();
+        return this.filmRepository.findAll().stream().map(this::toDTO).toList();
+    }
+
+    public ResponseEntity<List<FilmResponseDTO>> getAllFilms(int page, int size) {
+        PageRequest paginacion = PageRequest.of(page, size);
+
+        List<FilmResponseDTO> catalogo = filmRepository.findAll(paginacion).getContent().stream().map(this::toDTO).toList();
+        
+        return ResponseEntity.ok(catalogo);
     }
 
     public FilmResponseDTO getFilmById(Integer id) {
