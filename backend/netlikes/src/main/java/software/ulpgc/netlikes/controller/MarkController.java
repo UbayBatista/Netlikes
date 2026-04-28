@@ -2,12 +2,21 @@ package software.ulpgc.netlikes.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import software.ulpgc.netlikes.model.Mark;
 import software.ulpgc.netlikes.model.MarkId;
 import software.ulpgc.netlikes.service.MarkService;
 import lombok.RequiredArgsConstructor;
 import software.ulpgc.netlikes.model.Film;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
+import java.util.Optional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import org.hibernate.annotations.Generated;
 
 
 @RestController
@@ -36,15 +45,40 @@ public class MarkController {
     public ResponseEntity<?> toggleMark(
             @PathVariable String email, 
             @PathVariable Integer filmId, 
-            @RequestParam Mark.Type type) {
+            @RequestParam("type") String type) {
         
-        if (markService.exists(email, filmId)) {
-            markService.deletetype(email, filmId);
-            return ResponseEntity.ok("{\"status\": \"removed\"}");
+        Mark.Type newType = Mark.Type.valueOf(type.toUpperCase());
+        Optional<Mark> currentMark = markService.getMark(email, filmId);
+
+        if (currentMark.isPresent()) {
+            if (currentMark.get().getType() == newType) {
+                markService.deletetype(email, filmId);
+                return ResponseEntity.ok("{\"status\": \"removed\"}");
+            } else {
+                markService.typeFilm(email, filmId, newType);
+                return ResponseEntity.ok("{\"status\": \"updated\"}");
+            }
         } else {
-            markService.typeFilm(email, filmId, type);
+            markService.typeFilm(email, filmId, newType);
             return ResponseEntity.ok("{\"status\": \"added\"}");
         }
+    }
+
+    @GetMapping("/{email}/status/{filmId}")
+    public ResponseEntity<?> getMarkStatus(@PathVariable String email, @PathVariable Integer filmId) {
+        return markService.getMark(email, filmId)
+            .map(mark -> {
+                Map<String, Object> response = new HashMap<>();
+                response.put("email", email);
+                response.put("filmId", filmId);
+                response.put("type", mark.getType().toString());
+                return ResponseEntity.ok((Object) response);
+            })
+            .orElseGet(() -> {
+                Map<String, Object> noMark = new HashMap<>();
+                noMark.put("type", "NONE");
+                return ResponseEntity.ok(noMark);
+            });
     }
 
     @GetMapping("/{email}/films")

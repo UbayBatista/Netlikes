@@ -10,6 +10,7 @@ import software.ulpgc.netlikes.repository.UserRepository;
 
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import lombok.*;
@@ -23,25 +24,25 @@ public class MarkService {
     private final FilmRepository filmRepository;
     
     public Mark typeFilm(String email, Integer filmId, Mark.Type type) {
-        
-        MarkId id = new MarkId(email, filmId);
+    MarkId id = new MarkId(email, filmId);
 
-        return markRepository.findById(id)
-            .map(relationExists -> {
-                relationExists.setType(type);
-                return markRepository.save(relationExists);
-            })
-            .orElseGet(() -> {
-                User user = userRepository.findById(email).orElseThrow();
-                Film film = filmRepository.findById(filmId).orElseThrow();
+    return markRepository.findById(id)
+        .map(relationExists -> {
+            relationExists.setType(type);
+            return markRepository.save(relationExists);
+        })
+        .orElseGet(() -> {
+            User user = userRepository.findById(email).orElseThrow();
+            Film film = filmRepository.findById(filmId).orElseThrow();
 
-                Mark relation = new Mark();
-                relation.setUser(user);
-                relation.setFilm(film);
-                relation.setType(type);
+            Mark relation = new Mark();
+            relation.setId(id); 
+            relation.setUser(user);
+            relation.setFilm(film);
+            relation.setType(type);
 
-                return markRepository.save(relation);
-            });
+            return markRepository.save(relation);
+        });
     }
 
     public void deletetype(String email, Integer filmId) {
@@ -54,10 +55,13 @@ public class MarkService {
     }
 
     public List<Film> getFilmsByMarkType(String email, Mark.Type type) {
-        // Buscamos todas las marcas del usuario y filtramos por el tipo (SEEN o WATCHLATER)
         return markRepository.findAll().stream()
                 .filter(m -> m.getUser().getEmail().equals(email) && m.getType() == type)
                 .map(Mark::getFilm)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Mark> getMark(String email, Integer filmId) {
+        return markRepository.findById(new MarkId(email, filmId));
     }
 }
