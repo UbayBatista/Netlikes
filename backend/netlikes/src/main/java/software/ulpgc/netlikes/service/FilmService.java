@@ -87,7 +87,7 @@ public class FilmService {
         if (query == null || query.trim().isEmpty()) {
             return ResponseEntity.ok(Collections.emptyList());
         }
-        // Limitamos a los 10 primeros resultados para optimizar la red
+        
         Pageable topTen = PageRequest.of(0, 10);
         List<FilmResponseDTO> results = filmRepository.findByTitleContainingIgnoreCase(query, topTen).stream().map(this::toDTO).toList();
         

@@ -23,8 +23,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserResponseDTO> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers(
+        @RequestParam(defaultValue = "0") int page, 
+        @RequestParam(defaultValue = "20") int size,
+        @RequestParam String mail
+    ) {
+        return userService.getAllUsers(page, size, mail);
     }
 
     @GetMapping("/{email}")
@@ -89,5 +93,10 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<UserResponseDTO>> searchFilm(@RequestParam String query) {
+        return this.userService.searchBy(query);
     }
 }
