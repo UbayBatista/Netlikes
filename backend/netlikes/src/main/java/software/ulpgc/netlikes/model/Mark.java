@@ -22,7 +22,12 @@ public class Mark {
     @JoinColumn(name = "filmId")
     private Film film;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String type;
-    
+    private Type type;
+
+    public enum Type {
+        SEEN,
+        WATCHLATER
+    } 
 }
