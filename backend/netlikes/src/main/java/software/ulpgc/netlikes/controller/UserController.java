@@ -3,6 +3,8 @@ package software.ulpgc.netlikes.controller;
 import software.ulpgc.netlikes.dto.UserRequestDTO;
 import software.ulpgc.netlikes.dto.UserResponseDTO;
 import software.ulpgc.netlikes.dto.LoginRequestDTO;
+import software.ulpgc.netlikes.dto.UserProfileDTO;
+import software.ulpgc.netlikes.dto.PrivacyRequestDTO;
 import software.ulpgc.netlikes.dto.RegisterRequestDTO;
 import software.ulpgc.netlikes.dto.ValidAnswerRequestDTO;
 import software.ulpgc.netlikes.service.UserService;
@@ -90,4 +92,23 @@ public class UserController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
+
+    @GetMapping("/myProfile/{email}")
+    public UserProfileDTO myProfile(@PathVariable String email){
+        return userService.myProfile(email);
+    }
+
+    
+    @GetMapping("/profile/{userName}")
+    public UserProfileDTO userProfile(@PathVariable String userName, @RequestParam String requesterEmail){
+        return userService.userProfile(userName, requesterEmail);
+    }
+
+    @PatchMapping("/myProfile/{email}/privacy")
+    public ResponseEntity<?> changePrivacy(@PathVariable String email, @RequestBody PrivacyRequestDTO request) {
+        userService.changePrivacy(email, request.getIsPrivate());
+        return ResponseEntity.ok().build();
+    }
+
+
 }
