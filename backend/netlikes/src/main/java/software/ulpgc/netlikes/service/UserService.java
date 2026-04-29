@@ -1,7 +1,10 @@
 package software.ulpgc.netlikes.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import software.ulpgc.netlikes.dto.LoginRequestDTO;
 import software.ulpgc.netlikes.dto.UserProfileDTO;
@@ -14,6 +17,7 @@ import software.ulpgc.netlikes.repository.GenreRepository;
 import software.ulpgc.netlikes.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,6 +38,29 @@ public class UserService {
                 .stream()
                 .map(this::toDTO)
                 .toList();
+    }
+
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers(int page, int size, String mail) {
+        PageRequest paginacion = PageRequest.of(page, size);
+
+        List<UserResponseDTO> catalogo = userRepository.findAll(paginacion).getContent()
+        .stream()
+        .filter(u -> !u.getEmail().equals(mail))
+        .map(this::toDTO)
+        .toList();
+        
+        return ResponseEntity.ok(catalogo);
+    }
+
+    public ResponseEntity<List<UserResponseDTO>> searchBy(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        
+        Pageable topTen = PageRequest.of(0, 10);
+        List<UserResponseDTO> results = userRepository.findByNameContainingIgnoreCase(query, topTen).stream().map(this::toDTO).toList();
+        
+        return ResponseEntity.ok(results);
     }
 
     public UserResponseDTO getUserById(String email) {
