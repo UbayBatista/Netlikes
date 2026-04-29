@@ -16,7 +16,6 @@ import software.ulpgc.netlikes.model.Genre;
 import software.ulpgc.netlikes.model.User;
 import software.ulpgc.netlikes.repository.GenreRepository;
 import software.ulpgc.netlikes.repository.UserRepository;
-import software.ulpgc.netlikes.service.MarkService;
 import software.ulpgc.netlikes.model.Film;
 import software.ulpgc.netlikes.model.Mark;
 
@@ -206,12 +205,12 @@ public class UserService {
         return new UserProfileDTO(
                 target.getEmail(),
                 target.getName(),
-                canSeeContent ? target.getBio() : "Este perfil es privado",
+                target.getBio(),
                 target.isAccountPrivacity(),
                 0,
                 0,
-                watched,
-                later
+                canSeeContent ? watched : null,
+                canSeeContent ? later : null
         );
     }
 
