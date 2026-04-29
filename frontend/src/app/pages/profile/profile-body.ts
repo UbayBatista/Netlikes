@@ -6,9 +6,10 @@ import { Film } from "../../components/film/film";
 import { SocialModal } from "../../components/social-modal/social-modal";
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
-import { User } from '../../models/user.models';
+import { MyProfile, UserProfile, User } from '../../models/user.models';
 import { AsyncPipe } from '@angular/common';
 import { Router } from "@angular/router";
+import { ProfileService } from "../../services/profile.service";
 
 @Component({
     selector:"app-profile-complete",
@@ -18,9 +19,12 @@ import { Router } from "@angular/router";
     styleUrl: "./profile-body.css"
 })
 export class ProfileComplete implements OnInit{
+    profile$: Observable<MyProfile | UserProfile | null>;
+    itsMe$: Observable<boolean>;
     currentUser$: Observable<User | null>;
+
     profileName = '';
-    profilePicture = 'https://media.gettyimages.com/id/962792726/es/foto/kiev-ukraine-cristiano-ronaldo-of-real-madrid-poses-with-the-uefa-champions-league-trophy.jpg?s=612x612&w=gi&k=20&c=iGuCfZEUXyVagRfgPF765GB9CHIsyTplWQisj_AUC2U='; 
+    profilePicture = ''; 
     textBio = 'Hola soy nuevo por aquí.';
     itsMe = false;
     isEditing = false;
@@ -28,20 +32,21 @@ export class ProfileComplete implements OnInit{
     socialType: 'Seguidores' | 'Seguidos' = 'Seguidores';
     socialData: any[] = [];
     
-    constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef, private authService: AuthService, private router: Router) {
+    constructor(private route: ActivatedRoute, 
+        private router: Router, 
+        private cdr: ChangeDetectorRef, 
+        private authService: AuthService, 
+        private profileService: ProfileService
+    ) {
         this.currentUser$ = this.authService.getCurrentUser();
+        this.profile$ = this.profileService.getProfile();
+        this.itsMe$ = this.profileService.isMyProfile();
     }
 
     ngOnInit() {
         
         this.route.params.subscribe(params => {
-            this.profileName = params['username']; 
-            
-            if (this.profileName === "my profile") {
-                this.itsMe = true;
-            } else {
-                this.itsMe = false;
-            }
+            this.profileService.loadProfile(params['username']);
         });
     }
     
@@ -164,6 +169,11 @@ export class ProfileComplete implements OnInit{
 
     Edit(){
         this.isEditing = !this.isEditing;
+    }
+
+    onPrivacyChange(isPrivate: boolean): void {
+        console.log("Se está cambiando la privacidad de la cuenta: ", isPrivate);
+        this.profileService.updatePrivacy(isPrivate);
     }
 
     logout(){

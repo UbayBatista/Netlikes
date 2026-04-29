@@ -10,13 +10,18 @@ import { Component, Input, Output, EventEmitter} from "@angular/core";
 export class ProfileHeader{
     @Input() userName: string = '';
     @Input() userPicture: string = 'Error';
+    @Input() isPrivate!: boolean;
     @Input() type: string = "Editar Perfil";
     @Input() option: string = "Ajustes";
     @Input() otherUser: string = 'No';
+    @Input() followers!: number;
+    @Input() following!: number;
+    @Output() privacyChange = new EventEmitter<boolean>();
     @Output() logOut = new EventEmitter<void>();
-    openMenu: boolean = false;
-
+    @Output() editClick = new EventEmitter<void>();
     @Output() openSocialModal = new EventEmitter<'Seguidores' | 'Seguidos'>();
+    
+    openMenu: boolean = false;
 
     Menu(){
         this.openMenu = !this.openMenu;
@@ -26,12 +31,15 @@ export class ProfileHeader{
         this.logOut.emit()
     }
 
-    @Output() editClick = new EventEmitter<void>();
     onEdit() {
         this.editClick.emit();
     }
 
     openSocial(type: 'Seguidores' | 'Seguidos') {
         this.openSocialModal.emit(type);
+    }
+
+    togglePrivacy() {
+        this.privacyChange.emit(!this.isPrivate);
     }
 }
