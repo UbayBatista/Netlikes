@@ -16,7 +16,6 @@ import software.ulpgc.netlikes.model.Genre;
 import software.ulpgc.netlikes.model.User;
 import software.ulpgc.netlikes.repository.GenreRepository;
 import software.ulpgc.netlikes.repository.UserRepository;
-import software.ulpgc.netlikes.model.Film;
 import software.ulpgc.netlikes.model.Mark;
 
 import java.util.ArrayList;
@@ -151,29 +150,12 @@ public class UserService {
         return user.getAnswer().equals(answer);
     }
 
-    private FilmResponseDTO toFilmDTO(Film film) {
-        FilmResponseDTO dto = new FilmResponseDTO();
-        dto.setId(film.getId());
-        dto.setTitle(film.getTitle());
-        dto.setPosterPath(film.getPosterPath());
-        dto.setTagLine(film.getTagLine());
-        dto.setOverView(film.getOverView());
-        dto.setRuntime(film.getRuntime());
-        dto.setAgeRating(film.getAgeRating());
-        dto.setAdult(film.isAdult());
-        dto.setReleaseDate(film.getReleaseDate());
-        return dto;
-    }
-
     public UserProfileDTO myProfile(String email){
         User user = userRepository.findById(email)
             .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
         
-        List<FilmResponseDTO> watchedFilms = markService.getFilmsByMarkType(email, Mark.Type.SEEN)
-            .stream().map(this::toFilmDTO).toList();
-            
-        List<FilmResponseDTO> watchLaterFilms = markService.getFilmsByMarkType(email, Mark.Type.WATCHLATER)
-                .stream().map(this::toFilmDTO).toList();
+        List<FilmResponseDTO> watchedFilms = markService.getFilmsByMarkType(email, Mark.Type.SEEN);
+        List<FilmResponseDTO> watchLaterFilms = markService.getFilmsByMarkType(email, Mark.Type.WATCHLATER);
 
         return new UserProfileDTO(
             user.getEmail(),
@@ -197,10 +179,10 @@ public class UserService {
         boolean canSeeContent = !target.isAccountPrivacity() || isOwnProfile || isFollowing;
 
         List<FilmResponseDTO> watched = canSeeContent ? 
-            markService.getFilmsByMarkType(target.getEmail(), Mark.Type.SEEN).stream().map(this::toFilmDTO).toList() : new ArrayList<>();
+            markService.getFilmsByMarkType(target.getEmail(), Mark.Type.SEEN) : new ArrayList<>();
         
         List<FilmResponseDTO> later = canSeeContent ? 
-            markService.getFilmsByMarkType(target.getEmail(), Mark.Type.WATCHLATER).stream().map(this::toFilmDTO).toList() : new ArrayList<>();
+            markService.getFilmsByMarkType(target.getEmail(), Mark.Type.WATCHLATER) : new ArrayList<>();
 
         return new UserProfileDTO(
                 target.getEmail(),

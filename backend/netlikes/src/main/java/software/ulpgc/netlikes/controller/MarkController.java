@@ -7,7 +7,7 @@ import software.ulpgc.netlikes.model.Mark;
 import software.ulpgc.netlikes.model.MarkId;
 import software.ulpgc.netlikes.service.MarkService;
 import lombok.RequiredArgsConstructor;
-import software.ulpgc.netlikes.model.Film;
+import software.ulpgc.netlikes.dto.FilmResponseDTO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +82,7 @@ public class MarkController {
     }
 
     @GetMapping("/{email}/films")
-    public ResponseEntity<List<Film>> getMarkedFilms(
+    public ResponseEntity<List<FilmResponseDTO>> getMarkedFilms(
             @PathVariable String email, 
             @RequestParam Mark.Type type) {
         return ResponseEntity.ok(markService.getFilmsByMarkType(email, type));

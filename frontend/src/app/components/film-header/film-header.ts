@@ -72,7 +72,6 @@ export class FilmHeader implements OnInit {
     }
 
     this.interactionService.toggleMark(this.film.id, 'SEEN').subscribe({
-      next: (res) => console.log('Servidor actualizado:', res),
       error: (err) => {
         this.isWatched = previousState;
         this.cdr.detectChanges();
@@ -90,7 +89,6 @@ export class FilmHeader implements OnInit {
     }
 
     this.interactionService.toggleMark(this.film.id, 'WATCHLATER').subscribe({
-      next: (res) => console.log('Servidor actualizado:', res),
       error: (err) => {
         this.isWatchLater = previousState;
         this.cdr.detectChanges();
@@ -104,7 +102,9 @@ export class FilmHeader implements OnInit {
     this.currentRating = this.currentRating === rating ? null : rating;
   }
 
-  shareFilm() { console.log('Compartir película:', this.film.title); }
+  shareFilm() { 
+    //TODO: Compartir = Recomendar (en tu perfil y en chat).
+  }
 
   extractColorFromImage(imageUrl: string) {
     const img = new Image();
