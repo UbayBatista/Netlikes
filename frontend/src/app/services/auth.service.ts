@@ -60,4 +60,8 @@ export class AuthService {
       responseType: 'text' 
     }) as Observable<string>;
   }
+
+  getCurrentUserEmail(): string | null {
+    return this.currentUser$.value?.email || null;
+  }
 }
