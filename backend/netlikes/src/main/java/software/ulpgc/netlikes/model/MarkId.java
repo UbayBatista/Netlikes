@@ -14,7 +14,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MarkId implements Serializable {
     private String email;
-    
-    @Column(name = "filmId")
     private Integer filmId;
 }

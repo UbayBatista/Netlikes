@@ -18,18 +18,12 @@ public class Mark {
     @ManyToOne
     @MapsId("email")
     @JoinColumn(name = "email")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "marks", "password"})
     @JsonIgnore
     private User user;
 
     @ManyToOne
     @MapsId("filmId")
-    @JoinColumn(name = "filmId")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "participations", "genres", "platforms"})
+    @JoinColumn(name = "film_id")
     @JsonIgnore
     private Film film;
 
