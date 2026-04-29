@@ -1,9 +1,13 @@
 package software.ulpgc.netlikes.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import software.ulpgc.netlikes.dto.LoginRequestDTO;
+import software.ulpgc.netlikes.dto.UserProfileDTO;
 import software.ulpgc.netlikes.dto.RegisterRequestDTO;
 import software.ulpgc.netlikes.dto.UserRequestDTO;
 import software.ulpgc.netlikes.dto.UserResponseDTO;
@@ -12,6 +16,8 @@ import software.ulpgc.netlikes.model.User;
 import software.ulpgc.netlikes.repository.GenreRepository;
 import software.ulpgc.netlikes.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,6 +38,29 @@ public class UserService {
                 .stream()
                 .map(this::toDTO)
                 .toList();
+    }
+
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers(int page, int size, String mail) {
+        PageRequest paginacion = PageRequest.of(page, size);
+
+        List<UserResponseDTO> catalogo = userRepository.findAll(paginacion).getContent()
+        .stream()
+        .filter(u -> !u.getEmail().equals(mail))
+        .map(this::toDTO)
+        .toList();
+        
+        return ResponseEntity.ok(catalogo);
+    }
+
+    public ResponseEntity<List<UserResponseDTO>> searchBy(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        
+        Pageable topTen = PageRequest.of(0, 10);
+        List<UserResponseDTO> results = userRepository.findByNameContainingIgnoreCase(query, topTen).stream().map(this::toDTO).toList();
+        
+        return ResponseEntity.ok(results);
     }
 
     public UserResponseDTO getUserById(String email) {
@@ -116,6 +145,50 @@ public class UserService {
         return user.getAnswer().equals(answer);
     }
 
+    public UserProfileDTO myProfile(String email){
+        User user = userRepository.findById(email)
+            .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
+        
+        return new UserProfileDTO(
+        user.getEmail(),
+        user.getName(),
+        user.getBio(),
+        user.isAccountPrivacity(),
+        0,
+        0,
+        new ArrayList<>(), // TO DO: coger las películas
+        new ArrayList<>()
+    );
+    }
+
+    public UserProfileDTO userProfile(String userName, String requesterEmail) {
+        User target = userRepository.findByName(userName)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        boolean isOwnProfile = target.getEmail().equals(requesterEmail);
+        boolean isFollowing = false; // TO DO: Mirar si se siguen
+
+        boolean canSeeContent = !target.isAccountPrivacity() || isOwnProfile || isFollowing;
+
+        return new UserProfileDTO(
+            target.getEmail(),
+            target.getName(),
+            canSeeContent ? target.getBio() : null,
+            target.isAccountPrivacity(),
+            0,
+            0,
+            canSeeContent ? new ArrayList<>() : null, //TO DO: Mirar peliculas
+            canSeeContent ? new ArrayList<>() : null
+        );
+    }
+
+    public void changePrivacy(String email, Boolean isPrivate) {
+        User user = userRepository.findById(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        user.setAccountPrivacity(isPrivate);
+        userRepository.save(user);
+    }
+
     private void applyDtoToEntity(UserRequestDTO dto, User user) {
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -143,4 +216,7 @@ public class UserService {
 
         return dto;
     }
+
+    
 }
+
