@@ -28,6 +28,7 @@ export class FilmHeader implements OnInit {
       this.extractColorFromImage(this.imgBaseUrl + this.film.posterPath);
     }
     this.loadInitialMarkStatus();
+    this.loadInitialRateStatus();
   }
 
   private loadInitialMarkStatus() {
@@ -44,6 +45,15 @@ export class FilmHeader implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al recuperar estado', err)
+    });
+  }
+
+  private loadInitialRateStatus() {
+    this.interactionService.getRateStatus(this.film.id).subscribe({
+        next: (rate) => {
+            if (rate) this.currentRating = rate.score.toLowerCase();
+            this.cdr.detectChanges();
+        }
     });
   }
 
@@ -99,7 +109,16 @@ export class FilmHeader implements OnInit {
 
   rateFilm(rating: string) { 
     if (!this.isWatched) return; 
+
+    const oldRating = this.currentRating;
     this.currentRating = this.currentRating === rating ? null : rating;
+
+    this.interactionService.toggleRate(this.film.id, rating).subscribe({
+        error: (err) => {
+            this.currentRating = oldRating;
+            this.cdr.detectChanges();
+        }
+    });
   }
 
   shareFilm() { 
