@@ -8,6 +8,7 @@ import software.ulpgc.netlikes.model.MarkId;
 import software.ulpgc.netlikes.service.MarkService;
 import lombok.RequiredArgsConstructor;
 import software.ulpgc.netlikes.dto.FilmResponseDTO;
+import software.ulpgc.netlikes.service.RateService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +23,11 @@ import org.hibernate.annotations.Generated;
 @RestController
 @RequestMapping("/marks")
 @RequiredArgsConstructor
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class MarkController {
 
     private final MarkService markService;
+    private final RateService rateService;
 
     @PostMapping("/{email}/mark/{filmId}")
     public Mark typePelicula(
@@ -53,9 +55,15 @@ public class MarkController {
         if (currentMark.isPresent()) {
             if (currentMark.get().getType() == newType) {
                 markService.deletetype(email, filmId);
+                rateService.deleteRateDirectly(email, filmId); 
+                
                 return ResponseEntity.ok("{\"status\": \"removed\"}");
             } else {
                 markService.typeFilm(email, filmId, newType);
+                if (newType == Mark.Type.WATCHLATER) {
+                    rateService.deleteRateDirectly(email, filmId);
+                }
+                
                 return ResponseEntity.ok("{\"status\": \"updated\"}");
             }
         } else {
