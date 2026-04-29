@@ -27,9 +27,9 @@
 
                         <div class="netflix-row" #scrollContainer>
                             <div class="netflix-slider">
-                                @for(film of filmsViewOther; track film) {
+                                @for(film of profile.watchedFilms; track film) {
                                     <div class="film-item">
-                                        <app-film [posterPath]="film.image" [title]="film.title"></app-film>
+                                        <app-film [posterPath]="film.posterPath" [title]="film.title" [id]="film.id"></app-film>
                                     </div>
                                 }
                             </div>
@@ -49,9 +49,9 @@
                         }
                         <div class="netflix-row" #scrollContainer>
                             <div class="netflix-slider">
-                                @for(film of filmsLaterOther; track film) {
+                                @for(film of profile.laterFilms; track film) {
                                     <div class="film-item">
-                                        <app-film [posterPath]="film.image" [title]="film.title"></app-film>
+                                        <app-film [posterPath]="film.posterPath" [title]="film.title" [id]="film.id"></app-film>
                                     </div>
                                 }
                             </div>
@@ -62,6 +62,8 @@
                         }
                     </div>
                 </app-profile-components>
+            }@else {
+                <p>Cuenta privada</p>
             }
         }
     }

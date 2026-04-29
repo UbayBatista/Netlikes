@@ -9,19 +9,26 @@ import { Component, Input, Output, EventEmitter} from "@angular/core";
 })
 export class ProfileHeader{
     @Input() userName: string = '';
-    @Input() userPicture: string = 'Error';
+    @Input() userPicture: string | null = null;
     @Input() isPrivate!: boolean;
     @Input() type: string = "Editar Perfil";
     @Input() option: string = "Ajustes";
     @Input() otherUser: string = 'No';
     @Input() followers!: number;
     @Input() following!: number;
+
     @Output() privacyChange = new EventEmitter<boolean>();
     @Output() logOut = new EventEmitter<void>();
     @Output() editClick = new EventEmitter<void>();
     @Output() openSocialModal = new EventEmitter<'Seguidores' | 'Seguidos'>();
     
     openMenu: boolean = false;
+
+    ngOnChanges() {
+        if (!this.userPicture) {
+        this.userPicture = 'assets/ProfilePicture.jpg';
+        }
+    }
 
     Menu(){
         this.openMenu = !this.openMenu;

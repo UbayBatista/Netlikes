@@ -34,14 +34,9 @@ export class ProfileService {
 
     updatePrivacy(isPrivate: boolean): void {
     this.profile$.pipe(take(1)).subscribe(profile => {
-        console.log("Profile en updatePrivacy:", profile); // <-- añade esto
         if (!profile) return;
-        this.userService.updatePrivacy(profile.email, isPrivate).subscribe({
-            next: () => {
-                console.log("Privacidad actualizada correctamente");
-                this.profile$.next({ ...profile, isPrivate });
-            },
-            error: (err) => console.log("Error en updatePrivacy:", err) // <-- y esto
+        this.userService.updatePrivacy(profile.email, isPrivate).subscribe(() =>{
+                this.profile$.next({ ...profile, isPrivate })
         });
     });
 }
