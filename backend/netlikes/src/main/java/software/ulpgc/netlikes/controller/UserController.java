@@ -2,6 +2,7 @@ package software.ulpgc.netlikes.controller;
 
 import software.ulpgc.netlikes.dto.UserRequestDTO;
 import software.ulpgc.netlikes.dto.UserResponseDTO;
+import software.ulpgc.netlikes.dto.ChangePasswordDTO;
 import software.ulpgc.netlikes.dto.LoginRequestDTO;
 import software.ulpgc.netlikes.dto.UserProfileDTO;
 import software.ulpgc.netlikes.dto.PrivacyRequestDTO;
@@ -97,11 +98,20 @@ public class UserController {
         }
     }
 
+    @PatchMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO request) {
+        try {
+            userService.changePassword(request.getEmail(), request.getNewPassword());
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/myProfile/{email}")
     public UserProfileDTO myProfile(@PathVariable String email){
         return userService.myProfile(email);
     }
-
     
     @GetMapping("/profile/{userName}")
     public UserProfileDTO userProfile(@PathVariable String userName, @RequestParam String requesterEmail){
@@ -113,7 +123,6 @@ public class UserController {
         userService.changePrivacy(email, request.getIsPrivate());
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping("/search")
     public ResponseEntity<List<UserResponseDTO>> searchFilm(@RequestParam String query) {

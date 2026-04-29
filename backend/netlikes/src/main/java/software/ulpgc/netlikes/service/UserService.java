@@ -145,6 +145,14 @@ public class UserService {
         return user.getAnswer().equals(answer);
     }
 
+    public void changePassword(String email, String newPassword) {
+        User user = userRepository.findById(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
     public UserProfileDTO myProfile(String email){
         User user = userRepository.findById(email)
             .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
